@@ -20,30 +20,19 @@
 * **Thông điệp chính:** *"Hiểu mình, thấu đồng đội – 3 phút nhẹ tênh qua lăng kính đời thường."*
 * **Thông điệp lan tỏa (Viral Hook):** *"Bạn là đóa hoa nào trong khu vườn Duhat hôm nay? 🌻🪴🌸🌺"*
 
-### 1.3 Vấn Đề Thị Trường & Cơ Hội Đột Phá (Problem & Opportunity)
+### 1.3 Vấn Đề Thị Trường & Định Vị PMM (Market Context & Positioning)
+> **Câu hỏi định vị cốt lõi:** *"Vì Sao Dân Văn Phòng Bỏ MBTI Để Mê Mẩn '72 Loài Hoa' Trên Duhat?"*
 
-```mermaid
-graph TD
-    subgraph Hiện Trạng: Nỗi Đau Trắc Nghiệm Cũ
-        A1[MBTI / DISC 60-100 câu] -->|Quá dài & mệt mỏi| A2[Tỷ lệ bỏ dở > 65%]
-        A3[Bối cảnh công sở cứng nhắc] -->|Tâm lý trả lời theo chuẩn HR| A4[Kết quả thiếu trung thực]
-        A5[Báo cáo chữ PDF khô khan] -->|Không gắn với app chat| A6[Đọc 1 lần rồi lãng quên]
-    end
+* **Nỗi ám ảnh lớn nhất của Dân Văn Phòng đối với công cụ cũ:**
+  1. **Tâm lý đề phòng HR & Sát hạch nhân sự:** Các bài test MBTI, Enneagram hay DISC với 60–120 câu hỏi trừu tượng mang đậm tính đánh giá công sở (*"Bạn có lập kế hoạch 5 năm không?", "Bạn xử lý xung đột dự án ra sao?"*), khiến dân văn phòng rơi vào trạng thái "thi cử", trả lời gượng ép theo mẫu số chung kỳ vọng của công ty thay vì bộc lộ phản xạ tự nhiên.
+  2. **Cảm giác bị đóng khung & Gán nhãn:** Dân văn phòng sợ bị dán nhãn "độc đoán", "khó tính", "chậm chạp". Kết quả sau test chỉ là file PDF đọc 1 lần rồi lãng quên, không giúp ích gì cho giao tiếp thực tế hàng ngày.
 
-    subgraph Đột Phá: Lời Giải Duhat Likert AI
-        B1[10 tình huống đời thường gần gũi] -->|Format 5 mức độ Likert| B2[Hoàn thành trong < 2.5 phút]
-        B3[Linh vật Vịt Duhat thân thiện] -->|Không phán xét đúng/sai| B4[Phản ánh trung thực bản năng]
-        B5[Tích hợp thẳng vào Group Chat] -->|Vườn hoa tương hỗ & Độ ăn ý| B6[Sống động, lan tỏa, gắn kết hàng ngày]
-    end
-```
-
-* **Nỗi đau lớn nhất của các công cụ cũ:**
-  1. **Gánh nặng nhận thức (Cognitive Overload):** Các bài test MBTI, Enneagram hay DISC thường đòi hỏi 60 – 120 câu hỏi trừu tượng mang đậm tính đánh giá công sở (*"Bạn có lập kế hoạch 5 năm không?", "Bạn xử lý xung đột dự án ra sao?"*), khiến người dùng rơi vào trạng thái "thi cử" và trả lời theo mẫu số chung kỳ vọng của công ty.
-  2. **Tách rời hành vi giao tiếp:** Kết quả sau khi làm test chỉ là một file PDF hoặc một trang web ngoài, người dùng đọc lướt một lần rồi cất đi. Đồng nghiệp trong nhóm không hề biết cách áp dụng kết quả đó vào việc giao tiếp, phân chia công việc hay hóa giải mâu thuẫn hàng ngày.
 * **Cơ hội vàng cho Duhat:**
-  1. **Tự nhiên hóa (Casualization):** Đưa toàn bộ việc khám phá tính cách về **10 tình huống đời thường** (dọn dẹp góc vườn, nấu ăn cho bạn bè, đi siêu thị, xử lý khi quán ăn phục vụ chậm...).
-  2. **Tối giản thao tác (Frictionless Interaction):** Cơ chế **5 mức độ Likert trực quan (🟢🟢 -> 🔴🔴)** cho phép người dùng bấm chọn phản xạ trong 1 giây, hoặc thoải mái gõ text/voice chia sẻ lý do theo ngôn ngữ tự nhiên.
-  3. **Kích hoạt mạng lưới tức thì (Network Effects & Team Synergy):** Kết quả test sinh ra Thẻ Hồ Sơ Loài Hoa có thể chia sẻ 1 chạm vào Group Chat, lập tức mở khóa **Ma trận Ăn ý (Synergy Matrix)** và **Góc Vườn Đồng Đội (Team Garden)**, biến một bài test cá nhân thành tính năng gắn kết tập thể mạnh mẽ.
+  1. **Tự nhiên hóa & Không phán xét (Zero Stigma):** Đưa việc khám phá tính cách về những tình huống gần gũi (dọn vườn, đi siêu thị, xử lý khi trễ hẹn cà phê, bưng nhầm món...).  
+     *(⚠️ **Lưu ý quan trọng cho Product Team:** 10 tình huống đời thường trong bản prototype chỉ là mẫu đề xuất minh họa, hoàn toàn không cố định. Hệ thống thực tế sẽ hỗ trợ **Ngân hàng tình huống động (Dynamic Scenario Bank)** để mở rộng sang các tình huống dự án, xử lý sự cố hoặc tùy biến theo ngành nghề).*
+  2. **Tối giản thao tác (Frictionless Interaction):** Thang đo **5 mức độ Likert trực quan (🟢🟢 &rarr; 🔴🔴)** phản xạ trong 1 giây, hoặc gõ text/voice chia sẻ lý do tự nhiên.
+  3. **Hệ thống Ma Trận 3 &times; 4 &times; 6 = 72 Loài Hoa Độc Bản:** 6 Giá trị cốt lõi &times; 3 Phong cách dẫn dắt &times; 4 Kiểu tư duy. Tôn vinh nét độc bản, không có loài hoa nào xấu.
+  4. **Kích hoạt mạng lưới tức thì (Network Effects & Team Synergy):** Kết quả test sinh ra Thẻ Hồ Sơ Loài Hoa có thể chia sẻ 1 chạm vào Group Chat, lập tức mở khóa **Ma trận Ăn ý (Synergy Matrix)** và **Góc Vườn Đồng Đội (Team Garden)**.
 
 ---
 

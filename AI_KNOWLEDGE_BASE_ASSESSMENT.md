@@ -7,13 +7,43 @@
 2. **Khả năng đáp ứng của AI đến đâu?** *(Thẩm định tính khả thi kỹ thuật, SLA thời gian phản hồi, rủi ro ảo giác, chiến lược dự phòng Fallback & chi phí vận hành)*  
 
 🌐 **Bản mẫu tương tác Trực Tuyến (Live Online Links):**
-* **Link Trực Tiếp (Không chặn bởi tường lửa công ty):** [https://duhat-personality.surge.sh/](https://duhat-personality.surge.sh/)
+* **Link Trực Tiếp (Không chặn bởi tường lửa công ty):** [https://tangy-limit-o13oa.ship.place/](https://tangy-limit-o13oa.ship.place/)
+* **Bản Báo Cáo Trình Diễn PMM Trực Quan (Executive Deck HTML):** [https://tangy-limit-o13oa.ship.place/AI_KNOWLEDGE_BASE_PRESENTATION.html](https://tangy-limit-o13oa.ship.place/AI_KNOWLEDGE_BASE_PRESENTATION.html)
 * **Link Dự Phòng (GitHub Pages):** [https://daothang38.github.io/duhat-personality-test/](https://daothang38.github.io/duhat-personality-test/)
-* **Bản Trình Diễn Báo Cáo Trực Quan (Interactive Executive Deck):** [https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html](https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html)
+
+> ⚠️ **LƯU Ý QUAN TRỌNG CHO TEAM PRODUCT:**  
+> 1. **Đối tượng định vị:** Dân văn phòng hiện đại (xóa bỏ tâm lý thi cử, e ngại HR của MBTI/DISC để hướng đến sự an toàn tâm lý và thấu hiểu đồng đội).  
+> 2. **Tình huống trắc nghiệm:** 10 tình huống đời thường trong bản demo **chỉ là đề xuất prototype, không cố định**. Hệ thống sẽ hỗ trợ Ngân Hàng Tình Huống Động (Dynamic Scenario Bank) có thể tùy biến theo bối cảnh công việc thực tế, dự án hoặc ngành nghề.
 
 ---
 
-## 1. Bản Đồ Tri Thức AI (AI Knowledge Tree & System Topology)
+## 1. Ma Trận 3 &times; 4 &times; 6 (Hệ Thống 72 Loài Hoa & Knowledge Base)
+
+Toàn bộ hệ thống tri thức phân loại được cấu thành từ 3 chiều độc lập:
+
+$$\mathbf{6\ \text{Giá Trị Cốt Lõi}} \times \mathbf{3\ \text{Phong Cách Dẫn Dắt}} \times \mathbf{4\ \text{Kiểu Tư Duy}} = \mathbf{72\ \text{Hình Mẫu Loài Hoa}}$$
+
+### Chi tiết 3 Chiều Tri Thức (3-Tier Knowledge Taxonomy):
+1. **Chiều 1 - 6 Giá trị cốt lõi (Core Values):**
+   * **Tín:** Trọng cam kết, đúng hẹn, bảo vệ chữ tín tuyệt đối.
+   * **Tâm:** Tận tụy, trách nhiệm, chu đáo với trải nghiệm của người nhận.
+   * **Trí:** Ham học hỏi, coi trọng dữ liệu và giả thuyết đã kiểm chứng.
+   * **Tốc:** Tốc độ, linh hoạt, chớp thời cơ nhanh chóng.
+   * **Tinh:** Chuẩn mực cao, tinh gọn, không chấp nhận sự cẩu thả.
+   * **Nhân:** Thấu cảm, bao dung, đặt con người lên trên sự cố.
+2. **Chiều 2 - 3 Phong cách dẫn dắt (Leadership / Influence):**
+   * **Độc đoán thiên tài:** Tự xác lập hướng đi dựa trên chuyên môn, dám đứng mũi chịu sào và chốt đường dứt khoát.
+   * **Hệ sinh thái:** Kết nối các bên có năng lực bổ trợ, gom nguồn lực đa chiều để cùng giải quyết vấn đề.
+   * **Nền tảng:** Xây dựng cơ chế, công cụ, checklist dùng chung để nhiều người tự vận hành mà không cần hỏi lại.
+3. **Chiều 3 - 4 Kiểu tư duy (Thinking Styles):**
+   * **Khoa học:** Đo lường khách quan, so sánh logic, dữ liệu thực chứng.
+   * **Hệ thống:** Bức tranh toàn cảnh, chuỗi tác động dây chuyền liên hoàn giữa các khâu.
+   * **Sáng tạo:** Thích đổi mới, tìm tòi công thức mới lạ mang dấu ấn riêng.
+   * **Đơn giản:** Lược bỏ rườm rà, đi thẳng vào cốt lõi tạo ra giá trị nhanh nhất.
+
+---
+
+## 2. Bản Đồ Tri Thức AI (AI Knowledge Tree & System Topology)
 
 Sơ đồ cây phân định toàn bộ kiến trúc tính năng thành 2 nhánh: **Nhánh Thuật Toán Cố Định (Deterministic Engine)** và **Nhánh Trí Tuệ Nhân Tạo (6 AI Touchpoints)**.
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Duhat AI - Thuyết Minh Ý Tưởng & Đòn Bẩy Lan Tỏa (Product Marketing Deck)</title>
+  <title>Duhat AI - Thuyết Minh Ý Tưởng, Ma Trận 3x4x6 & Đòn Bẩy Lan Tỏa (Product Marketing Deck)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
@@ -65,7 +65,7 @@
 
     /* Top Navigation Header */
     .top-header {
-      background: rgba(21, 29, 47, 0.88);
+      background: rgba(21, 29, 47, 0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
       position: sticky;
@@ -113,7 +113,7 @@
     .deck-nav-pills {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       background: var(--bg-card-subtle);
       padding: 4px;
       border-radius: var(--radius-full);
@@ -124,7 +124,7 @@
       font-family: inherit;
       font-size: 0.78rem;
       font-weight: 700;
-      padding: 8px 16px;
+      padding: 8px 14px;
       border-radius: var(--radius-full);
       border: none;
       background: transparent;
@@ -134,6 +134,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     .nav-pill:hover {
@@ -185,7 +186,7 @@
 
     /* Main Slide Container */
     .deck-container {
-      max-width: 1220px;
+      max-width: 1240px;
       width: 100%;
       margin: 0 auto;
       padding: 24px 20px 40px 20px;
@@ -242,11 +243,11 @@
     .slide-desc {
       font-size: 0.92rem;
       color: var(--text-secondary);
-      max-width: 900px;
+      max-width: 950px;
       line-height: 1.6;
     }
 
-    /* Layout Grids */
+    /* Grids */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -285,19 +286,8 @@
       border-color: var(--primary);
     }
 
-    .card-icon-hero {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 4px;
-    }
-
     .card-title {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       font-weight: 800;
       letter-spacing: -0.3px;
     }
@@ -326,7 +316,144 @@
     .pill-purple { background: #F3E8FF; color: #6B21A8; border: 1px solid #D8B4FE; }
     .pill-pink { background: #FCE7F3; color: #9D174D; border: 1px solid #F472B6; }
 
-    /* Interactive Simulation Frame (Phone View) */
+    /* Custom Specification Table */
+    .spec-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+
+    table.spec-table th {
+      background: var(--bg-card-subtle);
+      padding: 14px 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    table.spec-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    table.spec-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.spec-table tr:hover td {
+      background: rgba(253, 200, 48, 0.04);
+    }
+
+    /* 3x4x6 Knowledge Base Visual Matrix Styles */
+    .matrix-showcase-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .matrix-tier-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 16px;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      align-items: center;
+    }
+
+    .matrix-tier-row:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 800px) {
+      .matrix-tier-row { grid-template-columns: 1fr; }
+    }
+
+    .tier-label-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tier-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      width: fit-content;
+    }
+
+    .tier-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .tier-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+    }
+
+    .tier-item-pill {
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .tier-item-pill:hover {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .tier-item-pill strong {
+      display: block;
+      color: var(--text-main);
+      font-size: 0.84rem;
+      margin-bottom: 2px;
+    }
+
+    .tier-item-pill span {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      display: block;
+      line-height: 1.3;
+    }
+
+    /* Live Interactive Combinator */
+    .combinator-panel {
+      background: linear-gradient(135deg, rgba(253, 200, 48, 0.08) 0%, rgba(30, 41, 59, 0.4) 100%);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Phone Mockups */
     .mock-chat-window {
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
@@ -391,54 +518,38 @@
       border-top-left-radius: 4px;
     }
 
-    /* Highlight Trigger Cards for the Viral Moment */
-    .trigger-showcase-card {
+    /* Trigger Cards */
+    .trigger-card {
       background: var(--bg-card);
       border: 2px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 26px;
+      padding: 24px;
       position: relative;
       overflow: hidden;
       box-shadow: var(--shadow-card);
       transition: all 0.25s ease;
     }
 
-    .trigger-showcase-card:hover {
+    .trigger-card:hover {
       border-color: var(--primary);
       transform: translateY(-3px);
     }
 
-    .trigger-showcase-card.accent-gold {
-      border-color: rgba(253, 200, 48, 0.5);
-      background: linear-gradient(135deg, rgba(253, 200, 48, 0.05) 0%, var(--bg-card) 100%);
-    }
-
-    .trigger-showcase-card.accent-purple {
-      border-color: rgba(192, 132, 252, 0.5);
-      background: linear-gradient(135deg, rgba(192, 132, 252, 0.05) 0%, var(--bg-card) 100%);
-    }
-
-    .trigger-showcase-card.accent-pink {
-      border-color: rgba(244, 114, 182, 0.5);
-      background: linear-gradient(135deg, rgba(244, 114, 182, 0.05) 0%, var(--bg-card) 100%);
-    }
-
-    .trigger-number-badge {
+    .trigger-num {
       position: absolute;
-      top: 18px;
-      right: 20px;
+      top: 14px;
+      right: 18px;
       font-size: 2.2rem;
       font-weight: 900;
       opacity: 0.12;
     }
 
-    /* Interactive Comparison Sandbox */
-    .qa-interactive-block {
+    /* Sandbox */
+    .sandbox-panel {
       background: var(--bg-card);
       border: 2px solid var(--primary);
       border-radius: var(--radius-lg);
       padding: 24px;
-      margin-bottom: 24px;
       box-shadow: 0 10px 30px rgba(253, 200, 48, 0.15);
     }
 
@@ -466,7 +577,6 @@
       background: var(--primary);
       color: #1A1A1A;
       border-color: var(--primary);
-      transform: translateY(-1px);
     }
 
     .dialog-stream {
@@ -524,18 +634,19 @@
     <div class="brand-wrap">
       <span class="duck-avatar">🦆</span>
       <div class="brand-text">
-        <h1>Duhat AI - Thuyết Minh Ý Tưởng & Đòn Bẩy Lan Tỏa (Product Marketing)</h1>
-        <p>Bản trình diễn trải nghiệm Chat 1:1, Đưa vào Nhóm & Khoảnh khắc +1 Bạn</p>
+        <h1>Duhat AI - Thuyết Minh Ý Tưởng & Knowledge Base (Product Marketing)</h1>
+        <p>Bản trình diễn dành cho Product Team & C-Suite</p>
       </div>
     </div>
 
     <!-- Navigation Pills -->
     <nav class="deck-nav-pills" id="deck-nav">
-      <button class="nav-pill active" data-slide="1">🌟 Bối Cảnh & Đột Phá</button>
-      <button class="nav-pill" data-slide="2">💬 Khi Chat 1:1 Với AI</button>
-      <button class="nav-pill" data-slide="3">👥 Khi Đưa Vào Group Chat</button>
-      <button class="nav-pill" data-slide="4">⚡ Moment Kích Hoạt +1 Bạn</button>
-      <button class="nav-pill" data-slide="5">🌸 Thử Nghiệm Hỏi Đáp</button>
+      <button class="nav-pill active" data-slide="1">🏢 Định Vị Dân Văn Phòng</button>
+      <button class="nav-pill" data-slide="2">🧩 Ma Trận 3x4x6</button>
+      <button class="nav-pill" data-slide="3">🎯 Cần AI Ở Chỗ Nào?</button>
+      <button class="nav-pill" data-slide="4">💬 Chat 1:1 & Group Chat</button>
+      <button class="nav-pill" data-slide="5">⚡ Moment +1 Bạn</button>
+      <button class="nav-pill" data-slide="6">🌸 Thử Nghiệm Hỏi Đáp</button>
     </nav>
 
     <!-- Header Actions -->
@@ -547,313 +658,436 @@
     </div>
   </header>
 
-  <!-- MAIN DECK CONTENT -->
+  <!-- MAIN DECK CONTAINER -->
   <main class="deck-container">
 
-    <!-- SLIDE 1: BỐI CẢNH & ĐỘT PHÁ CỦA Ý TƯỞNG -->
+    <!-- SLIDE 1: ĐỊNH VỊ CHO DÂN VĂN PHÒNG & NGUYÊN TẮC TÌNH HUỐNG -->
     <section class="deck-slide active" id="slide-1">
       <div class="slide-banner">
         <span class="slide-tag">Chiến Lược Sản Phẩm & Định Vị PMM</span>
-        <h2 class="slide-title">Vì Sao Người Trẻ Bỏ MBTI Để Mê Mẩn "72 Loài Hoa" Trên Duhat?</h2>
+        <h2 class="slide-title">Vì Sao Dân Văn Phòng Bỏ MBTI Để Mê Mẩn "72 Loài Hoa" Trên Duhat?</h2>
         <p class="slide-desc">
-          Các bài test tính cách truyền thống (MBTI, DISC 60–100 câu) thường thất bại vì <strong>quá dài, tạo tâm lý thi cử công sở</strong> và kết quả nằm chết ở một trang web ngoài. Duhat giải quyết triệt để bằng cách đưa toàn bộ bài trắc nghiệm về <strong>10 tình huống đời thường gần gũi</strong> và tích hợp thẳng vào luồng chat tự nhiên.
+          Dân văn phòng hiện đại đã quá mệt mỏi với các bài test MBTI/DISC 100 câu hỏi mang tính "sát hạch nhân sự" của HR. Họ cần một công cụ <strong>thấu hiểu bản thân an toàn, không phán xét</strong>, giúp giải tỏa mâu thuẫn giao tiếp và biến nhóm chat công việc thành một <strong>Khu Vườn Đồng Đội gắn kết tự nhiên</strong>.
         </p>
       </div>
 
       <div class="grid-3">
         <div class="feature-card" style="border-top: 4px solid #EF4444;">
-          <div class="card-icon-hero" style="background: rgba(239, 68, 68, 0.15); color: #EF4444;">❌</div>
-          <span class="pill-badge" style="background:#FEE2E2; color:#991B1B;">Nỗi Đau Cũ</span>
-          <h3 class="card-title">MBTI / DISC Cũ Kỹ</h3>
+          <span class="pill-badge" style="background:#FEE2E2; color:#991B1B;">Nỗi Ám Ảnh Văn Phòng</span>
+          <h3 class="card-title">MBTI / DISC Sát Hạch</h3>
           <p class="card-body">
-            • 60 đến 120 câu hỏi mang tính đánh giá năng lực công sở.<br>
-            • Người dùng sợ HR đánh giá nên trả lời theo chuẩn mực công ty.<br>
-            • Tỷ lệ bỏ dở giữa chừng lên đến 65%.<br>
-            • File PDF kết quả đọc 1 lần rồi lãng quên.
+            • <strong>Tâm lý đề phòng HR:</strong> Dân văn phòng luôn có xu hướng chọn đáp án "chuẩn mực công ty" thay vì phản ánh bản năng thực tế.<br>
+            • <strong>Cảm giác bị đóng khung:</strong> Bị gán nhãn "hướng nội", "độc tài", "khó tính".<br>
+            • Tỷ lệ bỏ dở lên tới 65% vì câu hỏi giả định công sở nhức đầu.
           </p>
         </div>
 
         <div class="feature-card" style="border-top: 4px solid var(--primary);">
-          <div class="card-icon-hero" style="background: rgba(253, 200, 48, 0.15); color: var(--primary);">✨</div>
           <span class="pill-badge pill-yellow">Đột Phá Duhat</span>
-          <h3 class="card-title">10 Tình Huống Đời Thường</h3>
+          <h3 class="card-title">Tình Huống Gần Gũi Đời Thường</h3>
           <p class="card-body">
-            • <strong>Không hỏi về công sở:</strong> Hỏi về dọn vườn, đi siêu thị, xử lý khi quán ăn bưng nhầm món, lên kế hoạch dã ngoại.<br>
-            • <strong>Thang đo 5 mức độ Likert:</strong> Chạm phản xạ trong 1 giây (🟢🟢 &rarr; 🔴🔴).<br>
+            • <strong>Không thi cử công sở:</strong> Hỏi về việc dọn vườn, đi siêu thị, xử lý khi trễ hẹn cà phê, phản xạ khi quán ăn bưng nhầm món.<br>
+            • <strong>Thang đo Likert 5 mức độ:</strong> Bấm chọn phản xạ trong 1 giây (🟢🟢 &rarr; 🔴🔴).<br>
             • Hoàn thành nhẹ tênh trong chưa đầy 2.5 phút.
           </p>
         </div>
 
         <div class="feature-card" style="border-top: 4px solid var(--accent-green);">
-          <div class="card-icon-hero" style="background: rgba(34, 197, 94, 0.15); color: var(--accent-green);">🌸</div>
-          <span class="pill-badge pill-green">Giá Trị Nhân Văn</span>
-          <h3 class="card-title">Hệ Sinh Thái 72 Loài Hoa</h3>
+          <span class="pill-badge pill-green">Nguyên Tắc Cốt Lõi</span>
+          <h3 class="card-title">Tôn Vinh Vẻ Đẹp Độc Bản</h3>
           <p class="card-body">
-            • 6 Giá trị &times; 3 Phong cách &times; 4 Kiểu tư duy.<br>
-            • <strong>Nguyên tắc Zero Stigma:</strong> Tuyệt đối không có hoa xấu hay hoa tốt hơn hoa nào.<br>
-            • Tôn vinh vẻ đẹp độc bản, chỉ ra điểm mạnh và cách bù trừ điểm mù cho nhau.
+            • <strong>Zero Stigma:</strong> Không có loài hoa nào xấu, không có phong cách nào tốt hơn phong cách nào.<br>
+            • Giúp đồng nghiệp hiểu vì sao người kia lại cẩn trọng, vì sao người kia lại thích tốc độ.<br>
+            • Tạo ra <strong>Sự An Toàn Tâm Lý (Psychological Safety)</strong> trong tổ chức.
           </p>
         </div>
       </div>
 
-      <div class="feature-card" style="background: var(--bg-card-subtle);">
-        <h4 style="font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
-          <span>🎯</span> Mục Tiêu Sản Phẩm (Product North Star)
-        </h4>
-        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px;">
-          Không phải là một bài kiểm tra tâm lý học khô cứng. Mục tiêu của Duhat là trở thành <strong>"Chất Xúc Tác Giao Tiếp (Social Ice-Breaker)"</strong> giúp đồng đội thấu cảm phong cách của nhau, giảm thiểu va chạm ngầm và biến nhóm chat thành một <strong>Khu Vườn Sống Động</strong>.
-        </p>
+      <!-- Callout: 10 Tình Huống Là Đề Xuất Prototype (Không Cố Định) -->
+      <div class="feature-card" style="background: rgba(253, 200, 48, 0.08); border: 2px dashed var(--primary);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:1.6rem;">💡</span>
+          <div>
+            <h4 style="font-weight: 800; font-size: 1rem; color: var(--primary);">
+              Lưu Ý Quan Trọng Cho Team Product: 10 Tình Huống Đời Thường Chỉ Là Mẫu Đề Xuất Prototype
+            </h4>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-top: 4px; line-height: 1.55;">
+              10 tình huống đời thường trong bản demo <strong>hoàn toàn không cố định</strong>. Đây là bộ khung mẫu để chứng minh khả năng đo lường phản xạ tự nhiên. Trong thực tế triển khai, hệ thống sẽ hỗ trợ một <strong>Ngân Hàng Tình Huống Động (Dynamic Scenario Bank)</strong>: Có thể mở rộng sang các tình huống dự án thực chiến, tình huống xử lý khủng hoảng hoặc tùy biến theo từng văn hóa doanh nghiệp!
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SLIDE 2: KHI CHAT 1:1 VỚI AI THÌ NHƯ THẾ NÀO? -->
+    <!-- SLIDE 2: MA TRẬN 3x4x6 - HỆ THỐNG 72 LOÀI HOA & KNOWLEDGE BASE -->
     <section class="deck-slide" id="slide-2">
       <div class="slide-banner">
-        <span class="slide-tag">Trải Nghiệm Người Dùng Độc Bản</span>
-        <h2 class="slide-title">Khi Chat 1:1 Với Duhat AI Thì Trải Nghiệm Sẽ Ra Sao?</h2>
+        <span class="slide-tag">Kiến Trúc Tri Thức Nền Tảng (Core Framework)</span>
+        <h2 class="slide-title">Ma Trận 3 &times; 4 &times; 6 &rarr; Hệ Thống 72 Hình Mẫu Loài Hoa</h2>
         <p class="slide-desc">
-          Người dùng không phải điền vào biểu mẫu khảo sát đơn điệu. Họ đang <strong>trò chuyện cùng Linh vật Vịt Duhat</strong> trong một phòng chat ấm áp, nơi AI thấu hiểu cả cú chạm 1-giây lẫn câu gõ tâm sự tự nhiên.
+          Hệ thống được xây dựng trên bộ khung toán học và hành vi chặt chẽ: <strong>6 Giá Trị Cốt Lõi &times; 3 Phong Cách Dẫn Dắt &times; 4 Kiểu Tư Duy = 72 Hình Mẫu Loài Hoa Độc Bản</strong>. Không một ai bị trùng lặp máy móc.
+        </p>
+      </div>
+
+      <!-- Visual Matrix Box -->
+      <div class="matrix-showcase-box">
+        <!-- Tier 1: 6 Giá Trị -->
+        <div class="matrix-tier-row">
+          <div class="tier-label-box">
+            <span class="tier-badge pill-yellow">Chiều 1: Giá Trị Cốt Lõi</span>
+            <div class="tier-name">6 Giá Trị (Core Values)</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Động lực sâu kín điều hướng hành vi</div>
+          </div>
+          <div class="tier-items-grid">
+            <div class="tier-item-pill" data-dim="val" data-key="tin">
+              <strong>💎 Tín</strong>
+              <span>Trọng cam kết, giữ đúng hạn</span>
+            </div>
+            <div class="tier-item-pill" data-dim="val" data-key="tam">
+              <strong>❤️ Tâm</strong>
+              <span>Trách nhiệm, chu đáo, hoàn thiện</span>
+            </div>
+            <div class="tier-item-pill" data-dim="val" data-key="tri">
+              <strong>🧠 Trí</strong>
+              <span>Hiểu biết, ham học hỏi, dữ liệu</span>
+            </div>
+            <div class="tier-item-pill" data-dim="val" data-key="toc">
+              <strong>⚡ Tốc</strong>
+              <span>Tốc độ, chớp thời cơ, linh hoạt</span>
+            </div>
+            <div class="tier-item-pill" data-dim="val" data-key="tinh">
+              <strong>🎯 Tinh</strong>
+              <span>Chuẩn mực cao, tinh gọn</span>
+            </div>
+            <div class="tier-item-pill" data-dim="val" data-key="nhan">
+              <strong>🤝 Nhân</strong>
+              <span>Thấu cảm, gắn kết, bao dung</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2: 3 Phong Cách Lãnh Đạo -->
+        <div class="matrix-tier-row">
+          <div class="tier-label-box">
+            <span class="tier-badge pill-blue">Chiều 2: Phong Cách Dẫn Dắt</span>
+            <div class="tier-name">3 Phong Cách (Leadership)</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Cách tạo ảnh hưởng & xử lý bài toán chung</div>
+          </div>
+          <div class="tier-items-grid">
+            <div class="tier-item-pill" data-dim="lead" data-key="docdoan">
+              <strong>👑 Độc Đoán Thiên Tài</strong>
+              <span>Tự xác lập hướng đi, dám chốt đường & chịu trách nhiệm</span>
+            </div>
+            <div class="tier-item-pill" data-dim="lead" data-key="ecosystem">
+              <strong>🌐 Hệ Sinh Thái</strong>
+              <span>Kết nối các bên có năng lực bổ trợ để cùng thắng</span>
+            </div>
+            <div class="tier-item-pill" data-dim="lead" data-key="nen">
+              <strong>🏗️ Nền Tảng</strong>
+              <span>Xây quy trình, checklist, cơ chế để team tự vận hành</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3: 4 Kiểu Tư Duy -->
+        <div class="matrix-tier-row">
+          <div class="tier-label-box">
+            <span class="tier-badge pill-purple">Chiều 3: Kiểu Tư Duy</span>
+            <div class="tier-name">4 Kiểu Tư Duy (Thinking)</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Cách tiếp cận và phân tích vấn đề</div>
+          </div>
+          <div class="tier-items-grid">
+            <div class="tier-item-pill" data-dim="think" data-key="khoahoc">
+              <strong>🔬 Khoa Học</strong>
+              <span>Dữ liệu thực chứng, đo lường, kiểm chứng logic</span>
+            </div>
+            <div class="tier-item-pill" data-dim="think" data-key="hethong">
+              <strong>🔄 Hệ Thống</strong>
+              <span>Bức tranh toàn cảnh, chuỗi tác động dây chuyền liên đới</span>
+            </div>
+            <div class="tier-item-pill" data-dim="think" data-key="sangtao">
+              <strong>💡 Sáng Tạo</strong>
+              <span>Thử nghiệm công thức mới, phá vỡ khuôn mẫu cũ</span>
+            </div>
+            <div class="tier-item-pill" data-dim="think" data-key="dongian">
+              <strong>✂️ Đơn Giản</strong>
+              <span>Lược bỏ rườm rà, đi thẳng vào cốt lõi tạo giá trị</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combinator Result Preview -->
+        <div class="combinator-panel">
+          <div>
+            <div style="font-size:0.76rem; font-weight:800; color:#854D0E; text-transform:uppercase;">
+              Công Thức Tổ Hợp: 6 &times; 3 &times; 4 = 72 Hình Mẫu
+            </div>
+            <div style="font-size:1.1rem; font-weight:800; margin-top:2px;">
+              Ví dụ: <span style="color:#D97706;">Tín</span> + <span style="color:#2563EB;">Độc Đoán Thiên Tài</span> + <span style="color:#7C3AED;">Hệ Thống</span> &rarr; 🌻 <strong>Hoa Hướng Dương</strong>
+            </div>
+            <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:4px;">
+              Chân dung: <em>"Người Tiên Phong Đáng Tin Cậy & Hệ Thống — Chốt đường dứt khoát, giữ đúng cam kết, dự báo trước rủi ro dây chuyền."</em>
+            </div>
+          </div>
+          <div style="font-size:2.5rem;">🌻</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: ĐẶC TẢ CHI TIẾT: CẦN AI Ở CHỖ NÀO? -->
+    <section class="deck-slide" id="slide-3">
+      <div class="slide-banner">
+        <span class="slide-tag">Thẩm Định Kỹ Thuật Dành Cho Product & Tech Leads</span>
+        <h2 class="slide-title">Đặc Tả Chi Tiết: Cần AI Ở Chỗ Nào & Đâu Là Thuật Toán Cố Định?</h2>
+        <p class="slide-desc">
+          Để sản phẩm đạt <strong>độ trễ siêu tốc (&le; 500ms), chi phí vận hành cực thấp (&lt; $0.001/user) và 0% lỗi ảo giác</strong>, việc phân định rõ ranh giới giữa <em>Deterministic Core (Thuật toán cố định)</em> và <em>AI Touchpoints (Điểm chạm AI)</em> là điều sống còn.
+        </p>
+      </div>
+
+      <!-- Bảng So Sánh Chi Tiết -->
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th style="width: 20%;">Phân Vùng Hệ Thống</th>
+              <th style="width: 32%;">Nhiệm Vụ Cụ Thể</th>
+              <th style="width: 26%;">Công Nghệ Thực Thi</th>
+              <th style="width: 22%;">Vì Sao Chọn Giải Pháp Này?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Deterministic Rows -->
+            <tr style="background: rgba(34, 197, 94, 0.04);">
+              <td>
+                <span class="pill-badge pill-green">Deterministic Core</span><br>
+                <strong>Thang Đo Likert 5 Mức Độ</strong>
+              </td>
+              <td>Gán điểm chuẩn hóa (-2, -1, 0, +1, +2) ngay khi người dùng chạm vào 5 nút tròn trên dock bàn phím.</td>
+              <td>Thuật toán mã nguồn Javascript / Backend thuần túy.</td>
+              <td><strong>0ms độ trễ</strong>, 100% chính xác, không tốn bất kỳ chi phí API nào.</td>
+            </tr>
+            <tr style="background: rgba(34, 197, 94, 0.04);">
+              <td>
+                <span class="pill-badge pill-green">Deterministic Core</span><br>
+                <strong>Tính Điểm 3 Chiều & Ánh Xạ 72 Loài Hoa</strong>
+              </td>
+              <td>Cộng dồn điểm theo 3 chiều (Giá trị, Dẫn dắt, Tư duy) và tra cứu vào Bảng Ma Trận (Lookup Table 6x3x4).</td>
+              <td>Bảng tra cứu ma trận cố định (Matrix Lookup Table).</td>
+              <td><strong>Tuyệt đối không có ảo giác (Zero Hallucination)</strong>, đảm bảo tính công bằng khoa học.</td>
+            </tr>
+
+            <!-- AI Touchpoints Rows -->
+            <tr>
+              <td>
+                <span class="pill-badge pill-yellow">Touchpoint 1 (AI)</span><br>
+                <strong>NLU Intent & Động Cơ Ngầm</strong>
+              </td>
+              <td>Khi người dùng không bấm nút mà gõ text hoặc gửi voice: AI trích xuất mức Likert tương đương và <strong>bóc tách động cơ đằng sau hành vi</strong>.</td>
+              <td>Fast SLM / LLM (Gemini 1.5/2.0 Flash) trích xuất JSON.</td>
+              <td>Ngôn ngữ tự nhiên tiếng Việt phong phú, không có bộ Regex nào bao quát hết sắc thái đời thường.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="pill-badge pill-blue">Touchpoint 2 (AI)</span><br>
+                <strong>Adaptive Probing Agent</strong>
+              </td>
+              <td>Khi người dùng liên tục chọn <em>Trung lập</em> hoặc khi điểm của 2 chiều hòa nhau: AI tự động sinh 1 câu hỏi vi mô để làm rõ khuynh hướng.</td>
+              <td>LLM Prompting có ràng buộc ngữ cảnh (Context Injection).</td>
+              <td>Bộ câu hỏi tĩnh không thể tự co giãn theo điểm số giằng co của từng cá nhân.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="pill-badge pill-blue">Touchpoint 3 (AI)</span><br>
+                <strong>Dynamic Synergy Generator</strong>
+              </td>
+              <td>Sinh cẩm nang phối hợp may đo giữa 2 loài hoa theo <strong>bối cảnh dự án thực tế của team</strong> (VD: <em>"Team chuẩn bị chạy chiến dịch Flash sale 48h"</em>).</td>
+              <td>LLM Dynamic Reasoning kết hợp ma trận điểm bù trừ.</td>
+              <td>Bối cảnh công việc thực tế thiên biến vạn hóa, ma trận mẫu tĩnh chỉ bao quát trường hợp chung.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="pill-badge pill-yellow">Touchpoint 4 (AI)</span><br>
+                <strong>Duhat Tone & Empathy Guardrail</strong>
+              </td>
+              <td>Duy trì Brand Voice chú vịt Duhat tươi vui, ấm áp, dùng emoji 🦆🌸, <strong>chặn đứng mọi từ ngữ phán xét tiêu cực kiểu HR</strong>.</td>
+              <td>System Prompt + Few-Shot Filtering Guardrails.</td>
+              <td>Đảm bảo sự an toàn tâm lý (Psychological safety) tuyệt đối cho người dùng.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="pill-badge pill-purple">Touchpoint 5 (AI - Đột Phá)</span><br>
+                <strong>Trợ Lý Đối Thoại & Giải Mã Loài Hoa</strong>
+              </td>
+              <td>Cho phép người dùng hỏi: <em>"Tại sao tôi là Hướng Dương mà không phải Cẩm Tú Cầu?", "Điểm mù lớn nhất?", "Cách phối hợp với sếp trái ngược?"</em>.</td>
+              <td>Conversational LLM + RAG 10 câu trả lời của user.</td>
+              <td>Giải tỏa tâm lý hoài nghi, đối soát trực tiếp lý do, <strong>tăng 100% độ tin cậy và kích thích bàn luận</strong>.</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="pill-badge pill-pink">Touchpoint 6 (AI - Phase 2)</span><br>
+                <strong>Generative Visual Identity</strong>
+              </td>
+              <td>Sinh hình ảnh chú vịt Duhat mang phụ kiện của loài hoa kết quả (VD: Vịt cài hoa sen đá, mặc áo kiến trúc sư).</td>
+              <td>Diffusion / GenAI Image Model (Imagen 3 / SDXL).</td>
+              <td>Tạo cảm giác sở hữu độc bản, kích hoạt mong muốn chia sẻ lên Story mạng xã hội.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: KHI CHAT 1:1 VỚI AI & KHI ĐƯA VÀO GROUP CHAT -->
+    <section class="deck-slide" id="slide-4">
+      <div class="slide-banner">
+        <span class="slide-tag">Hành Trình Trải Nghiệm Sản Phẩm (User Journey)</span>
+        <h2 class="slide-title">Chat 1:1 Khám Phá Bản Thân & Đưa Vào Group Chat Đồng Đội</h2>
+        <p class="slide-desc">
+          Duhat liên kết liền mạch giữa <strong>Không gian riêng tư 1:1</strong> (nơi người dùng tự do bộc lộ phản xạ tự nhiên không sợ ai phán xét) và <strong>Không gian nhóm (Group Chat)</strong> (nơi tính cách được cộng hưởng và mở khóa độ ăn ý).
         </p>
       </div>
 
       <div class="grid-2">
-        <!-- Cột Trái: Các bước trải nghiệm 1:1 -->
-        <div style="display: flex; flex-direction: column; gap: 14px;">
-          <div class="feature-card">
-            <span class="pill-badge pill-yellow">Bước 1: Khởi Động Ấm Áp</span>
-            <h4 style="font-weight: 800;">Vịt Duhat Chào Mừng Không Phán Xét</h4>
-            <p class="card-body">
-              Vịt Duhat mở lời hóm hỉnh: <em>"Không cần suy nghĩ như ở công ty, hãy chọn theo cảm giác tự nhiên nhất nhé!"</em>. Giúp người dùng trút bỏ hoàn toàn áp lực phòng thi.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <span class="pill-badge pill-blue">Bước 2: 10 Tình Huống Tương Tác Kép</span>
-            <h4 style="font-weight: 800;">Bấm Nhanh Hoặc Gõ Text Tùy Ý</h4>
-            <p class="card-body">
-              • <strong>Bấm nút:</strong> Dock 5 mức độ Likert hiện diện ngay trên bàn phím.<br>
-              • <strong>Hoặc Gõ/Voice:</strong> Nếu người dùng gõ <em>"Tùy lúc, bạn thân thì mình xí xóa chứ đối tác thì phải đúng giờ"</em>, AI lập tức nhận diện mức điểm và bóc tách động cơ ngầm!
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <span class="pill-badge pill-green">Bước 3: Tiết Lộ Thẻ Hoa Độc Bản</span>
-            <h4 style="font-weight: 800;">Chân Dung, Điểm Mạnh & Hiểu Lầm</h4>
-            <p class="card-body">
-              Xuất hiện Thẻ Hồ Sơ rực rỡ (VD: 🌻 <strong>Hoa Hướng Dương</strong> — Tiên phong & Cam kết). Chỉ rõ thế mạnh dẫn dắt và lý giải vì sao người khác đôi khi hiểu nhầm bạn là hơi chậm linh hoạt khi biến số thay đổi.
-            </p>
-          </div>
-
-          <div class="feature-card" style="border: 2px solid var(--accent-purple);">
-            <span class="pill-badge pill-purple">Bước 4: Tính Năng Đột Phá Mới</span>
-            <h4 style="font-weight: 800;">Hỏi Đáp Trực Tiếp Với Loài Hoa (Flower Q&A)</h4>
-            <p class="card-body">
-              Người dùng trực tiếp chất vấn: <em>"Tại sao tôi là Hướng Dương mà không phải Cẩm Tú Cầu hay Sen Đá?"</em>. AI đối soát ngược lại 10 câu trả lời để giải thích thuyết phục 100%!
-            </p>
-          </div>
-        </div>
-
-        <!-- Cột Phải: Mô phỏng khung chat 1:1 -->
+        <!-- Khung Trái: Chat 1:1 -->
         <div class="mock-chat-window">
           <div class="mock-chat-header">
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="font-size:1.3rem;">🦆</span>
               <div>
-                <div style="font-size:0.88rem; font-weight:800;">Duhat AI · Chat 1:1</div>
-                <div style="font-size:0.7rem; color:var(--accent-green);">Đang giải mã phản xạ tự nhiên...</div>
+                <div style="font-size:0.88rem; font-weight:800;">1. Khi Chat 1:1 Với Duhat AI</div>
+                <div style="font-size:0.7rem; color:var(--accent-green);">Riêng tư · Nhẹ nhàng · Không áp lực</div>
               </div>
             </div>
-            <span class="pill-badge pill-green">Mệnh đề: 5/10</span>
+            <span class="pill-badge pill-yellow">Cá Nhân</span>
           </div>
 
           <div class="mock-chat-body">
-            <!-- Bot Bubble -->
             <div class="mock-msg others">
               <span style="font-size:1.2rem;">🌸</span>
               <div class="mock-msg-bubble">
-                <div style="font-size:0.72rem; color:#B45309; font-weight:800; margin-bottom:4px;">⚡ TÌNH HUỐNG 5: LÃNH ĐẠO DỰ ÁN</div>
-                <div>Khi nhóm bạn tụ tập đi chơi mà ai cũng ngập ngừng bảo <em>"sao cũng được / ăn gì cũng được"</em>, phản xạ của bạn là gì?</div>
+                <div style="font-size:0.72rem; color:#B45309; font-weight:800; margin-bottom:4px;">⚡ TÌNH HUỐNG: ĐÚNG HẸN</div>
+                <div>Khi hẹn đi cà phê hoặc đi xa, nếu có nguy cơ trễ 10 phút, bạn có nhắn báo trước ngay không?</div>
               </div>
             </div>
 
-            <!-- User Response -->
             <div class="mock-msg self">
               <div class="mock-msg-bubble">
-                <div>🟢🟢 <strong>Rất đồng tình (+2)</strong><br><small style="opacity:0.85;">Mình sẽ đứng ra chốt luôn quán ăn và dẫn đường!</small></div>
+                <div>🟢🟢 <strong>Rất đồng tình (+2)</strong><br><small style="opacity:0.85;">Luôn báo sớm và hẹn mốc mới để giữ chữ tín!</small></div>
               </div>
             </div>
 
-            <!-- Bot Reaction -->
-            <div class="mock-msg others">
-              <span style="font-size:1.2rem;">🌸</span>
-              <div class="mock-msg-bubble">
-                <div>Tuyệt vời! Bạn có tố chất dẫn dắt rất dứt khoát và dám chịu trách nhiệm! ✨ Hãy đến với tình huống tiếp theo nhé...</div>
-              </div>
-            </div>
-
-            <!-- Profile Result Trigger -->
             <div style="background: rgba(253, 200, 48, 0.12); border: 1.5px dashed var(--primary); border-radius: 12px; padding: 12px; text-align: center;">
               <span style="font-size: 2rem;">🌻</span>
               <div style="font-weight: 800; font-size: 0.95rem;">Bạn là Hoa Hướng Dương!</div>
-              <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 8px;">Tín · Độc đoán thiên tài · Hệ thống</div>
-              <button class="chip-btn" style="background:var(--primary); color:#1A1A1A; border:none; width:100%;">
-                🌸 Mở Thẻ Hồ Sơ & Hỏi Đáp Cùng AI
-              </button>
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 6px;">Tín · Độc đoán thiên tài · Hệ thống</div>
+              <div style="font-size: 0.76rem; color: #059669; font-weight: 700;">💬 Có thể hỏi AI ngay: "Vì sao tôi không phải Cẩm Tú Cầu?"</div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- SLIDE 3: KHI ĐƯA VÀO GROUP CHAT THÌ NHƯ THẾ NÀO? -->
-    <section class="deck-slide" id="slide-3">
-      <div class="slide-banner">
-        <span class="slide-tag">Trải Nghiệm Cộng Hưởng Nhóm</span>
-        <h2 class="slide-title">Khi Đưa Vào Group Chat Thì Điều Gì Sẽ Xảy Ra?</h2>
-        <p class="slide-desc">
-          Đây là nơi giá trị của Duhat bùng nổ: Một kết quả cá nhân <strong>biến thành chủ đề thảo luận sôi nổi của cả nhóm</strong>, tự động mở khóa chỉ số ăn ý và dựng nên một <strong>Góc Vườn Đồng Đội (Team Garden)</strong>.
-        </p>
-      </div>
-
-      <div class="grid-2">
-        <!-- Mô phỏng Group Chat -->
+        <!-- Khung Phải: Group Chat -->
         <div class="mock-chat-window">
           <div class="mock-chat-header">
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="font-size:1.3rem;">🌿</span>
               <div>
-                <div style="font-size:0.88rem; font-weight:800;">Team Sáng Tạo & Tech 🌿 (4 TV)</div>
-                <div style="font-size:0.7rem; color:var(--text-muted);">Nam, Linh, An, Bạn</div>
+                <div style="font-size:0.88rem; font-weight:800;">2. Khi Đưa Vào Group Chat Chung</div>
+                <div style="font-size:0.7rem; color:var(--text-muted);">Sân khấu nhóm · Gắn kết · Tương tác thực</div>
               </div>
             </div>
-            <span class="pill-badge pill-purple">Vườn hoa đã nở 3/4</span>
+            <span class="pill-badge pill-purple">Nhóm Công Việc</span>
           </div>
 
           <div class="mock-chat-body">
-            <!-- Shared Card from User -->
+            <!-- Thẻ chia sẻ -->
             <div class="mock-msg self">
               <div class="mock-msg-bubble" style="background:#FFFBEB; border:1.5px solid #FCD34D; color:#1A1A1A; width:100%;">
-                <div style="font-size:0.68rem; font-weight:800; color:#B45309; margin-bottom:4px;">🦆 DUHAT AI · THẺ HÌNH MẪU HOA</div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                  <span style="font-size:2rem;">🌻</span>
+                <div style="font-size:0.68rem; font-weight:800; color:#B45309; margin-bottom:2px;">🦆 DUHAT AI · THẺ HÌNH MẪU</div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:1.8rem;">🌻</span>
                   <div>
-                    <div style="font-weight:800; font-size:0.95rem;">Hoa Hướng Dương</div>
-                    <div style="font-size:0.75rem; color:#78350F;">Tín · Độc đoán thiên tài · Hệ thống</div>
+                    <div style="font-weight:800; font-size:0.92rem;">Hoa Hướng Dương</div>
+                    <div style="font-size:0.72rem; color:#78350F;">Tín · Độc đoán thiên tài · Hệ thống</div>
                   </div>
                 </div>
-                <div style="margin-top:8px; padding-top:8px; border-top:1px dashed #FDE68A; font-size:0.75rem; color:#059669; font-weight:700;">
-                  🤝 Đã ghép đôi ăn ý: 94% với Nam (🪴 Sen Đá)
+                <div style="margin-top:6px; padding-top:6px; border-top:1px dashed #FDE68A; font-size:0.74rem; color:#059669; font-weight:700;">
+                  🤝 Ghép đôi ăn ý: 94% với Nam (🪴 Sen Đá)
                 </div>
               </div>
             </div>
 
-            <!-- Colleague 1 Reaction -->
-            <div class="mock-msg others">
-              <span style="font-size:1.2rem;">🌸</span>
-              <div class="mock-msg-bubble">
-                <div style="font-size:0.72rem; font-weight:800; color:#B45309;">Linh · 🌸 Cẩm Tú Cầu</div>
-                <div>Oa chuẩn luôn! Bạn ra Hướng Dương chốt hướng đi, kết hợp với Cẩm Tú Cầu kết nối nguồn lực là siêu ăn ý luôn 🎉</div>
-              </div>
-            </div>
-
-            <!-- Colleague 2 Reaction -->
+            <!-- Phản hồi đồng đội -->
             <div class="mock-msg others">
               <span style="font-size:1.2rem;">🪴</span>
               <div class="mock-msg-bubble">
                 <div style="font-size:0.72rem; font-weight:800; color:#15803D;">Nam · 🪴 Sen Đá</div>
-                <div>Haha chuẩn bài! Hướng Dương + Sen Đá là trùm quy trình bài bản của team rồi 👍</div>
+                <div>Haha chuẩn luôn! Bạn lo mục tiêu chốt deadline, mình lo làm checklist quy trình cho team là siêu chuẩn bài 👍</div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Các tính năng nhóm mở khóa -->
-        <div style="display: flex; flex-direction: column; gap: 14px;">
-          <div class="feature-card" style="border-left: 4px solid var(--accent-green);">
-            <h4 style="font-weight: 800; display:flex; align-items:center; gap:8px;">
-              <span>🌱</span> Góc Vườn Đồng Đội (Team Living Garden)
-            </h4>
-            <p class="card-body">
-              Mỗi thành viên làm xong bài test sẽ <strong>"trồng" một chậu hoa mang tên mình</strong> vào khu vườn chung của nhóm. Cả team có thể bấm vào chậu hoa của nhau để xem tính cách và cách chăm sóc.
-            </p>
-          </div>
-
-          <div class="feature-card" style="border-left: 4px solid var(--primary);">
-            <h4 style="font-weight: 800; display:flex; align-items:center; gap:8px;">
-              <span>🤝</span> Ma Trận Ăn Ý 1-1 (Synergy Matrix)
-            </h4>
-            <p class="card-body">
-              Tự động tính toán mức độ hòa hợp giữa 2 cá nhân bất kỳ (VD: <em>🌻 Hướng Dương + 🪴 Sen Đá = 94%</em>):
-              <br>• <strong>Điểm bù trừ bứt phá:</strong> Người mở đường dứt khoát & Người xây hậu phương chuẩn mực.
-              <br>• <strong>Vùng va chạm tiềm ẩn:</strong> Cả hai đều cẩn trọng nên dễ chậm khi cần xoay trục gấp.
-              <br>• <strong>Mẹo phối hợp vàng:</strong> Giao toàn quyền thiết kế checklist cho Sen Đá, chốt deadline cho Hướng Dương.
-            </p>
-          </div>
-
-          <div class="feature-card" style="border-left: 4px solid var(--accent-purple);">
-            <h4 style="font-weight: 800; display:flex; align-items:center; gap:8px;">
-              <span>🤖</span> Duhat AI - Trọng Tài Hòa Giải Nhóm
-            </h4>
-            <p class="card-body">
-              Khi giao việc trong nhóm, thành viên có thể tag bot: <em>"@Duhat, nhiệm vụ này nên giao cho bạn nào?"</em>. Bot sẽ gợi ý dựa trên sở trường tự nhiên của loài hoa!
-            </p>
+            <div class="mock-msg others">
+              <span style="font-size:1.2rem;">🌸</span>
+              <div class="mock-msg-bubble">
+                <div style="font-size:0.72rem; font-weight:800; color:#B45309;">Linh · 🌸 Cẩm Tú Cầu</div>
+                <div>Vườn hoa của team mình đã có 3 chậu nở rộ rồi nè, chỉ còn thiếu hoa của @Tuấn thôi! 🌿</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 4: MOMENT QUYẾT ĐỊNH KHIẾN USER PHẢI +1 BẠN VÀO CHAT CÙNG -->
-    <section class="deck-slide" id="slide-4">
+    <!-- SLIDE 5: MOMENT KÍCH HOẠT USER BẮT BUỘC PHẢI +1 BẠN VÀO CHAT CÙNG -->
+    <section class="deck-slide" id="slide-5">
       <div class="slide-banner">
         <span class="slide-tag">Đòn Bẩy Lan Tỏa Đột Phá (Viral Engine & Tipping Point)</span>
         <h2 class="slide-title">Moment Nào Khiến User Bắt Buộc Phải +1 Người Bạn Vào Chat Cùng?</h2>
         <p class="slide-desc">
-          Viral không tự nhiên sinh ra từ một nút bấm "Share" chung chung. Nó được kích hoạt bởi <strong>sự tò mò xã hội (Social Curiosity), mong muốn khỏa lấp điểm mù cá nhân</strong> và nhu cầu muốn giải mã độ ăn ý với một người cụ thể.
+          Người dùng sẽ không chia sẻ chỉ vì một nút "Share" vô hồn. Họ chia sẻ khi có <strong>động lực tâm lý mạnh mẽ</strong>: muốn bù trừ điểm mù, tò mò về độ ăn ý với một người cụ thể, hoặc bị hiệu ứng FOMO của nhóm thôi thúc.
         </p>
       </div>
 
       <div class="grid-3">
         <!-- MOMENT 1 -->
-        <div class="trigger-showcase-card accent-gold">
-          <div class="trigger-number-badge">01</div>
-          <span class="pill-badge pill-yellow" style="margin-bottom: 10px;">Đòn Bẩy 1: Khuyết Thiếu</span>
-          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">
+        <div class="trigger-card" style="border-top: 4px solid #F59E0B;">
+          <div class="trigger-num">01</div>
+          <span class="pill-badge pill-yellow" style="margin-bottom: 8px;">Đòn Bẩy 1: Khuyết Thiếu</span>
+          <h3 style="font-size: 1.12rem; font-weight: 800; margin-bottom: 6px;">
             "Mảnh Ghép Bù Trừ Điểm Mù"
           </h3>
           <p class="card-body">
-            Sau khi nhận thẻ <strong>🌻 Hoa Hướng Dương</strong>, màn hình xuất hiện một gợi ý kích hoạt:
+            Sau khi nhận thẻ <strong>🌻 Hoa Hướng Dương</strong>, AI không chỉ khen mà chỉ ra điểm mù:
           </p>
           <div style="background: rgba(254, 243, 199, 0.4); border-left: 3px solid #F59E0B; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin: 10px 0; color: #92400E; line-height: 1.5;">
-            <em>"Điểm mù của bạn là dễ bị quá bám cam kết cũ khi biến số thay đổi! Bạn đang cực kỳ cần một đóa <strong>🌺 Hoa Đỗ Quyên (Hệ Tốc chớp nhoáng)</strong> để kéo nhanh tiến độ. Rủ ngay 1 người bạn vào test xem bạn ấy có phải là tia chớp của bạn không!"</em>
+            <em>"Điểm mù của bạn là dễ bị bám quá chặt vào cam kết cũ khi biến số thay đổi! Bạn đang cực kỳ cần một đóa <strong>🌺 Hoa Đỗ Quyên (Hệ Tốc chớp nhoáng)</strong> để kéo nhanh tiến độ. Rủ ngay 1 người bạn vào test xem bạn ấy có phải là tia chớp của bạn không!"</em>
           </div>
           <div style="font-size: 0.82rem; font-weight: 800; color: #D97706;">
-            👉 Hành động: Bấm nút <code>[+1 Mời Người Bù Trừ]</code> gửi thẳng vào DM bạn bè.
+            👉 Hành động: Bấm nút <code>[+1 Mời Người Bù Trừ]</code> gửi vào DM bạn bè.
           </div>
         </div>
 
         <!-- MOMENT 2 -->
-        <div class="trigger-showcase-card accent-purple">
-          <div class="trigger-number-badge">02</div>
-          <span class="pill-badge pill-purple" style="margin-bottom: 10px;">Đòn Bẩy 2: Ổ Khóa Ăn Ý</span>
-          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">
+        <div class="trigger-card" style="border-top: 4px solid #A855F7;">
+          <div class="trigger-num">02</div>
+          <span class="pill-badge pill-purple" style="margin-bottom: 8px;">Đòn Bẩy 2: Ổ Khóa Ăn Ý</span>
+          <h3 style="font-size: 1.12rem; font-weight: 800; margin-bottom: 6px;">
             "Ổ Khóa Thách Thức Ăn Ý 1-1"
           </h3>
           <p class="card-body">
-            Trong màn hình chat cá nhân với một người bạn hoặc đồng nghiệp, Duhat hiển thị một chiếc thẻ tương tác:
+            Trong màn hình chat 1-1 với một người bạn chưa làm test, Duhat hiển thị một chiếc thẻ tương tác:
           </p>
           <div style="background: rgba(243, 232, 255, 0.4); border-left: 3px solid #A855F7; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin: 10px 0; color: #6B21A8; line-height: 1.5;">
             <em>"Độ ăn ý giữa Bạn và Hoàng đang là <strong>🔒 ???%</strong>. Hãy gửi lời mời Hoàng làm bài test 2 phút để mở khóa bản đồ cộng hưởng và xem hai bạn hợp nhau ở điểm nào!"</em>
           </div>
           <div style="font-size: 0.82rem; font-weight: 800; color: #9333EA;">
-            👉 Hành động: User bấm gửi lời mời vì tò mò xem điểm ăn ý của cả hai là bao nhiêu!
+            👉 Hành động: Người dùng bấm gửi lời mời vì tò mò muốn biết điểm ăn ý của cả hai!
           </div>
         </div>
 
         <!-- MOMENT 3 -->
-        <div class="trigger-showcase-card accent-pink">
-          <div class="trigger-number-badge">03</div>
-          <span class="pill-badge pill-pink" style="margin-bottom: 10px;">Đòn Bẩy 3: FOMO Nhóm</span>
-          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">
+        <div class="trigger-card" style="border-top: 4px solid #EC4899;">
+          <div class="trigger-num">03</div>
+          <span class="pill-badge pill-pink" style="margin-bottom: 8px;">Đòn Bẩy 3: FOMO Nhóm</span>
+          <h3 style="font-size: 1.12rem; font-weight: 800; margin-bottom: 6px;">
             "Chậu Hoa Bí Ẩn Trong Vườn"
           </h3>
           <p class="card-body">
@@ -867,20 +1101,10 @@
           </div>
         </div>
       </div>
-
-      <div class="feature-card" style="border: 2px solid var(--primary); background: var(--bg-card-subtle);">
-        <h4 style="font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
-          <span>🚀</span> Công Thức Lan Tỏa Cốt Lõi (The Viral Loop Equation)
-        </h4>
-        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 6px; line-height: 1.6;">
-          <strong>Nhận diện bản thân (1:1)</strong> &rarr; <strong>Phát hiện điểm mù cần người bổ trợ</strong> &rarr; <strong>Mời 1 bạn cụ thể để mở khóa độ ăn ý (+1)</strong> &rarr; <strong>Cả hai cùng nở hoa trong nhóm chung (Group)</strong>.  
-          Vòng lặp này giúp hệ số lan tỏa <strong>K-Factor dự kiến &ge; 1.45</strong>, tạo ra tăng trưởng tự nhiên (organic growth) cho ứng dụng Duhat.
-        </p>
-      </div>
     </section>
 
-    <!-- SLIDE 5: THỬ NGHIỆM HỎI ĐÁP LOÀI HOA (LIVE SANDBOX) -->
-    <section class="deck-slide" id="slide-5">
+    <!-- SLIDE 6: THỬ NGHIỆM HỎI ĐÁP LOÀI HOA (LIVE SANDBOX) -->
+    <section class="deck-slide" id="slide-6">
       <div class="slide-banner">
         <span class="slide-tag">Trải Nghiệm Thử Nghiệm Tương Tác</span>
         <h2 class="slide-title">Thử Nghiệm Tính Năng: "Tại Sao Tôi Là Hoa Này Mà Không Phải Hoa Kia?"</h2>
@@ -889,7 +1113,7 @@
         </p>
       </div>
 
-      <div class="qa-interactive-block">
+      <div class="sandbox-panel">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
           <h3 style="font-size: 1.1rem; font-weight: 800; display:flex; align-items:center; gap:8px;">
             <span>🌸</span> Trợ Lý Đối Thoại & Giải Mã Loài Hoa (Duhat AI Copilot)
@@ -902,7 +1126,7 @@
           <div class="mock-msg others">
             <span style="font-size:1.3rem;">🦆</span>
             <div class="mock-msg-bubble">
-              Quak quak! 🦆 Chào bạn, mình là <strong>Duhat AI Copilot</strong>. Dựa trên 10 tình huống bạn vừa chọn, bạn thuộc hình mẫu <strong>🌻 Hoa Hướng Dương (Tín · Độc đoán thiên tài · Hệ thống)</strong>! Bạn muốn mình giải thích vì sao bạn là hoa này mà không phải Cẩm Tú Cầu hay Sen Đá? Bấm câu hỏi dưới nhé!
+              Quak quak! 🦆 Chào bạn, mình là <strong>Duhat AI Copilot</strong>. Dựa trên các tình huống bạn vừa chọn, bạn thuộc hình mẫu <strong>🌻 Hoa Hướng Dương (Tín · Độc đoán thiên tài · Hệ thống)</strong>! Bạn muốn mình giải thích vì sao bạn là hoa này mà không phải Cẩm Tú Cầu hay Sen Đá? Bấm câu hỏi dưới nhé!
             </div>
           </div>
         </div>
@@ -931,7 +1155,7 @@
   <!-- DECK FOOTER & CONTROLS -->
   <footer class="deck-footer">
     <div style="font-size:0.82rem; color:var(--text-muted);">
-      Trang <span id="slide-num-label" style="font-weight:800; color:var(--text-main);">1</span> / 5 · 
+      Trang <span id="slide-num-label" style="font-weight:800; color:var(--text-main);">1</span> / 6 · 
       <strong>Duhat Product Marketing Deck</strong>
     </div>
 
@@ -944,7 +1168,7 @@
   <!-- JAVASCRIPT SLIDE CONTROLLER & SANDBOX -->
   <script>
     let activeSlide = 1;
-    const maxSlides = 5;
+    const maxSlides = 6;
 
     function showSlide(num) {
       if (num < 1 || num > maxSlides) return;
@@ -1004,7 +1228,7 @@
         <div class="mock-msg others" id="${typeId}">
           <span style="font-size:1.3rem;">🦆</span>
           <div class="mock-msg-bubble" style="color:var(--text-muted); font-style:italic;">
-            Duhat AI đang đối soát 10 tình huống đời thường của bạn...
+            Duhat AI đang đối soát các tình huống và ma trận 3x4x6...
           </div>
         </div>
       `;
@@ -1020,7 +1244,7 @@
         if (lower.includes('cẩm tú cầu')) {
           reply = `
             <strong>🌸 Vì sao bạn là 🌻 Hướng Dương mà không phải 🌸 Cẩm Tú Cầu?</strong><br><br>
-            • <strong>Ở Tình huống 5 (khi nhóm phân vân ăn gì/đi đâu):</strong> Bạn chọn mức +2 ở phong cách <em>Độc đoán thiên tài</em> (dám đứng ra chốt quán và dẫn đường). Trong khi Cẩm Tú Cầu là hình mẫu <em>Hệ sinh thái</em> — thích hỏi ý kiến từng người và kết nối đa chiều.<br>
+            • <strong>Điểm khác biệt cốt lõi ở Chiều Phong Cách Dẫn Dắt:</strong> Khi nhóm phân vân ăn gì/đi đâu, bạn chọn phản xạ <em>Độc đoán thiên tài</em> (dám đứng ra chốt quán và dẫn đường). Trong khi Cẩm Tú Cầu là hình mẫu <em>Hệ sinh thái</em> — thích hỏi ý kiến từng người và kết nối đa bên.<br>
             • <strong>Về Tư duy:</strong> Bạn đạt điểm cao ở tư duy <em>Hệ thống</em> (nhìn bức tranh liên hoàn dài hạn), trong khi Cẩm Tú Cầu chú trọng tư duy <em>Khoa học</em> (cần dữ liệu và thử nghiệm thực chứng).<br><br>
             💡 <em>Bạn là ngọn cờ dẫn dắt cam kết! Nếu muốn thêm tố chất Cẩm Tú Cầu, hãy tập thói quen tham vấn thêm ý kiến của 2 người khác trước khi chốt quyết định nhé!</em>
           `;
@@ -1028,7 +1252,7 @@
           reply = `
             <strong>🪴 Vì sao bạn là 🌻 Hướng Dương mà không phải 🪴 Sen Đá?</strong><br><br>
             • Cả hai đều rất trọng cam kết và sự chỉn chu.<br>
-            • <strong>Điểm khác biệt:</strong> Sen Đá là hình mẫu <em>Nền tảng tự vận hành</em> (Tình huống 7: thích tạo checklist và công cụ dùng chung để người khác tự làm không cần hỏi mình). Còn bạn thích trực tiếp cầm trịch và điều phối.<br>
+            • <strong>Điểm khác biệt:</strong> Sen Đá là hình mẫu <em>Nền tảng tự vận hành</em> (thích tạo checklist và công cụ dùng chung để người khác tự làm không cần hỏi mình). Còn bạn thích trực tiếp cầm trịch và điều phối.<br>
             • <strong>Độ ăn ý:</strong> Bạn và Sen Đá đạt độ ăn ý lên đến <strong>94%</strong> — bạn định hướng mục tiêu, còn Sen Đá lo hậu phương vững chắc!
           `;
         } else if (lower.includes('điểm mù') || lower.includes('va chạm')) {
@@ -1040,14 +1264,14 @@
         } else if (lower.includes('sếp') || lower.includes('thuyết phục')) {
           reply = `
             <strong>🤝 Bí quyết thuyết phục người có tính cách trái ngược:</strong><br><br>
-            • <strong>Với người hệ Tốc (Đỗ Quyên):</strong> Đi thẳng vào kết quả trong 3 gạch đầu dòng, đừng nói dài về quy trình.<br>
+            • <strong>Với người hệ Tốc (Đỗ Quyên):</strong> Đi thẳng vào kết quả cần đạt trong 3 gạch đầu dòng, đừng nói dài về quy trình.<br>
             • <strong>Với người hệ Nền tảng (Sen Đá):</strong> Chuẩn bị bảng checklist, dữ liệu kiểm chứng và mốc bàn giao cụ thể.<br>
             • <strong>Với người hệ Hệ sinh thái (Cẩm Tú Cầu):</strong> Lắng nghe góc nhìn đối tác của họ trước khi chốt!
           `;
         } else {
           reply = `
             <strong>🦆 Duhat AI giải đáp:</strong><br><br>
-            Với hình mẫu <strong>🌻 Hoa Hướng Dương</strong>, bạn là điểm tựa đáng tin cậy của nhóm. Về câu hỏi <em>"${q}"</em>, AI khẳng định tính cách này phản ánh phản xạ tự nhiên hiện tại của bạn. Bạn hoàn toàn có thể phát triển thêm các phẩm chất mới khi trải nghiệm nhiều vai trò khác nhau! ✨🌸
+            Với hình mẫu <strong>🌻 Hoa Hướng Dương (Tín · Độc đoán thiên tài · Hệ thống)</strong>, bạn là điểm tựa đáng tin cậy của nhóm. Về câu hỏi <em>"${q}"</em>, AI khẳng định tính cách này phản ánh phản xạ tự nhiên hiện tại của bạn trong bộ khung ma trận 3x4x6! ✨🌸
           `;
         }
 

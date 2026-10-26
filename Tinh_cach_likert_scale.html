@@ -1,0 +1,3387 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duhat - Khám Phá Tính Cách AI (Format 5 Mức Độ Likert)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & COLOR TOKENS (DUHAT SPECIFICATION)
+       ========================================================================== */
+    :root {
+      --color-primary: #FDC830;
+      --color-primary-hover: #F5B800;
+      --color-primary-light: #FEF5D1;
+      --color-primary-subtle: #FFFDF5;
+
+      --color-bg-app: #FFFFFF;
+      --color-bg-chat: #F4F6F4;
+      --color-bg-input: #F2F3F5;
+      --color-bg-hover: #F9FAFB;
+      --color-bg-active: #F3F4F6;
+
+      --color-text-main: #1A1A1A;
+      --color-text-secondary: #555555;
+      --color-text-muted: #757575;
+      --color-border: #E5E7EB;
+      --color-border-dark: #D1D5DB;
+      --color-online: #22C55E;
+      --color-read-tick: #0284C7;
+      --color-unread-badge: #EF4444;
+
+      /* Likert Colors */
+      --likert-strongly-agree: #15803D;
+      --likert-agree: #22C55E;
+      --likert-neutral: #94A3B8;
+      --likert-disagree: #F97316;
+      --likert-strongly-disagree: #DC2626;
+
+      --radius-full: 9999px;
+      --radius-2xl: 20px;
+      --radius-xl: 16px;
+      --radius-lg: 12px;
+      --radius-md: 8px;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-floating-nav: 0 12px 30px -4px rgba(0, 0, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+
+      --phone-width: 412px;
+      --phone-height: 870px;
+      --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+
+    *::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: radial-gradient(circle at 10% 20%, #F8FAFC 0%, #E2E8F0 100%);
+      color: var(--color-text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-env {
+      background: radial-gradient(circle at 10% 20%, #1E293B 0%, #0F172A 100%);
+    }
+
+    body.dark-env .prototype-control-bar {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #F8FAFC;
+    }
+
+    body.dark-env .ctrl-btn {
+      background: #334155;
+      color: #F8FAFC;
+      border-color: #475569;
+    }
+
+    /* Outer Control Bar */
+    .prototype-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 620px;
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: var(--shadow-md);
+      z-index: 100;
+    }
+
+    .brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .duck-icon {
+      font-size: 1.35rem;
+      animation: duckBob 2s infinite ease-in-out;
+    }
+
+    .brand-title {
+      font-size: 0.95rem;
+      letter-spacing: -0.2px;
+    }
+
+    .badge-version {
+      font-size: 0.7rem;
+      background: #DCFCE7;
+      color: #15803D;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+    }
+
+    .control-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      background: #FFFFFF;
+      color: var(--color-text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ctrl-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+
+    /* Mobile Device Chassis */
+    .device-viewport {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .iphone-chassis {
+      position: relative;
+      width: var(--phone-width);
+      height: var(--phone-height);
+      background-color: var(--color-bg-app);
+      border-radius: 50px;
+      box-shadow: 0 0 0 12px #1E293B, 0 0 0 14px #475569, 0 25px 60px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dynamic Island */
+    .dynamic-island {
+      position: absolute;
+      top: 11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 122px;
+      height: 32px;
+      background-color: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+    }
+
+    .island-camera {
+      width: 10px;
+      height: 10px;
+      background: #111827;
+      border-radius: 50%;
+      border: 1.5px solid #1F2937;
+    }
+
+    .island-sensor {
+      width: 9px;
+      height: 9px;
+      background: #030712;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    /* Phone Status Bar */
+    .phone-status-bar {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 26px 0 26px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      z-index: 40;
+      user-select: none;
+    }
+
+    .status-indicators {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .battery-icon {
+      width: 22px;
+      height: 11px;
+      border: 1.5px solid currentColor;
+      border-radius: 3.5px;
+      padding: 1px;
+      position: relative;
+    }
+
+    .battery-icon::after {
+      content: '';
+      position: absolute;
+      right: -3.5px;
+      top: 2.5px;
+      width: 2px;
+      height: 4px;
+      background: currentColor;
+      border-radius: 0 1px 1px 0;
+    }
+
+    .battery-level {
+      width: 82%;
+      height: 100%;
+      background: currentColor;
+      border-radius: 1.5px;
+    }
+
+    /* Screens Routing */
+    .app-screen {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 48px);
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-bg-app);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(30px);
+      transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .app-screen.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .scrollable-content {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 96px;
+      scrollbar-width: none;
+    }
+
+    .scrollable-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ==========================================================================
+       2. SCREEN 1: INBOX & MAIN DASHBOARD
+       ========================================================================== */
+    .inbox-header {
+      padding: 12px 20px 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-duck-badge {
+      font-size: 1.45rem;
+      background: var(--color-primary-light);
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 1.5px solid var(--color-primary);
+    }
+
+    .logo-text {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--color-text-main);
+    }
+
+    .header-action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-circle-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--color-bg-input);
+      border: none;
+      color: var(--color-text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .icon-circle-btn:hover {
+      background-color: var(--color-primary-light);
+      color: #B45309;
+      transform: scale(1.05);
+    }
+
+    /* Search Bar */
+    .search-container {
+      padding: 8px 20px 12px 20px;
+    }
+
+    .search-bar-pill {
+      display: flex;
+      align-items: center;
+      background-color: var(--color-bg-input);
+      border-radius: var(--radius-full);
+      padding: 10px 16px;
+      transition: box-shadow 0.2s, background-color 0.2s;
+    }
+
+    .search-bar-pill:focus-within {
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 2px var(--color-primary);
+    }
+
+    .search-icon {
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .search-bar-pill input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--color-text-main);
+    }
+
+    /* Mascot Banner (Format Likert 5 Mức Độ) */
+    .banner-wrapper {
+      padding: 4px 20px 14px 20px;
+    }
+
+    .interactive-banner {
+      background: linear-gradient(135deg, #FDC830 0%, #F59E0B 100%);
+      border-radius: var(--radius-2xl);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 8px 20px -4px rgba(253, 200, 48, 0.45);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+
+    .interactive-banner:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 12px 24px -4px rgba(253, 200, 48, 0.55);
+    }
+
+    .banner-content {
+      flex: 1;
+      z-index: 2;
+    }
+
+    .banner-pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #854D0E;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .banner-heading {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #1A1A1A;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .banner-cta-button {
+      background-color: #1A1A1A;
+      color: #FFFFFF;
+      border: none;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .banner-mascot-visual {
+      width: 95px;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    /* Filter Pill Bar */
+    .filter-pill-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 20px 14px 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filter-pill-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pill-btn {
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      background-color: #FFFFFF;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn.active {
+      background-color: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: #1A1A1A;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(253, 200, 48, 0.25);
+    }
+
+    /* Conversation List */
+    .conversation-section {
+      padding: 0 12px;
+    }
+
+    .conversation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .conversation-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 10px;
+      border-radius: var(--radius-xl);
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .conversation-item:hover {
+      background-color: var(--color-bg-hover);
+    }
+
+    .conv-avatar-wrap {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      margin-right: 14px;
+    }
+
+    .conv-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: var(--color-bg-input);
+    }
+
+    .conv-avatar.ai-avatar {
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, #FEF5D1 0%, #FDE047 100%);
+      border: 1.5px solid var(--color-primary);
+    }
+
+    .presence-dot {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background-color: var(--color-online);
+      border: 2.5px solid #FFFFFF;
+    }
+
+    .conv-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .conv-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .conv-name-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .conv-name {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+    }
+
+    .badge-tag-ai {
+      background: #EDE9FE;
+      color: #6D28D9;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+    }
+
+    .conv-meta {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .conv-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .conv-snippet {
+      font-size: 0.86rem;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .unread-badge {
+      background-color: var(--color-primary);
+      color: #1A1A1A;
+      font-size: 0.72rem;
+      font-weight: 800;
+      min-width: 20px;
+      height: 20px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+    }
+
+    /* Floating Bottom Navigation Bar */
+    .bottom-nav-bar {
+      position: absolute;
+      bottom: 22px;
+      left: 20px;
+      right: 20px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 8px;
+      box-shadow: var(--shadow-floating-nav);
+      border: 1px solid rgba(229, 231, 235, 0.8);
+      z-index: 30;
+    }
+
+    .nav-tab-item {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab-item.active {
+      background-color: var(--color-primary-light);
+      color: #1A1A1A;
+      padding: 6px 16px;
+      font-weight: 700;
+    }
+
+    .nav-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       3. SCREEN 2: CHAT ROOM VIEW (LIKERT 5-POINT SCALE STREAM)
+       ========================================================================== */
+    .chat-header {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+      background-color: #FFFFFF;
+      z-index: 10;
+    }
+
+    .chat-back-btn {
+      background: none;
+      border: none;
+      color: var(--color-text-main);
+      padding: 6px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .chat-recipient-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 10px;
+    }
+
+    .header-avatar.ai-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      background: linear-gradient(135deg, #FEF5D1 0%, #FDE047 100%);
+      border: 1px solid var(--color-primary);
+    }
+
+    .recipient-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+    }
+
+    .recipient-status {
+      font-size: 0.72rem;
+      color: var(--color-online);
+      font-weight: 600;
+    }
+
+    /* Progress Header Tracker */
+    .assessment-progress-tracker {
+      background: #FFFFFF;
+      padding: 8px 16px 10px 16px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #FDC830 0%, #22C55E 100%);
+      border-radius: 3px;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Message Stream with Doodle Wallpaper */
+    .message-stream {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background-color: var(--color-bg-chat);
+      background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+
+    .message-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      max-width: 90%;
+      animation: messagePop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .message-row.self {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-row.others {
+      align-self: flex-start;
+    }
+
+    .msg-sender-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: var(--color-bg-input);
+      flex-shrink: 0;
+    }
+
+    .msg-bubble {
+      padding: 12px 16px;
+      border-radius: var(--radius-2xl);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      position: relative;
+      word-break: break-word;
+    }
+
+    .message-row.self .msg-bubble {
+      background-color: var(--color-primary-light);
+      color: #1A1A1A;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .message-row.others .msg-bubble {
+      background-color: #FFFFFF;
+      color: var(--color-text-main);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    .msg-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      margin-top: 5px;
+      font-size: 0.68rem;
+      color: var(--color-text-muted);
+    }
+
+    .tick-icon {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-read-tick);
+    }
+
+    /* ==========================================================================
+       4. MOBILE-FIRST COMPACT LIKERT STATEMENT & ANSWER CONTROLS
+       ========================================================================== */
+    .statement-message-row {
+      max-width: 96% !important;
+      width: 96%;
+    }
+
+    .statement-bubble {
+      width: 100%;
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px !important;
+      padding: 12px 12px 8px 12px !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .likert-statement-compact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .statement-top-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .pill-badge {
+      background: var(--color-primary-light);
+      color: #854D0E;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+      font-size: 0.68rem;
+    }
+
+    .pill-category {
+      color: var(--color-text-muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .statement-proposition {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #1E293B;
+      line-height: 1.4;
+      padding: 0 2px;
+    }
+
+    /* ==========================================================================
+       4. MOBILE-FIRST 5-DOT INTUITIVE LIKERT SLIDER (NO CRAMPED TEXT/BOXES)
+       ========================================================================== */
+    .likert-scale-dock {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 10px 10px 8px 10px;
+      width: 100%;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .likert-scale-labels {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      padding: 0 4px;
+    }
+
+    .scale-lbl-agree {
+      color: #15803D;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .scale-lbl-disagree {
+      color: #DC2626;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .likert-dots-track {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 48px;
+      padding: 0 4px;
+    }
+
+    .track-connecting-line {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      top: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, #86EFAC 0%, #E2E8F0 50%, #FCA5A5 100%);
+      transform: translateY(-50%);
+      z-index: 1;
+      border-radius: 2px;
+    }
+
+    .likert-dot-node {
+      position: relative;
+      z-index: 2;
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .likert-dot-node:hover {
+      transform: scale(1.12);
+    }
+
+    .likert-dot-node:active {
+      transform: scale(0.92);
+    }
+
+    .likert-dot-node[disabled] {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .dot-circle {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .dot-check-icon {
+      display: none;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    /* 5 Differentiated Circle Sizes & Gradients */
+    /* Level 5: Rất đồng tình (To nhất - Xanh lá đậm) */
+    .likert-dot-node.lvl-5 .dot-circle {
+      width: 38px;
+      height: 38px;
+      background: #15803D;
+      border: 3px solid #86EFAC;
+      color: #FFFFFF;
+    }
+
+    /* Level 4: Đồng tình (Vừa - Xanh lá sáng) */
+    .likert-dot-node.lvl-4 .dot-circle {
+      width: 28px;
+      height: 28px;
+      background: #22C55E;
+      border: 2.5px solid #BBF7D0;
+      color: #FFFFFF;
+    }
+
+    /* Level 3: Trung lập (Nhỏ nhất - Xám tinh tế) */
+    .likert-dot-node.lvl-3 .dot-circle {
+      width: 20px;
+      height: 20px;
+      background: #CBD5E1;
+      border: 2px solid #E2E8F0;
+      color: #475569;
+    }
+
+    /* Level 2: Không đồng tình (Vừa - Cam đỏ) */
+    .likert-dot-node.lvl-2 .dot-circle {
+      width: 28px;
+      height: 28px;
+      background: #F87171;
+      border: 2.5px solid #FECDD3;
+      color: #FFFFFF;
+    }
+
+    /* Level 1: Rất không đồng tình (To nhất - Đỏ rượu) */
+    .likert-dot-node.lvl-1 .dot-circle {
+      width: 38px;
+      height: 38px;
+      background: #DC2626;
+      border: 3px solid #FCA5A5;
+      color: #FFFFFF;
+    }
+
+    /* Selected State: Solid Fill + White Check Icon */
+    .likert-dot-node.selected .dot-circle {
+      box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px currentColor;
+      transform: scale(1.15);
+    }
+
+    .likert-dot-node.selected .dot-check-icon {
+      display: block;
+    }
+
+    .likert-dot-node.dimmed {
+      opacity: 0.35;
+      filter: grayscale(0.6);
+    }
+
+    /* Dynamic feedback label beneath dots */
+    .likert-live-indicator {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      min-height: 20px;
+      line-height: 20px;
+      color: #64748B;
+      transition: all 0.2s ease;
+      background: rgba(241, 245, 249, 0.7);
+      border-radius: 6px;
+      padding: 1px 6px;
+    }
+
+    /* Quick Reply Dock above Input Bar */
+    .chat-quick-chips-bar {
+      padding: 6px 10px;
+      background: var(--color-bg-chat);
+      border-top: 1px solid var(--color-border);
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+
+    .chat-quick-chips-bar::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    /* When displaying onboarding chips */
+    .chat-quick-chips-bar:not(.quick-likert-dock) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chat-chip-btn {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-border);
+      background: #FFFFFF;
+      color: var(--color-text-main);
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .chat-chip-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+
+    .chat-chip-btn.accent-chip {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: #854D0E;
+    }
+
+    /* When displaying 5 Likert Buttons: Sleek Thumbpad */
+    .chat-quick-chips-bar.quick-likert-dock {
+      display: grid !important;
+      grid-template-columns: repeat(5, 1fr) !important;
+      gap: 4px !important;
+      padding: 6px 8px !important;
+    }
+
+    .quick-likert-btn {
+      height: 44px;
+      border-radius: 10px;
+      border: 1.5px solid var(--color-border);
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      cursor: pointer;
+      min-width: 0;
+      padding: 2px 1px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .quick-likert-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .quick-likert-btn:active {
+      transform: scale(0.95);
+    }
+
+    .quick-dot-preview {
+      display: inline-block;
+      border-radius: 50%;
+    }
+
+    .quick-likert-btn.lvl-5 .quick-dot-preview {
+      width: 14px;
+      height: 14px;
+      background: #15803D;
+    }
+
+    .quick-likert-btn.lvl-4 .quick-dot-preview {
+      width: 11px;
+      height: 11px;
+      background: #22C55E;
+    }
+
+    .quick-likert-btn.lvl-3 .quick-dot-preview {
+      width: 8px;
+      height: 8px;
+      background: #94A3B8;
+    }
+
+    .quick-likert-btn.lvl-2 .quick-dot-preview {
+      width: 11px;
+      height: 11px;
+      background: #F87171;
+    }
+
+    .quick-likert-btn.lvl-1 .quick-dot-preview {
+      width: 14px;
+      height: 14px;
+      background: #DC2626;
+    }
+
+    .quick-label-text {
+      font-size: 0.65rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .quick-likert-btn.lvl-5 { color: #15803D; border-color: #BBF7D0; }
+    .quick-likert-btn.lvl-5:hover { background: #DCFCE7; border-color: #22C55E; }
+
+    .quick-likert-btn.lvl-4 { color: #16A34A; border-color: #DCFCE7; }
+    .quick-likert-btn.lvl-4:hover { background: #F0FDF4; border-color: #4ADE80; }
+
+    .quick-likert-btn.lvl-3 { color: #64748B; border-color: #E2E8F0; }
+    .quick-likert-btn.lvl-3:hover { background: #F1F5F9; border-color: #94A3B8; }
+
+    .quick-likert-btn.lvl-2 { color: #EA580C; border-color: #FED7AA; }
+    .quick-likert-btn.lvl-2:hover { background: #FFEDD5; border-color: #FB923C; }
+
+    .quick-likert-btn.lvl-1 { color: #DC2626; border-color: #FECDD3; }
+    .quick-likert-btn.lvl-1:hover { background: #FFE4E6; border-color: #F87171; }
+
+    /* Typing Indicator */
+    .typing-indicator-wrapper {
+      padding: 4px 16px 8px 16px;
+      background: var(--color-bg-chat);
+    }
+
+    .typing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .typing-dots {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .typing-dots span {
+      width: 5px;
+      height: 5px;
+      background-color: var(--color-primary-hover);
+      border-radius: 50%;
+      animation: typingBounce 1.2s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    /* Chat Input Bar */
+    .chat-input-bar {
+      padding: 10px 14px;
+      background-color: #FFFFFF;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .btn-input-accessory {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .chat-input-pill {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background-color: var(--color-bg-input);
+      border-radius: var(--radius-full);
+      padding: 6px 12px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .chat-input-pill:focus-within {
+      background-color: #FFFFFF;
+      border-color: var(--color-primary);
+    }
+
+    .chat-input-pill input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--color-text-main);
+    }
+
+    .btn-send-main {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(253, 200, 48, 0.4);
+    }
+
+    /* Result Card in Chat */
+    .result-trigger-card {
+      background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+      border: 2px solid #FDA4AF;
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      margin-top: 6px;
+    }
+
+    .result-flower-hero {
+      font-size: 3.5rem;
+      line-height: 1;
+      margin-bottom: 8px;
+      animation: flowerBloom 1.5s infinite alternate ease-in-out;
+    }
+
+    .result-trigger-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #9F1239;
+    }
+
+    .result-trigger-sub {
+      font-size: 0.82rem;
+      color: #BE123C;
+      margin: 4px 0 12px 0;
+    }
+
+    .btn-view-flower-card {
+      background: #E11D48;
+      color: #FFFFFF;
+      border: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+    }
+
+    /* Profile Screen */
+    .flower-profile-header {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+      background: #FFFFFF;
+    }
+
+    .flower-main-card {
+      background: linear-gradient(145deg, #FFF1F2 0%, #FFFFFF 60%, #FEF5D1 100%);
+      border-radius: 24px;
+      border: 1.5px solid #FECDD3;
+      padding: 22px 18px;
+      box-shadow: var(--shadow-lg);
+      margin: 16px;
+    }
+
+    .flower-badge-ribbon {
+      display: inline-flex;
+      background: #FFE4E6;
+      color: #9F1239;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+    }
+
+    .flower-visual-hero {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .flower-emoji-large {
+      font-size: 4.5rem;
+    }
+
+    .flower-name-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #881337;
+    }
+
+    .flower-tagline {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #9F1239;
+      margin-top: 2px;
+    }
+
+    .dimensions-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed #FECDD3;
+    }
+
+    .dim-badge-box {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(229, 231, 235, 0.8);
+      border-radius: var(--radius-lg);
+      padding: 8px 6px;
+      text-align: center;
+    }
+
+    .dim-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+    }
+
+    .dim-value {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+      margin-top: 2px;
+    }
+
+    .profile-section-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      margin: 0 16px 14px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-head-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+      margin-bottom: 10px;
+    }
+
+    .profile-paragraph {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--color-text-secondary);
+    }
+
+    .highlight-tip-box {
+      background: #F0FDF4;
+      border-left: 3px solid #22C55E;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: #166534;
+      margin-top: 8px;
+    }
+
+    .warning-box {
+      background: #FFFBEB;
+      border-left: 3px solid #F59E0B;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: #92400E;
+      margin-top: 8px;
+    }
+
+    /* ==========================================================================
+       5. GROUP CHAT & FLOWER SYNERGY MATRIX (CÁCH CÁC LOÀI HOA KẾT HỢP)
+       ========================================================================== */
+    .group-avatar {
+      background: linear-gradient(135deg, #DCFCE7 0%, #86EFAC 100%) !important;
+      border: 1.5px solid #22C55E !important;
+      font-size: 1.35rem;
+    }
+
+    .badge-tag-group {
+      background: #DCFCE7;
+      color: #15803D;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Shared Card in Group Chat */
+    .shared-flower-card-bubble {
+      background: linear-gradient(145deg, #FFFDF5 0%, #FEF5D1 100%) !important;
+      border: 2px solid var(--color-primary);
+      border-radius: 20px !important;
+      padding: 14px 16px !important;
+      box-shadow: 0 4px 14px rgba(253, 200, 48, 0.25);
+      max-width: 100%;
+    }
+
+    .shared-card-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #854D0E;
+      margin-bottom: 8px;
+    }
+
+    .shared-card-body {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #FFFFFF;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(253, 200, 48, 0.6);
+      margin-bottom: 10px;
+    }
+
+    .shared-flower-icon {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .shared-flower-info h4 {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: #1A1A1A;
+    }
+
+    .shared-flower-info p {
+      font-size: 0.75rem;
+      color: #64748B;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+
+    .btn-view-synergy-inline {
+      width: 100%;
+      background: #1A1A1A;
+      color: #FFFFFF;
+      border: none;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-view-synergy-inline:hover {
+      background: #334155;
+      transform: translateY(-1px);
+    }
+
+    /* Teammate Chat Bubbles in Group */
+    .msg-sender-name {
+      font-size: 0.72rem;
+      font-weight: 800;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sender-flower-badge {
+      font-size: 0.65rem;
+      padding: 1px 6px;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    /* Interactive Flower Synergy Section in Profile */
+    .synergy-partner-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .synergy-partner-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .synergy-tab-btn {
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-border);
+      background: #FFFFFF;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .synergy-tab-btn.active {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: #854D0E;
+      font-weight: 800;
+    }
+
+    .synergy-result-box {
+      background: #FFFFFF;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .synergy-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .synergy-pill-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .synergy-dim-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .synergy-dim-item {
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .synergy-item-green {
+      background: #F0FDF4;
+      border-left: 3px solid #22C55E;
+      color: #166534;
+    }
+
+    .synergy-item-orange {
+      background: #FFFBEB;
+      border-left: 3px solid #F59E0B;
+      color: #92400E;
+    }
+
+    .synergy-item-purple {
+      background: #FAF5FF;
+      border-left: 3px solid #A855F7;
+      color: #6B21A8;
+    }
+
+    /* Actions Bar in Profile */
+    .profile-action-dock {
+      padding: 10px 16px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-share-group-main {
+      width: 100%;
+      background: linear-gradient(135deg, #FDC830 0%, #F59E0B 100%);
+      color: #1A1A1A;
+      border: none;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 800;
+      padding: 12px 18px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(253, 200, 48, 0.45);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-share-group-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(253, 200, 48, 0.6);
+    }
+
+    .btn-open-garden-sec {
+      width: 100%;
+      background: #FFFFFF;
+      color: #1A1A1A;
+      border: 1.5px solid var(--color-border);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-open-garden-sec:hover {
+      background: var(--color-bg-hover);
+      border-color: #CBD5E1;
+    }
+
+    /* ==========================================================================
+       6. SCREEN 4: VƯỜN HOA NHÓM (TEAM GARDEN VIEW)
+       ========================================================================== */
+    .garden-screen-header {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+      background: #FFFFFF;
+    }
+
+    .garden-hero-stats {
+      background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+      border: 1.5px solid #A7F3D0;
+      border-radius: 20px;
+      padding: 14px 16px;
+      margin: 14px 16px;
+      text-align: center;
+    }
+
+    .garden-stats-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #065F46;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .garden-stats-score {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #047857;
+      margin: 2px 0;
+    }
+
+    .garden-stats-desc {
+      font-size: 0.78rem;
+      color: #065F46;
+      line-height: 1.4;
+    }
+
+    .garden-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 0 16px;
+      margin-bottom: 14px;
+    }
+
+    .garden-member-pot {
+      background: #FFFFFF;
+      border: 1.5px solid var(--color-border);
+      border-radius: 16px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .garden-member-pot:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .garden-member-pot.active-inspect {
+      border-color: #22C55E;
+      background: #F0FDF4;
+      box-shadow: 0 0 0 2px #22C55E;
+    }
+
+    .pot-avatar-badge {
+      font-size: 2.2rem;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pot-member-name {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+    }
+
+    .pot-flower-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    .pot-role-tag {
+      font-size: 0.65rem;
+      color: var(--color-text-muted);
+      margin-top: 1px;
+    }
+
+    /* Home Bar Indicator */
+    .home-indicator-bar {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      pointer-events: none;
+    }
+
+    .home-indicator {
+      width: 135px;
+      height: 5px;
+      background-color: #000000;
+      border-radius: 3px;
+      opacity: 0.35;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes duckBob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px) rotate(5deg);
+      }
+    }
+
+    @keyframes typingBounce {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0.6);
+        opacity: 0.4;
+      }
+
+      40% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes messagePop {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.97);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes flowerBloom {
+      0% {
+        transform: scale(0.95);
+      }
+
+      100% {
+        transform: scale(1.05) rotate(3deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="prototype-environment">
+    <!-- Thanh điều khiển Toolbar giả lập bên ngoài -->
+    <header class="prototype-control-bar">
+      <div class="brand-tag">
+        <span class="duck-icon">🦆</span>
+        <span class="brand-title">Duhat AI - Format 5 Mức Độ (Likert)</span>
+        <span class="badge-version">Mệnh Đề Nhanh</span>
+      </div>
+      <div class="control-actions">
+        <button id="btn-toggle-theme" class="ctrl-btn" title="Chuyển chế độ Nền">🌓 Đổi nền</button>
+        <button id="btn-restart-assessment" class="ctrl-btn" title="Làm lại bài test từ đầu">🔄 Khởi động lại</button>
+      </div>
+    </header>
+
+    <!-- Khung thiết bị di động (Mobile Device Shell) -->
+    <main class="device-viewport">
+      <div class="iphone-chassis">
+        <!-- Dynamic Island & Camera -->
+        <div class="dynamic-island">
+          <div class="island-camera"></div>
+          <div class="island-sensor"></div>
+        </div>
+
+        <!-- Phone Status Bar -->
+        <div class="phone-status-bar">
+          <span id="phone-clock" class="status-clock">09:41</span>
+          <div class="status-indicators">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z" />
+            </svg>
+            <div class="battery-icon">
+              <div class="battery-level"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÀN HÌNH 1: INBOX & MAIN VIEW -->
+        <section id="screen-inbox" class="app-screen active">
+          <header class="inbox-header">
+            <div class="header-logo-group">
+              <span class="logo-duck-badge">🦆</span>
+              <h1 class="logo-text">Duhat</h1>
+            </div>
+            <div class="header-action-group">
+              <button class="icon-circle-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2">
+                  </path>
+                  <rect x="7" y="7" width="10" height="10" rx="2"></rect>
+                </svg>
+              </button>
+            </div>
+          </header>
+
+          <div class="scrollable-content">
+            <div class="search-container">
+              <div class="search-bar-pill">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#757575"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input id="input-search" type="text" placeholder="Tìm kiếm liên hệ, tin nhắn">
+              </div>
+            </div>
+
+            <!-- Banner: Khám phá 5 Mức Độ (Likert) -->
+            <div class="banner-wrapper">
+              <div id="banner-start-likert" class="interactive-banner" role="button" tabindex="0">
+                <div class="banner-content">
+                  <span class="banner-pill-tag">🌿 10 TÌNH HUỐNG ĐỜI THƯỜNG</span>
+                  <h2 class="banner-heading">Khám phá loài hoa qua<br>tình huống đời thường!</h2>
+                  <button class="banner-cta-button">
+                    <span>Khám phá ngay qua 10 tình huống ✨</span>
+                  </button>
+                </div>
+                <div class="banner-mascot-visual">
+                  <span style="font-size: 4rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));">🌸</span>
+                </div>
+              </div>
+            </div>
+
+            <nav class="filter-pill-nav">
+              <button class="pill-btn active">Tất cả</button>
+              <button class="pill-btn">Chat AI 🌸</button>
+              <button class="pill-btn">Chưa đọc</button>
+              <button class="pill-btn">Nhóm</button>
+            </nav>
+
+            <section class="conversation-section">
+              <div class="conversation-list">
+                <div class="conversation-item" id="conv-item-ai">
+                  <div class="conv-avatar-wrap">
+                    <div class="conv-avatar ai-avatar">🌸</div>
+                    <span class="presence-dot"></span>
+                  </div>
+                  <div class="conv-content">
+                    <div class="conv-top-row">
+                      <div class="conv-name-group">
+                        <span class="conv-name">Duhat AI - Bài Test Tính Cách</span>
+                      </div>
+                      <span class="conv-meta">Vừa xong</span>
+                    </div>
+                    <div class="conv-bottom-row">
+                      <span class="conv-snippet">Khám phá hình mẫu loài hoa qua 10 tình huống đời thường gần gũi!</span>
+                      <span class="unread-badge">1</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Group Chat Item -->
+                <div class="conversation-item" id="conv-item-group">
+                  <div class="conv-avatar-wrap">
+                    <div class="conv-avatar group-avatar">🌿</div>
+                    <span class="presence-dot"></span>
+                  </div>
+                  <div class="conv-content">
+                    <div class="conv-top-row">
+                      <div class="conv-name-group">
+                        <span class="conv-name">Team Sáng Tạo & Tech 🌿</span>
+                        <span class="badge-tag-group">4 TV</span>
+                      </div>
+                      <span class="conv-meta" id="group-conv-time">11:35</span>
+                    </div>
+                    <div class="conv-bottom-row">
+                      <span class="conv-snippet" id="group-snippet-preview">Linh: Ai test ra loài hoa gì rồi share vào
+                        nhóm nhé!</span>
+                      <span class="unread-badge" id="group-unread-badge">2</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <footer class="bottom-nav-bar">
+            <button class="nav-tab-item" id="tab-contacts"><span class="nav-label">Danh bạ</span></button>
+            <button class="nav-tab-item" id="tab-garden"><span class="nav-label">Vườn hoa</span></button>
+            <button class="nav-tab-item active" id="tab-messages"><span class="nav-label">Tin nhắn</span></button>
+            <button class="nav-tab-item" id="tab-calls"><span class="nav-label">Cuộc gọi</span></button>
+            <button class="nav-tab-item" id="tab-settings"><span class="nav-label">Cài đặt</span></button>
+          </footer>
+        </section>
+
+        <!-- MÀN HÌNH 2: CHAT ROOM VIEW (FORMAT MỆNH ĐỀ 5 MỨC ĐỘ) -->
+        <section id="screen-chat" class="app-screen">
+          <header class="chat-header">
+            <button id="btn-back-inbox" class="chat-back-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="chat-recipient-info">
+              <div class="header-avatar ai-avatar">🌸</div>
+              <div class="recipient-meta">
+                <h3 class="recipient-name">Duhat AI</h3>
+                <span class="recipient-status">Trợ lý giải mã tính cách 🌸</span>
+              </div>
+            </div>
+            <button class="icon-circle-btn" id="btn-view-profile-direct">🌸</button>
+          </header>
+
+          <!-- Thanh tiến độ bài test (Progress Tracker) -->
+          <div class="assessment-progress-tracker">
+            <div class="progress-labels">
+              <span id="tracker-current-label">Mệnh đề: 0 / 10</span>
+              <span id="tracker-percent-label">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div id="tracker-fill-bar" class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <!-- Messages Stream with Likert Statements -->
+          <div id="message-stream-container" class="message-stream">
+            <!-- Messages rendered dynamically -->
+          </div>
+
+          <!-- Typing Indicator -->
+          <div id="typing-indicator-bar" class="typing-indicator-wrapper hidden">
+            <div class="typing-pill">
+              <span class="typing-duck">🦆</span>
+              <span>Duhat AI đang ghi nhận kết quả</span>
+              <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+
+          <!-- Quick Chips Bar for 5 Levels -->
+          <div id="chat-quick-chips-bar" class="chat-quick-chips-bar">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Chat Input Bar -->
+          <footer class="chat-input-bar">
+            <div class="chat-input-pill">
+              <input id="input-message" type="text" placeholder="Gõ phản hồi hoặc bấm chọn 5 mức độ..."
+                autocomplete="off">
+            </div>
+            <button id="btn-submit-message" class="btn-send-main">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </footer>
+        </section>
+
+        <!-- MÀN HÌNH 3: THẺ HÌNH MẪU LOÀI HOA (RESULT PROFILE) -->
+        <section id="screen-flower-profile" class="app-screen">
+          <header class="flower-profile-header">
+            <button id="btn-back-from-flower" class="chat-back-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <h3 style="font-size: 1rem; font-weight: 800;">Hồ Sơ Tính Cách 72 Loài Hoa</h3>
+            <div></div>
+          </header>
+
+          <div class="scrollable-content">
+            <div class="flower-main-card">
+              <div class="flower-badge-ribbon"><span>✨ HÌNH MẪU ĐẠI DIỆN</span></div>
+              <div class="flower-visual-hero">
+                <div id="flower-card-emoji" class="flower-emoji-large">🌻</div>
+                <h2 id="flower-card-name" class="flower-name-title">Hoa Hướng Dương</h2>
+                <p id="flower-card-tagline" class="flower-tagline">Người Tiên Phong Đáng Tin Cậy & Hệ Thống</p>
+              </div>
+
+              <div class="dimensions-summary-grid">
+                <div class="dim-badge-box">
+                  <div class="dim-label">Giá Trị Cốt Lõi</div>
+                  <div id="dim-core-val" class="dim-value" style="color:#D97706;">Tín (Cam kết)</div>
+                </div>
+                <div class="dim-badge-box">
+                  <div class="dim-label">Phong Cách</div>
+                  <div id="dim-leadership" class="dim-value" style="color:#2563EB;">Độc đoán thiên tài</div>
+                </div>
+                <div class="dim-badge-box">
+                  <div class="dim-label">Kiểu Tư Duy</div>
+                  <div id="dim-thinking" class="dim-value" style="color:#7C3AED;">Hệ thống</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-section-card">
+              <h4 class="section-head-title">🌟 Chân dung & Nét riêng</h4>
+              <p id="flower-portrait-text" class="profile-paragraph"></p>
+              <div class="highlight-tip-box" id="flower-strength-box"></div>
+            </div>
+
+            <div class="profile-section-card">
+              <h4 class="section-head-title">🔍 Điểm dễ bị hiểu nhầm</h4>
+              <p id="flower-misunderstood-text" class="profile-paragraph"></p>
+              <div class="warning-box">
+                <strong>💡 Góc nhìn thực tế:</strong> Bạn luôn muốn bảo vệ tính cam kết và đảm bảo công việc không tạo
+                ra hệ lụy cho tập thể.
+              </div>
+            </div>
+
+            <div class="profile-section-card">
+              <h4 class="section-head-title">🤝 Gợi ý phối hợp cùng đồng đội</h4>
+              <ul id="flower-collab-tips"
+                style="padding-left: 18px; font-size: 0.84rem; line-height: 1.5; color: var(--color-text-secondary);">
+              </ul>
+            </div>
+
+            <!-- SECTION MỚI: CÁCH CÁC LOÀI HOA KẾT HỢP VỚI NHAU TRONG NHÓM -->
+            <div class="profile-section-card" id="flower-synergy-section">
+              <h4 class="section-head-title">🌱 Cách các loài hoa kết hợp với nhau</h4>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 10px;">
+                Chọn một đồng đội để khám phá độ ăn ý và cách phối hợp bù trừ điểm mù:
+              </p>
+
+              <!-- Tabs chọn đồng đội -->
+              <div class="synergy-partner-tabs" id="profile-synergy-tabs">
+                <button class="synergy-tab-btn active" data-partner="sen_da">
+                  <span>🪴</span> Nam (Sen Đá)
+                </button>
+                <button class="synergy-tab-btn" data-partner="cam_tu_cau">
+                  <span>🌸</span> Linh (Cẩm Tú Cầu)
+                </button>
+                <button class="synergy-tab-btn" data-partner="do_quyen">
+                  <span>🌺</span> An (Đỗ Quyên)
+                </button>
+              </div>
+
+              <!-- Nội dung phân tích ăn ý -->
+              <div class="synergy-result-box" id="profile-synergy-content">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- ACTION DOCK: CHIA SẺ VÀO GROUP CHAT & XEM VƯỜN HOA -->
+            <div class="profile-action-dock">
+              <button id="btn-share-to-group" class="btn-share-group-main">
+                <span>📤</span> Chia sẻ thẻ hoa vào Group Chat (Team Tech & Design 🌿)
+              </button>
+              <button id="btn-open-garden-view" class="btn-open-garden-sec">
+                <span>🌿</span> Xem Vườn Hoa Nhóm & Bản Đồ Ăn Ý
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MÀN HÌNH 4: GROUP CHAT (TEAM SÁNG TẠO & TECH) -->
+        <section id="screen-group-chat" class="app-screen">
+          <header class="group-chat-header">
+            <button id="btn-back-from-group" class="chat-back-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="chat-recipient-info">
+              <div class="header-avatar group-avatar">🌿</div>
+              <div class="recipient-meta">
+                <h3 class="recipient-name">Team Sáng Tạo & Tech 🌿</h3>
+                <span class="recipient-status">4 thành viên · 3 trực tuyến</span>
+              </div>
+            </div>
+            <button class="icon-circle-btn" id="btn-group-to-garden" title="Xem Vườn Hoa Nhóm">🌸</button>
+          </header>
+
+          <div id="group-message-stream" class="message-stream">
+            <!-- Tin nhắn trước đó của nhóm -->
+            <div class="message-row others">
+              <div class="msg-sender-avatar" style="background:#FDE68A;">🌸</div>
+              <div class="msg-bubble">
+                <div class="msg-sender-name" style="color:#B45309;">
+                  <span>Linh</span>
+                  <span class="sender-flower-badge" style="background:#FEF3C7; color:#92400E;">🌸 Cẩm Tú Cầu</span>
+                </div>
+                <div>Hôm nay mọi người thử làm bài test tính cách AI Duhat xem ra loài hoa gì nhé! Để xem team mình có
+                  phối hợp ăn ý không 😁</div>
+                <div class="msg-meta-row"><span>11:30</span></div>
+              </div>
+            </div>
+
+            <div class="message-row others">
+              <div class="msg-sender-avatar" style="background:#BBF7D0;">🪴</div>
+              <div class="msg-bubble">
+                <div class="msg-sender-name" style="color:#15803D;">
+                  <span>Nam</span>
+                  <span class="sender-flower-badge" style="background:#DCFCE7; color:#166534;">🪴 Sen Đá</span>
+                </div>
+                <div>Mình vừa test xong rồi này, ra ngay Hoa Sen Đá! Chuyên xây dựng quy trình với checklist tự vận hành
+                  👍</div>
+                <div class="msg-meta-row"><span>11:32</span></div>
+              </div>
+            </div>
+
+            <!-- Khu vực chèn thẻ chia sẻ từ bạn -->
+            <div id="group-shared-card-container"></div>
+          </div>
+
+          <!-- Group Input Bar -->
+          <footer class="chat-input-bar">
+            <div class="chat-input-pill">
+              <input id="input-group-message" type="text" placeholder="Nhắn tin với cả nhóm..." autocomplete="off">
+            </div>
+            <button id="btn-send-group-message" class="btn-send-main">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </footer>
+        </section>
+
+        <!-- MÀN HÌNH 5: VƯỜN HOA NHÓM & MA TRẬN KẾT HỢP (TEAM GARDEN VIEW) -->
+        <section id="screen-garden" class="app-screen">
+          <header class="garden-screen-header">
+            <button id="btn-back-from-garden" class="chat-back-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <h3 style="font-size: 1rem; font-weight: 800;">🌿 Vườn Hoa Của Nhóm</h3>
+            <button class="icon-circle-btn" id="btn-garden-to-group" title="Mở Group Chat">💬</button>
+          </header>
+
+          <div class="scrollable-content">
+            <!-- Hero Stats: Độ đa dạng của nhóm -->
+            <div class="garden-hero-stats">
+              <span class="garden-stats-title">Chỉ số phối hợp đội ngũ</span>
+              <div class="garden-stats-score">94%</div>
+              <p class="garden-stats-desc">
+                Nhóm hội tụ đầy đủ 3 phong cách: <strong>Độc đoán thiên tài</strong>, <strong>Hệ sinh thái</strong>,
+                <strong>Nền tảng</strong> & 4 phương thức tư duy.
+              </p>
+            </div>
+
+            <!-- Grid 4 thành viên trong Vườn hoa -->
+            <div style="padding: 0 16px 6px 16px; font-size: 0.85rem; font-weight: 800; color: var(--color-text-main);">
+              🌻 4 Loài Hoa Trong Đội Ngũ:
+            </div>
+            <div class="garden-grid-4">
+              <div class="garden-member-pot active-inspect" data-garden-partner="self">
+                <div class="pot-avatar-badge">🌻</div>
+                <div class="pot-member-name">Bạn (Chính mình)</div>
+                <div class="pot-flower-name">Hoa Hướng Dương</div>
+                <div class="pot-role-tag">Tín · Cam kết & Hệ thống</div>
+              </div>
+
+              <div class="garden-member-pot" data-garden-partner="sen_da">
+                <div class="pot-avatar-badge">🪴</div>
+                <div class="pot-member-name">Nam</div>
+                <div class="pot-flower-name">Hoa Sen Đá</div>
+                <div class="pot-role-tag">Tâm · Nền tảng tự vận hành</div>
+              </div>
+
+              <div class="garden-member-pot" data-garden-partner="cam_tu_cau">
+                <div class="pot-avatar-badge">🌸</div>
+                <div class="pot-member-name">Linh</div>
+                <div class="pot-flower-name">Hoa Cẩm Tú Cầu</div>
+                <div class="pot-role-tag">Trí · Kết nối đa chiều</div>
+              </div>
+
+              <div class="garden-member-pot" data-garden-partner="do_quyen">
+                <div class="pot-avatar-badge">🌺</div>
+                <div class="pot-member-name">An</div>
+                <div class="pot-flower-name">Hoa Đỗ Quyên</div>
+                <div class="pot-role-tag">Tốc · Tia chớp bứt phá</div>
+              </div>
+            </div>
+
+            <!-- Panel phân tích kết hợp giữa bạn và đồng đội được chọn -->
+            <div class="profile-section-card" style="margin-top: 6px;">
+              <h4 class="section-head-title" id="garden-synergy-title">🤝 Cách kết hợp: 🌻 Hướng Dương + 🪴 Sen Đá</h4>
+              <div id="garden-synergy-detail">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Home Bar Indicator -->
+        <div class="home-indicator-bar">
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       5. JAVASCRIPT: LIKERT 5-POINT SCALE ASSESSMENT ENGINE
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // --- 1. DANH SÁCH 10 TÌNH HUỐNG ĐỜI THƯỜNG (LÀM VƯỜN, SIÊU THỊ, DU LỊCH, QUÁN ĂN...) ---
+      const likertStatements = [
+        {
+          id: 'stmt1',
+          dimension: 'Tín (Cam kết & Đúng hẹn)',
+          category: 'val_tin',
+          text: 'Khi hẹn bạn bè đi cà phê hoặc chuyến đi xa, nếu nhận thấy có nguy cơ đến muộn dù chỉ 10 phút, tôi luôn chủ động nhắn báo trước ngay và hẹn giờ mới thay vì im lặng để đến nơi mới xin lỗi.',
+          rationaleAgree: 'Bạn coi trọng sự đúng hẹn và giữ chữ tín trong mọi mối quan hệ.',
+          rationaleDisagree: 'Bạn thường linh hoạt hoặc tự tin có thể bù đắp thời gian vào phút chót.'
+        },
+        {
+          id: 'stmt2',
+          dimension: 'Tâm & Tinh (Chăm chút & Chất lượng)',
+          category: 'val_tam',
+          text: 'Khi chăm sóc cây cảnh trong vườn hoặc nấu ăn cho người thân, tôi sẵn sàng bỏ thêm cả tiếng để tỉa tót / nêm nếm kỹ càng, thà ăn muộn một chút còn hơn làm qua loa cho xong.',
+          rationaleAgree: 'Bạn là người tận tụy, chu đáo và luôn hướng tới sự chỉn chu hoàn hảo.',
+          rationaleDisagree: 'Bạn ưu tiên sự tiện lợi, nhanh gọn để mọi người có bữa ăn hoặc không gian dùng được ngay.'
+        },
+        {
+          id: 'stmt3',
+          dimension: 'Tốc (Tốc độ & Linh hoạt)',
+          category: 'val_toc',
+          text: 'Vào một sáng cuối tuần, chỉ cần nảy ra ý định xách balo đi dã ngoại hoặc thấy siêu thị có đợt ưu đãi chớp nhoáng, tôi quyết định lên đường ngay chứ không mất thời gian đắn đo lên kế hoạch.',
+          rationaleAgree: 'Bạn có phong cách quyết đoán, tốc độ và luôn sẵn sàng đón nhận trải nghiệm mới.',
+          rationaleDisagree: 'Bạn coi trọng sự chuẩn bị kỹ càng, tính toán lịch trình chắc chắn trước khi xuất phát.'
+        },
+        {
+          id: 'stmt4',
+          dimension: 'Nhân (Thấu cảm & Bao dung)',
+          category: 'val_nhan',
+          text: 'Khi đi ăn nhà hàng mà quán quá đông, nhân viên phục vụ bưng nhầm món hoặc làm rớt đồ, phản xạ đầu tiên của tôi là thông cảm, an ủi bạn ấy trước thay vì bực mình phàn nàn.',
+          rationaleAgree: 'Bạn thấu cảm sâu sắc, luôn đặt sự bao dung và cảm xúc con người lên trên sự cố.',
+          rationaleDisagree: 'Bạn coi trọng sự chính xác, quy chuẩn dịch vụ và muốn vấn đề được xử lý đúng nguyên tắc.'
+        },
+        {
+          id: 'stmt5',
+          dimension: 'Lãnh đạo: Độc đoán thiên tài',
+          category: 'lead_docdoan',
+          text: 'Khi nhóm bạn tụ tập đi chơi mà ai cũng ngập ngừng bảo "sao cũng được / ăn gì cũng được", tôi sẽ chủ động đứng ra chốt luôn quán ăn và lịch trình cụ thể, tự tin dẫn đường cho cả hội.',
+          rationaleAgree: 'Bạn có bản lĩnh dẫn dắt dứt khoát, gu rõ ràng và dám chịu trách nhiệm cho quyết định chung.',
+          rationaleDisagree: 'Bạn kiên nhẫn chờ đợi mọi người cùng thảo luận để đạt sự đồng thuận tuyệt đối.'
+        },
+        {
+          id: 'stmt6',
+          dimension: 'Lãnh đạo: Hệ sinh thái',
+          category: 'lead_ecosystem',
+          text: 'Khi tổ chức một buổi tiệc ngoài trời, tôi thích kết nối và phân vai theo sở trường từng người: người sành ăn lo ướp thịt, người vui tính làm MC, người rành đường lo xe cộ.',
+          rationaleAgree: 'Bạn là bậc thầy kết nối hệ sinh thái, biết cách phát huy tối đa thế mạnh của từng người.',
+          rationaleDisagree: 'Bạn thích tự tay chuẩn bị mọi thứ hoặc chỉ giao cho 1-2 người bạn thân nhất phụ trách.'
+        },
+        {
+          id: 'stmt7',
+          dimension: 'Lãnh đạo: Nền tảng',
+          category: 'lead_nen',
+          text: 'Trước mỗi chuyến đi du lịch xa cùng gia đình hoặc bạn bè, tôi luôn lập sẵn một bảng checklist đồ dùng và lịch trình chia sẻ online để mọi người tự nhìn vào chuẩn bị mà không phải hỏi tôi liên tục.',
+          rationaleAgree: 'Bạn có tư duy xây dựng nền tảng và cơ chế tự vận hành thông minh.',
+          rationaleDisagree: 'Bạn thích đến đâu tính đến đó và xử lý linh hoạt theo cảm hứng từng ngày.'
+        },
+        {
+          id: 'stmt8',
+          dimension: 'Tư duy: Khoa học',
+          category: 'think_khoahoc',
+          text: 'Khi đi siêu thị mua sắm thiết bị gia dụng (như máy lọc không khí, nồi chiên), tôi luôn dành thời gian soi kỹ thông số kỹ thuật, so sánh giá và đọc review kiểm chứng trước khi xuống tiền.',
+          rationaleAgree: 'Tư duy của bạn dựa trên dữ liệu thực chứng, so sánh logic và bằng chứng rõ ràng.',
+          rationaleDisagree: 'Bạn chọn theo cảm quan trực giác, thương hiệu quen thuộc hoặc lời khuyên của người quen.'
+        },
+        {
+          id: 'stmt9',
+          dimension: 'Tư duy: Hệ thống',
+          category: 'think_hethong',
+          text: 'Khi bắt tay cải tạo góc vườn hoặc sắp xếp lại gian phòng, phản xạ đầu tiên của tôi là nhìn tổng thể: hướng nắng gió, đường thoát nước và cách bài trí liên hoàn giữa các khu vực.',
+          rationaleAgree: 'Bạn luôn nhìn bức tranh toàn cảnh và dự báo chuỗi tác động dây chuyền liên đới.',
+          rationaleDisagree: 'Bạn tập trung dọn dẹp và bài trí thật đẹp từng góc nhỏ một cách độc lập.'
+        },
+        {
+          id: 'stmt10',
+          dimension: 'Tư duy: Sáng tạo',
+          category: 'think_sangtao',
+          text: 'Khi vào bếp nấu nướng hay chăm sóc hoa cỏ, tôi thích tự chế công thức nêm nếm mới lạ hoặc thử cách chăm sóc độc đáo hơn là nhất nhất làm theo sách vở hay thói quen cũ.',
+          rationaleAgree: 'Bạn đam mê đổi mới sáng tạo, thích khám phá những cách làm độc lạ mang dấu ấn riêng.',
+          rationaleDisagree: 'Bạn tin tưởng các công thức chuẩn mực đã được thời gian kiểm chứng qua nhiều thế hệ.'
+        }
+      ];
+
+      // --- 2. 5 MỨC ĐỘ LIKERT (SCALE DEFINITIONS) ---
+      const likertScaleOptions = [
+        { level: 5, glyph: '🟢', label: 'Rất đồng tình', quickLabel: 'Rất đồng ý', score: 2, cssClass: 'lvl-5', color: '#15803D' },
+        { level: 4, glyph: '🟢', label: 'Đồng tình', quickLabel: 'Đồng ý', score: 1, cssClass: 'lvl-4', color: '#16A34A' },
+        { level: 3, glyph: '⚪', label: 'Trung lập', quickLabel: 'Trung lập', score: 0, cssClass: 'lvl-3', color: '#64748B' },
+        { level: 2, glyph: '🔴', label: 'Không đồng tình', quickLabel: 'Không đồng ý', score: -1, cssClass: 'lvl-2', color: '#EA580C' },
+        { level: 1, glyph: '🔴', label: 'Rất không đồng tình', quickLabel: 'Rất phản đối', score: -2, cssClass: 'lvl-1', color: '#DC2626' }
+      ];
+
+      // --- 3. HÌNH MẪU LOÀI HOA ---
+      const flowerArchetypes = {
+        'tin_docdoan_hethong': {
+          flowerName: 'Hoa Hướng Dương',
+          emoji: '🌻',
+          tagline: 'Người Tiên Phong Đáng Tin Cậy & Hệ Thống',
+          coreVal: 'Tín (Trọng cam kết)',
+          leadership: 'Độc đoán thiên tài',
+          thinking: 'Hệ thống (Bức tranh tổng thể)',
+          portrait: 'Bạn coi trọng cam kết và sự tin cậy tuyệt đối trong quá trình phối hợp. Khi đối mặt bài toán khó, bạn tự xác lập hướng đi rõ ràng dựa trên chuyên môn vững vàng, dám đứng mũi chịu sào và luôn tính toán tác động dây chuyền giữa các khâu.',
+          strength: 'Giữ cho cả nhóm luôn đúng hạn cam kết, dự báo trước rủi ro và điều hướng công việc có lớp lang bài bản.',
+          misunderstood: 'Sự kiên định bám cam kết cũ đôi khi có thể bị đồng nghiệp hiểu nhầm là chậm linh hoạt khi hoàn cảnh đột ngột thay đổi.',
+          collabTips: [
+            'Thống nhất đầu ra (output) và quyền tự quyết rõ ràng ngay từ đầu.',
+            'Cung cấp bức tranh toàn cảnh khi cần bạn đưa ra quyết định mới.',
+            'Báo sớm cho bạn ngay khi có dữ liệu đầu vào bị trễ hạn.'
+          ]
+        },
+        'tin_ecosystem_khoahoc': {
+          flowerName: 'Hoa Cẩm Tú Cầu',
+          emoji: '🌸',
+          tagline: 'Người Kết Nối Dựa Trên Bằng Chứng & Cam Kết',
+          coreVal: 'Tín & Trí',
+          leadership: 'Hệ sinh thái',
+          thinking: 'Khoa học (Dữ liệu khách quan)',
+          portrait: 'Bạn chủ động tìm đúng người ở các nhóm khác nhau, kết nối các năng lực bổ trợ để giải quyết vấn đề chung, đồng thời luôn dùng dữ liệu và giả thuyết đã kiểm chứng để đảm bảo lời hứa với đối tác.',
+          strength: 'Tạo dựng mạng lưới hợp tác đa chiều cực kỳ uy tín và giải quyết vấn đề dựa trên bằng chứng xác thực.',
+          misunderstood: 'Đòi hỏi dữ liệu kiểm chứng có thể khiến người khác cảm thấy bạn hơi cẩn trọng.',
+          collabTips: [
+            'Trình bày đề xuất kèm số liệu đo lường cụ thể.',
+            'Tận dụng thế mạnh kết nối của bạn để làm cầu nối giữa các phòng ban.'
+          ]
+        },
+        'tam_nen_hethong': {
+          flowerName: 'Hoa Sen Đá',
+          emoji: '🪴',
+          tagline: 'Kiến Trúc Sư Vững Vàng & Tận Tụy',
+          coreVal: 'Tâm (Trách nhiệm & Tận tụy)',
+          leadership: 'Nền tảng (Xây cơ chế tự vận hành)',
+          thinking: 'Hệ thống (Quy trình chuẩn mực)',
+          portrait: 'Bạn luôn hết lòng vì chất lượng công việc và trải nghiệm của người nhận. Bạn thích tạo ra hướng dẫn, công cụ, checklist dùng chung để đồng nghiệp tự xử lý mượt mà mà không phải phụ thuộc vào ai.',
+          strength: 'Xây dựng nền tảng vững chắc, bền bỉ và chuẩn mực cho tập thể vận hành dài hạn.',
+          misunderstood: 'Mong muốn quy trình hóa mọi thứ đôi khi có thể bị xem là rườm rà đối với những việc cần xử lý gấp.',
+          collabTips: [
+            'Cùng bạn thiết lập các mốc kiểm tra định kỳ thay vì theo dõi vi mô.',
+            'Ghi nhận sự tận tâm thầm lặng của bạn đối với thành công của đội ngũ.'
+          ]
+        },
+        'toc_docdoan_dongian': {
+          flowerName: 'Hoa Đỗ Quyên',
+          emoji: '🌺',
+          tagline: 'Tia Chớp Hành Động & Đi Thẳng Vào Trọng Tâm',
+          coreVal: 'Tốc (Tốc độ & Linh hoạt)',
+          leadership: 'Độc đoán thiên tài',
+          thinking: 'Đơn giản (Lược bỏ rườm rà)',
+          portrait: 'Bạn hành động cực nhanh, không ngại ra quyết định dứt khoát để chớp thời cơ. Bạn lược bỏ mọi quy trình rườm rà để tập trung thẳng vào điều cốt lõi tạo ra giá trị nhanh nhất.',
+          strength: 'Phá vỡ các điểm nghẽn, tạo động lực bứt phá và đưa giải pháp ra thị trường trong thời gian ngắn kỷ lục.',
+          misunderstood: 'Tốc độ quá nhanh đôi khi khiến đồng nghiệp chưa kịp theo kịp, dễ hiểu nhầm bạn nóng vội.',
+          collabTips: [
+            'Trao đổi ngắn gọn, đi thẳng vào kết quả cần đạt được.',
+            'Cho bạn không gian tự do xử lý linh hoạt.'
+          ]
+        }
+      };
+
+      // --- 4. STATE MANAGEMENT ---
+      const state = {
+        activeScreen: 'screen-inbox',
+        currentStmtIndex: 0,
+        scores: {},
+        onboardingDone: false,
+        completed: false,
+        matchedFlowerKey: 'tin_docdoan_hethong'
+      };
+
+      // --- 5. DOM REFERENCES ---
+      const els = {
+        phoneClock: document.getElementById('phone-clock'),
+        screenInbox: document.getElementById('screen-inbox'),
+        screenChat: document.getElementById('screen-chat'),
+        screenFlowerProfile: document.getElementById('screen-flower-profile'),
+        messageStreamContainer: document.getElementById('message-stream-container'),
+        typingIndicatorBar: document.getElementById('typing-indicator-bar'),
+        chatQuickChipsBar: document.getElementById('chat-quick-chips-bar'),
+        inputMessage: document.getElementById('input-message'),
+        btnSubmitMessage: document.getElementById('btn-submit-message'),
+        trackerCurrentLabel: document.getElementById('tracker-current-label'),
+        trackerPercentLabel: document.getElementById('tracker-percent-label'),
+        trackerFillBar: document.getElementById('tracker-fill-bar'),
+        bannerStartLikert: document.getElementById('banner-start-likert'),
+        convItemAi: document.getElementById('conv-item-ai'),
+        btnBackInbox: document.getElementById('btn-back-inbox'),
+        btnBackFromFlower: document.getElementById('btn-back-from-flower'),
+        btnViewProfileDirect: document.getElementById('btn-view-profile-direct'),
+        btnToggleTheme: document.getElementById('btn-toggle-theme'),
+        btnRestartAssessment: document.getElementById('btn-restart-assessment'),
+
+        // Group Chat and Garden screens
+        screenGroupChat: document.getElementById('screen-group-chat'),
+        screenGarden: document.getElementById('screen-garden'),
+        convItemGroup: document.getElementById('conv-item-group'),
+        btnShareToGroup: document.getElementById('btn-share-to-group'),
+        btnOpenGardenView: document.getElementById('btn-open-garden-view'),
+        btnBackFromGroup: document.getElementById('btn-back-from-group'),
+        btnBackFromGarden: document.getElementById('btn-back-from-garden'),
+        btnGroupToGarden: document.getElementById('btn-group-to-garden'),
+        btnGardenToGroup: document.getElementById('btn-garden-to-group'),
+        tabGarden: document.getElementById('tab-garden'),
+        tabMessages: document.getElementById('tab-messages'),
+        groupMessageStream: document.getElementById('group-message-stream'),
+        groupSharedCardContainer: document.getElementById('group-shared-card-container'),
+        profileSynergyTabs: document.getElementById('profile-synergy-tabs'),
+        profileSynergyContent: document.getElementById('profile-synergy-content'),
+        gardenSynergyDetail: document.getElementById('garden-synergy-detail'),
+        gardenSynergyTitle: document.getElementById('garden-synergy-title'),
+        groupSnippetPreview: document.getElementById('group-snippet-preview'),
+        groupUnreadBadge: document.getElementById('group-unread-badge'),
+        inputGroupMessage: document.getElementById('input-group-message'),
+        btnSendGroupMessage: document.getElementById('btn-send-group-message'),
+
+        // Profile fields
+        flowerCardEmoji: document.getElementById('flower-card-emoji'),
+        flowerCardName: document.getElementById('flower-card-name'),
+        flowerCardTagline: document.getElementById('flower-card-tagline'),
+        dimCoreVal: document.getElementById('dim-core-val'),
+        dimLeadership: document.getElementById('dim-leadership'),
+        dimThinking: document.getElementById('dim-thinking'),
+        flowerPortraitText: document.getElementById('flower-portrait-text'),
+        flowerStrengthBox: document.getElementById('flower-strength-box'),
+        flowerMisunderstoodText: document.getElementById('flower-misunderstood-text'),
+        flowerCollabTips: document.getElementById('flower-collab-tips')
+      };
+
+      // --- CLOCK ---
+      function updatePhoneClock() {
+        const now = new Date();
+        els.phoneClock.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      }
+      setInterval(updatePhoneClock, 1000);
+      updatePhoneClock();
+
+      // --- NAVIGATION ---
+      function navigateTo(screenId) {
+        state.activeScreen = screenId;
+        const allScreens = [
+          els.screenInbox, 
+          els.screenChat, 
+          els.screenFlowerProfile, 
+          els.screenGroupChat, 
+          els.screenGarden
+        ];
+        allScreens.forEach(s => s && s.classList.remove('active'));
+        document.getElementById(screenId)?.classList.add('active');
+
+        // Cập nhật trạng thái active tab dưới bottom bar
+        if (els.tabGarden && els.tabMessages) {
+          if (screenId === 'screen-garden') {
+            els.tabGarden.classList.add('active');
+            els.tabMessages.classList.remove('active');
+            renderGardenSynergy('sen_da');
+          } else if (screenId === 'screen-inbox') {
+            els.tabMessages.classList.add('active');
+            els.tabGarden.classList.remove('active');
+          }
+        }
+
+        if (screenId === 'screen-flower-profile') {
+          renderProfileSynergy('sen_da');
+        }
+
+        if (screenId === 'screen-chat') scrollChatToBottom();
+      }
+
+      function scrollChatToBottom() {
+        setTimeout(() => {
+          if (els.messageStreamContainer) {
+            els.messageStreamContainer.scrollTop = els.messageStreamContainer.scrollHeight;
+          }
+        }, 60);
+      }
+
+      function showTypingIndicator(show) {
+        if (els.typingIndicatorBar) {
+          els.typingIndicatorBar.classList.toggle('hidden', !show);
+          if (show) scrollChatToBottom();
+        }
+      }
+
+      function updateProgressBar(idx) {
+        const total = likertStatements.length;
+        const current = Math.min(idx, total);
+        const percent = Math.round((current / total) * 100);
+
+        els.trackerCurrentLabel.textContent = `Mệnh đề: ${current} / ${total}`;
+        els.trackerPercentLabel.textContent = `${percent}%`;
+        els.trackerFillBar.style.width = `${percent}%`;
+      }
+
+      // --- START ONBOARDING NARRATIVE ---
+      function startLikertAssessment() {
+        navigateTo('screen-chat');
+        if (!state.onboardingDone && els.messageStreamContainer.children.length === 0) {
+          renderOnboarding();
+        }
+      }
+
+      function renderOnboarding() {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const welcomeHtml = `
+          <div class="message-row others">
+            <div class="msg-sender-avatar">🌸</div>
+            <div class="msg-bubble">
+              <div>Quak quak! 🦆 Chào bạn, mình là <strong>Duhat AI</strong>.</div>
+              <p style="margin: 6px 0;">Chào mừng bạn đến với bài trắc nghiệm <strong>5 mức độ trực quan</strong> để giải mã hình mẫu loài hoa của bạn!</p>
+              
+              <div style="background: rgba(254, 243, 199, 0.6); border-left: 3px solid #F59E0B; padding: 8px 10px; border-radius: 6px; margin: 8px 0; font-size: 0.84rem; color: #92400E; line-height: 1.45;">
+                🌿 <strong>Cách thức rất đơn giản & gần gũi:</strong><br>
+                Mình sẽ đưa ra <strong>10 tình huống đời thường</strong> quen thuộc (như dọn vườn, đi siêu thị, chờ nhân viên bưng món, lên plan du lịch...). Bạn chỉ cần chọn nhanh mức độ phản ánh đúng phản xạ tự nhiên nhất của mình!
+              </div>
+
+              <div>Không cần phải suy nghĩ như ở công ty, hãy chọn theo cảm giác tự nhiên nhất nhé!</div>
+              <div class="msg-meta-row"><span>${timeStr}</span></div>
+            </div>
+          </div>
+        `;
+
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', welcomeHtml);
+        scrollChatToBottom();
+
+        // Render Onboarding Chips
+        renderOnboardingChips();
+      }
+
+      function renderOnboardingChips() {
+        els.chatQuickChipsBar.innerHTML = `
+          <button class="chat-chip-btn accent-chip" id="chip-start-likert">
+            🌸 Bắt đầu với Tình huống 1!
+          </button>
+          <button class="chat-chip-btn" id="chip-learn-scale">
+            ❓ Thang đo 5 mức độ hoạt động thế nào?
+          </button>
+        `;
+
+        els.chatQuickChipsBar.querySelector('#chip-start-likert')?.addEventListener('click', () => {
+          userAcceptsStart();
+        });
+
+        els.chatQuickChipsBar.querySelector('#chip-learn-scale')?.addEventListener('click', () => {
+          userAsksScaleInfo();
+        });
+      }
+
+      function userAcceptsStart() {
+        state.onboardingDone = true;
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const userMsg = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>Mình đã sẵn sàng, hãy đưa ra tình huống đầu tiên nhé! 🚀</div>
+              <div class="msg-meta-row"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsg);
+        scrollChatToBottom();
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          renderLikertStatement(0);
+        }, 800);
+      }
+
+      function userAsksScaleInfo() {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const botReply = `
+          <div class="message-row others">
+            <div class="msg-sender-avatar">🌸</div>
+            <div class="msg-bubble">
+              <div>Mỗi mệnh đề có 5 mức độ để bạn bấm chọn nhanh trong 1 giây:<br>
+                • 🟢🟢 <strong>Rất đồng tình:</strong> Hoàn toàn phản ánh đúng cách bạn thường hành xử.<br>
+                • 🟢 <strong>Đồng tình:</strong> Khá đúng với bạn trong phần lớn trường hợp.<br>
+                • ⚪ <strong>Trung lập:</strong> Tùy hoàn cảnh hoặc bạn chưa nghiêng về bên nào.<br>
+                • 🔴 <strong>Không đồng tình:</strong> Thường không phải là cách bạn làm.<br>
+                • 🔴🔴 <strong>Rất không đồng tình:</strong> Trái ngược hoàn toàn với phong cách của bạn.
+              </div>
+              <div class="msg-meta-row"><span>${timeStr}</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', botReply);
+        scrollChatToBottom();
+      }
+
+      // --- RENDER MỆNH ĐỀ & 5 MỨC ĐỘ LIKERT ---
+      function renderLikertStatement(idx) {
+        if (idx >= likertStatements.length) {
+          showFinalFlowerResult();
+          return;
+        }
+
+        updateProgressBar(idx + 1);
+        const stmt = likertStatements[idx];
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const stmtHtml = `
+          <div class="message-row others statement-message-row">
+            <div class="msg-sender-avatar">🌸</div>
+            <div class="msg-bubble statement-bubble">
+              <div class="likert-statement-compact">
+                <div class="statement-top-pill">
+                  <span class="pill-badge">⚡ Câu ${idx + 1}/${likertStatements.length}</span>
+                  <span class="pill-category">${stmt.dimension}</span>
+                </div>
+                <div class="statement-proposition">${stmt.text}</div>
+                
+                <div class="likert-scale-dock">
+                  <div class="likert-scale-labels">
+                    <span class="scale-lbl-agree">🟢 Đồng tình</span>
+                    <span class="scale-lbl-disagree">Không đồng tình 🔴</span>
+                  </div>
+                  
+                  <div class="likert-dots-track" data-stmt-idx="${idx}">
+                    <div class="track-connecting-line"></div>
+                    ${likertScaleOptions.map(opt => `
+                      <button class="likert-dot-node ${opt.cssClass}" data-level="${opt.level}" data-score="${opt.score}" title="${opt.label}" aria-label="${opt.label}">
+                        <span class="dot-circle">
+                          <span class="dot-check-icon">✓</span>
+                        </span>
+                      </button>
+                    `).join('')}
+                  </div>
+
+                  <div class="likert-live-indicator" id="live-indicator-${idx}">
+                    Chạm vòng tròn để chọn mức độ
+                  </div>
+                </div>
+              </div>
+              <div class="msg-meta-row"><span>${timeStr}</span></div>
+            </div>
+          </div>
+        `;
+
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', stmtHtml);
+        scrollChatToBottom();
+
+        // Gắn sự kiện click & hover 5 nút tròn Likert trong card
+        attachLikertEvents(idx);
+
+        // Đồng thời render 5 mức độ lên thanh Quick Bar ở dưới để bấm siêu nhanh!
+        renderLikertQuickChips(idx);
+      }
+
+      function attachLikertEvents(idx) {
+        const track = els.messageStreamContainer.querySelector(`.likert-dots-track[data-stmt-idx="${idx}"]`);
+        const liveInd = els.messageStreamContainer.querySelector(`#live-indicator-${idx}`);
+        if (!track) return;
+
+        track.querySelectorAll('.likert-dot-node').forEach(btn => {
+          const level = parseInt(btn.getAttribute('data-level'), 10);
+          const score = parseInt(btn.getAttribute('data-score'), 10);
+          const opt = likertScaleOptions.find(o => o.level === level);
+
+          // Hover / Focus preview
+          btn.addEventListener('mouseenter', () => {
+            if (btn.hasAttribute('disabled')) return;
+            if (liveInd && opt) {
+              liveInd.innerHTML = `<span style="color:${opt.color}; font-weight:800;">${opt.glyph} ${opt.label} (${score > 0 ? '+' : ''}${score})</span>`;
+            }
+          });
+
+          btn.addEventListener('mouseleave', () => {
+            if (btn.hasAttribute('disabled')) return;
+            if (liveInd) {
+              liveInd.textContent = 'Chạm vòng tròn để chọn mức độ';
+            }
+          });
+
+          btn.addEventListener('click', () => {
+            handleLikertSelection(idx, level, score);
+          });
+        });
+      }
+
+      function renderLikertQuickChips(idx) {
+        els.chatQuickChipsBar.className = 'chat-quick-chips-bar quick-likert-dock';
+        els.chatQuickChipsBar.innerHTML = likertScaleOptions.map(opt => `
+          <button class="quick-likert-btn ${opt.cssClass}" data-chip-level="${opt.level}" data-chip-score="${opt.score}" title="${opt.label}">
+            <span class="quick-dot-preview"></span>
+            <span class="quick-label-text">${opt.quickLabel}</span>
+          </button>
+        `).join('');
+
+        els.chatQuickChipsBar.querySelectorAll('[data-chip-level]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const level = parseInt(btn.getAttribute('data-chip-level'), 10);
+            const score = parseInt(btn.getAttribute('data-chip-score'), 10);
+            handleLikertSelection(idx, level, score);
+          });
+        });
+      }
+
+      // --- XỬ LÝ KHI NGƯỜI DÙNG CHỌN MỨC ĐỘ ---
+      function handleLikertSelection(idx, level, score, customReason = '') {
+        const stmt = likertStatements[idx];
+        const opt = likertScaleOptions.find(o => o.level === level);
+        if (!opt) return;
+
+        // Vô hiệu hóa nút và đánh dấu selected trong card
+        const track = els.messageStreamContainer.querySelector(`.likert-dots-track[data-stmt-idx="${idx}"]`);
+        if (track) {
+          track.querySelectorAll('.likert-dot-node').forEach(b => {
+            b.setAttribute('disabled', 'true');
+            const bLevel = parseInt(b.getAttribute('data-level'), 10);
+            if (bLevel === level) {
+              b.classList.add('selected');
+            } else {
+              b.classList.add('dimmed');
+            }
+          });
+        }
+
+        const liveInd = els.messageStreamContainer.querySelector(`#live-indicator-${idx}`);
+        if (liveInd) {
+          liveInd.innerHTML = `<span style="color:${opt.color}; font-weight:800;">✓ Đã chọn: ${opt.label}</span>`;
+        }
+
+        // Ghi điểm
+        state.scores[stmt.category] = score;
+
+        // Render User Bubble
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const displayedText = customReason
+          ? `<strong>${opt.glyph} ${opt.label}</strong><br><em style="color:#854D0E; font-size:0.86rem;">💬 "${customReason}"</em>`
+          : `<strong>${opt.glyph} ${opt.label}</strong>`;
+
+        const userMsg = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>${displayedText}</div>
+              <div class="msg-meta-row"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsg);
+        scrollChatToBottom();
+
+        // AI xác nhận và chuyển nhanh sang câu sau
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          state.currentStmtIndex++;
+          renderLikertStatement(state.currentStmtIndex);
+        }, 450);
+      }
+
+      // --- TÍNH TOÁN VÀ XUẤT THẺ HÌNH MẪU HOA ---
+      function showFinalFlowerResult() {
+        state.completed = true;
+        updateProgressBar(likertStatements.length);
+
+        // Quyết định hoa dựa trên điểm số các chiều
+        let flowerKey = 'tin_docdoan_hethong';
+        if ((state.scores.val_toc || 0) > 0) {
+          flowerKey = 'toc_docdoan_dongian';
+        } else if ((state.scores.lead_ecosystem || 0) > 0) {
+          flowerKey = 'tin_ecosystem_khoahoc';
+        } else if ((state.scores.lead_nen || 0) > 0) {
+          flowerKey = 'tam_nen_hethong';
+        }
+        state.matchedFlowerKey = flowerKey;
+        const flower = flowerArchetypes[flowerKey];
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          const now = new Date();
+          const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+          const resultHtml = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>🎉 <strong>Bạn đã hoàn thành 10 tình huống đánh giá!</strong></div>
+                <p style="margin: 6px 0;">Dựa trên phản xạ tự nhiên của bạn, AI đã giải mã hồ sơ 3 chiều và tìm ra loài hoa đại diện:</p>
+
+                <div class="result-trigger-card">
+                  <div class="result-flower-hero">${flower.emoji}</div>
+                  <div class="result-trigger-title">${flower.flowerName}</div>
+                  <div class="result-trigger-sub">${flower.tagline}</div>
+                  <button class="btn-view-flower-card" id="btn-open-result-profile">
+                    🌸 Mở Thẻ Hồ Sơ 72 Loài Hoa & Lời Khuyên
+                  </button>
+                </div>
+                <div class="msg-meta-row"><span>${timeStr}</span></div>
+              </div>
+            </div>
+          `;
+
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', resultHtml);
+          scrollChatToBottom();
+
+          els.chatQuickChipsBar.innerHTML = `
+            <button class="chat-chip-btn accent-chip" id="chip-view-card-end">🌸 Xem thẻ hồ sơ hoa</button>
+            <button class="chat-chip-btn" id="chip-restart-end">🔄 Đánh giá lại</button>
+          `;
+
+          document.getElementById('btn-open-result-profile')?.addEventListener('click', openProfileScreen);
+          document.getElementById('chip-view-card-end')?.addEventListener('click', openProfileScreen);
+          document.getElementById('chip-restart-end')?.addEventListener('click', resetLikertTest);
+        }, 900);
+      }
+
+      // --- 6. FLOWER SYNERGY MATRIX (CÁCH CÁC LOÀI HOA KẾT HỢP) ---
+      const synergyMatrix = {
+        'sen_da': {
+          partnerName: 'Nam',
+          partnerFlower: 'Hoa Sen Đá',
+          partnerEmoji: '🪴',
+          partnerRole: 'Tâm · Nền tảng tự vận hành',
+          synergyTag: 'Bộ Đôi Trọng Tâm & Bền Vững (Độ ăn ý: 94%)',
+          strengths: 'Cả hai đều có tư duy hệ thống và coi trọng cam kết dài hạn. Hướng Dương dẫn dắt mục tiêu dứt khoát và dám chịu trách nhiệm, còn Sen Đá xây dựng quy trình, tài liệu dùng chung và checklist vững chắc để cả nhóm tự vận hành trơn tru mà không sợ sai lệch dữ liệu.',
+          friction: 'Đều có xu hướng cẩn trọng và kiểm soát chất lượng kỹ càng, nên khi đối diện với các bài toán cần xoay trục bất ngờ hoặc đưa ra quyết định tốc độ trong vài phút, cả hai dễ rơi vào trạng thái cần thêm thời gian rà soát.',
+          collabTips: [
+            'Hướng Dương chốt rõ mốc thời hạn và đầu ra (output), giao toàn quyền chủ động cho Sen Đá thiết kế cơ chế thực thi.',
+            'Sen Đá tóm tắt 3 điểm mấu chốt cần duyệt thay vì gửi tài liệu quá chi tiết để Hướng Dương ra quyết định tức thì.'
+          ]
+        },
+        'cam_tu_cau': {
+          partnerName: 'Linh',
+          partnerFlower: 'Hoa Cẩm Tú Cầu',
+          partnerEmoji: '🌸',
+          partnerRole: 'Trí & Tín · Kết nối hệ sinh thái đa chiều',
+          synergyTag: 'Cặp Đôi Cầu Nối & Đột Phá (Độ ăn ý: 92%)',
+          strengths: 'Cẩm Tú Cầu là thỏi nam châm kết nối các nguồn lực và nhân sự bổ trợ từ nhiều phòng ban, Hướng Dương giữ vai trò chốt chặn thực thi cam kết. Dữ liệu và góc nhìn đa chiều của Cẩm Tú Cầu là đòn bẩy đắc lực giúp Hướng Dương dẫn đường chuẩn xác.',
+          friction: 'Cẩm Tú Cầu thích tham vấn ý kiến nhiều bên và duy trì sự hài hòa, trong khi Hướng Dương chuộng sự dứt khoát và đi thẳng vào mục tiêu trọng tâm để giữ đúng hạn.',
+          collabTips: [
+            'Cẩm Tú Cầu lọc sẵn 2 phương án khả thi kèm dữ liệu kiểm chứng trước khi trao đổi.',
+            'Hướng Dương mở lòng lắng nghe các mối quan hệ liên đới mà Cẩm Tú Cầu đã kết nối trước khi đưa ra quyết định cuối cùng.'
+          ]
+        },
+        'do_quyen': {
+          partnerName: 'An',
+          partnerFlower: 'Hoa Đỗ Quyên',
+          partnerEmoji: '🌺',
+          partnerRole: 'Tốc · Tia chớp bứt phá & Đơn giản',
+          synergyTag: 'Tia Chớp & Kim Chỉ Nam (Độ ăn ý: 88%)',
+          strengths: 'Bộ đôi bù trừ hoàn hảo: Đỗ Quyên kéo nhanh tiến độ, chớp thời cơ và phá vỡ sức ỳ; Hướng Dương kiểm soát tác động dây chuyền, giữ vững uy tín cam kết và ngăn ngừa rủi ro trễ hạn.',
+          friction: 'Đỗ Quyên ghét sự chậm trễ và các bước quy trình rườm rà; Hướng Dương lo ngại sự vội vàng thiếu tính toán lâu dài.',
+          collabTips: [
+            'Hướng Dương xác lập trước "hành lang an toàn" với các tiêu chí không thể thỏa hiệp để Đỗ Quyên tự do bứt phá.',
+            'Đỗ Quyên báo trước sớm các thử nghiệm mới để Hướng Dương kịp thời chuẩn bị phương án dự phòng.'
+          ]
+        }
+      };
+
+      function renderProfileSynergy(partnerKey) {
+        const item = synergyMatrix[partnerKey] || synergyMatrix['sen_da'];
+        if (!els.profileSynergyContent) return;
+
+        els.profileSynergyContent.innerHTML = `
+          <div class="synergy-badge-row">
+            <div style="font-size:0.88rem; font-weight:800; color:#1A1A1A;">
+              ${item.partnerEmoji} ${item.partnerName} · ${item.partnerFlower}
+            </div>
+            <span class="synergy-pill-tag">${item.synergyTag}</span>
+          </div>
+          <div style="font-size:0.75rem; color:#64748B; font-weight:600; margin-bottom:8px;">
+            Hình mẫu: ${item.partnerRole}
+          </div>
+
+          <div class="synergy-dim-block">
+            <div class="synergy-dim-item synergy-item-green">
+              <strong>✨ Điểm cộng phối hợp:</strong> ${item.strengths}
+            </div>
+            <div class="synergy-dim-item synergy-item-orange">
+              <strong>⚡ Vùng va chạm tiềm ẩn:</strong> ${item.friction}
+            </div>
+            <div class="synergy-dim-item synergy-item-purple">
+              <strong>💡 Bí kíp phối hợp vàng:</strong>
+              <ul style="margin: 4px 0 0 16px;">
+                ${item.collabTips.map(tip => `<li>${tip}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderGardenSynergy(partnerKey) {
+        const item = synergyMatrix[partnerKey] || synergyMatrix['sen_da'];
+        if (!els.gardenSynergyDetail) return;
+
+        if (els.gardenSynergyTitle) {
+          els.gardenSynergyTitle.innerHTML = `🤝 Cách kết hợp: 🌻 Bạn + ${item.partnerEmoji} ${item.partnerName} (${item.partnerFlower})`;
+        }
+
+        els.gardenSynergyDetail.innerHTML = `
+          <div class="synergy-badge-row">
+            <span class="synergy-pill-tag">${item.synergyTag}</span>
+            <span style="font-size:0.75rem; color:#059669; font-weight:700;">${item.partnerRole}</span>
+          </div>
+
+          <div class="synergy-dim-block">
+            <div class="synergy-dim-item synergy-item-green">
+              <strong>✨ Điểm bù trừ bứt phá:</strong> ${item.strengths}
+            </div>
+            <div class="synergy-dim-item synergy-item-orange">
+              <strong>⚡ Vùng va chạm tiềm ẩn:</strong> ${item.friction}
+            </div>
+            <div class="synergy-dim-item synergy-item-purple">
+              <strong>💡 Cách phối hợp mượt mà:</strong>
+              <ul style="margin: 4px 0 0 16px;">
+                ${item.collabTips.map(tip => `<li>${tip}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+
+      let hasSharedToGroup = false;
+
+      function shareToGroupChat() {
+        navigateTo('screen-group-chat');
+
+        if (!hasSharedToGroup && els.groupSharedCardContainer) {
+          hasSharedToGroup = true;
+          const flower = flowerArchetypes[state.matchedFlowerKey];
+          const now = new Date();
+          const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+          const sharedCardHtml = `
+            <div class="message-row self" style="margin-top: 10px;">
+              <div class="msg-bubble shared-flower-card-bubble">
+                <div class="shared-card-header">
+                  <span>🦆 DUHAT AI · THẺ HÌNH MẪU 72 LOÀI HOA</span>
+                </div>
+                <div class="shared-card-body">
+                  <div class="shared-flower-icon">${flower.emoji}</div>
+                  <div class="shared-flower-info">
+                    <h4>${flower.flowerName}</h4>
+                    <p>${flower.tagline}</p>
+                    <div style="font-size:0.68rem; color:#854D0E; font-weight:700; margin-top:2px;">
+                      ${flower.coreVal} · ${flower.leadership} · ${flower.thinking}
+                    </div>
+                  </div>
+                </div>
+                <button class="btn-view-synergy-inline" id="btn-group-inspect-synergy">
+                  <span>🔍</span> Xem cách phối hợp cùng đồng đội trong nhóm
+                </button>
+                <div class="msg-meta-row" style="color:#854D0E;"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+              </div>
+            </div>
+          `;
+
+          els.groupSharedCardContainer.innerHTML = sharedCardHtml;
+          document.getElementById('btn-group-inspect-synergy')?.addEventListener('click', () => {
+            navigateTo('screen-garden');
+          });
+
+          // Phản hồi tự động của đồng nghiệp trong nhóm
+          setTimeout(() => {
+            const replyLinh = `
+              <div class="message-row others">
+                <div class="msg-sender-avatar" style="background:#FDE68A;">🌸</div>
+                <div class="msg-bubble">
+                  <div class="msg-sender-name" style="color:#B45309;">
+                    <span>Linh</span>
+                    <span class="sender-flower-badge" style="background:#FEF3C7; color:#92400E;">🌸 Cẩm Tú Cầu</span>
+                  </div>
+                  <div>Oa! Bạn ra <strong>${flower.flowerName}</strong> chuẩn quá! Hướng Dương giữ tiến độ cam kết, kết hợp với Cẩm Tú Cầu kết nối nguồn lực là siêu ăn ý luôn 🎉</div>
+                  <div class="msg-meta-row"><span>${timeStr}</span></div>
+                </div>
+              </div>
+            `;
+            els.groupMessageStream.insertAdjacentHTML('beforeend', replyLinh);
+            if (els.groupSnippetPreview) els.groupSnippetPreview.textContent = `Linh: Oa! Bạn ra ${flower.flowerName} chuẩn quá! 🎉`;
+            if (els.groupUnreadBadge) els.groupUnreadBadge.textContent = '1';
+          }, 700);
+
+          setTimeout(() => {
+            const replyNam = `
+              <div class="message-row others">
+                <div class="msg-sender-avatar" style="background:#BBF7D0;">🪴</div>
+                <div class="msg-bubble">
+                  <div class="msg-sender-name" style="color:#15803D;">
+                    <span>Nam</span>
+                    <span class="sender-flower-badge" style="background:#DCFCE7; color:#166534;">🪴 Sen Đá</span>
+                  </div>
+                  <div>Haha chuẩn luôn, bạn với mình đều thiên về Hệ thống! Bộ đôi <strong>Hướng Dương + Sen Đá</strong> là trùm quy trình bài bản của team rồi 👍</div>
+                  <div class="msg-meta-row"><span>${timeStr}</span></div>
+                </div>
+              </div>
+            `;
+            els.groupMessageStream.insertAdjacentHTML('beforeend', replyNam);
+            if (els.groupSnippetPreview) els.groupSnippetPreview.textContent = `Nam: Haha, bộ đôi Hướng Dương + Sen Đá là trùm quy trình 👍`;
+          }, 1600);
+        }
+      }
+
+      function openProfileScreen() {
+        const flower = flowerArchetypes[state.matchedFlowerKey];
+        els.flowerCardEmoji.textContent = flower.emoji;
+        els.flowerCardName.textContent = flower.flowerName;
+        els.flowerCardTagline.textContent = flower.tagline;
+        els.dimCoreVal.textContent = flower.coreVal;
+        els.dimLeadership.textContent = flower.leadership;
+        els.dimThinking.textContent = flower.thinking;
+        els.flowerPortraitText.textContent = flower.portrait;
+        els.flowerStrengthBox.innerHTML = `<strong>💪 Điểm mạnh:</strong> ${flower.strength}`;
+        els.flowerMisunderstoodText.textContent = flower.misunderstood;
+        els.flowerCollabTips.innerHTML = flower.collabTips.map(t => `<li style="margin-bottom:6px;">${t}</li>`).join('');
+
+        renderProfileSynergy('sen_da');
+        renderGardenSynergy('sen_da');
+
+        navigateTo('screen-flower-profile');
+      }
+
+      // --- CHAT NGÔN NGỮ TỰ NHIÊN (NHẬN DIỆN MỨC ĐỘ QUA CHỮ GÕ) ---
+      function handleNaturalTextInput(text) {
+        if (!text.trim()) return;
+        const lower = text.trim().toLowerCase();
+
+        // 1. Nhận diện các mức độ Likert từ câu gõ
+        if (state.currentStmtIndex < likertStatements.length && !state.completed) {
+          if (/rất đồng tình|hoàn toàn đồng tình|cực kỳ đồng tình|rất đồng ý|chắc chắn|5/.test(lower)) {
+            handleLikertSelection(state.currentStmtIndex, 5, 2, text);
+            els.inputMessage.value = '';
+            return;
+          }
+          if (/đồng tình|đồng ý|chuẩn|đúng|hợp lý|khá đúng|4/.test(lower)) {
+            handleLikertSelection(state.currentStmtIndex, 4, 1, text);
+            els.inputMessage.value = '';
+            return;
+          }
+          if (/trung lập|bình thường|phân vân|tùy|nửa nọ nửa kia|3/.test(lower)) {
+            handleLikertSelection(state.currentStmtIndex, 3, 0, text);
+            els.inputMessage.value = '';
+            return;
+          }
+          if (/rất không đồng tình|hoàn toàn không|trái ngược|sai hoàn toàn|1/.test(lower)) {
+            handleLikertSelection(state.currentStmtIndex, 1, -2, text);
+            els.inputMessage.value = '';
+            return;
+          }
+          if (/không đồng tình|không đồng ý|không đúng|chưa hợp lý|2/.test(lower)) {
+            handleLikertSelection(state.currentStmtIndex, 2, -1, text);
+            els.inputMessage.value = '';
+            return;
+          }
+        }
+
+        // 2. Nếu gõ tự do khác
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const userMsg = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>${text}</div>
+              <div class="msg-meta-row"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsg);
+        els.inputMessage.value = '';
+        scrollChatToBottom();
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          const botReply = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>Cảm ơn chia sẻ của bạn! Bạn có thể bấm chọn nhanh 1 trong 5 nút tròn ở thẻ mệnh đề phía trên để tiếp tục hành trình nhé 🌸.</div>
+                <div class="msg-meta-row"><span>${timeStr}</span></div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', botReply);
+          scrollChatToBottom();
+        }, 800);
+      }
+
+      function resetLikertTest() {
+        state.currentStmtIndex = 0;
+        state.scores = {};
+        state.completed = false;
+        state.onboardingDone = false;
+        els.messageStreamContainer.innerHTML = '';
+        updateProgressBar(0);
+        startLikertAssessment();
+      }
+
+      // --- SETUP EVENTS ---
+      function setupEvents() {
+        els.bannerStartLikert.addEventListener('click', startLikertAssessment);
+        els.convItemAi.addEventListener('click', startLikertAssessment);
+        els.btnBackInbox.addEventListener('click', () => navigateTo('screen-inbox'));
+        els.btnBackFromFlower.addEventListener('click', () => navigateTo('screen-chat'));
+        els.btnViewProfileDirect.addEventListener('click', openProfileScreen);
+
+        els.btnSubmitMessage.addEventListener('click', () => handleNaturalTextInput(els.inputMessage.value));
+        els.inputMessage.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleNaturalTextInput(els.inputMessage.value);
+          }
+        });
+
+        // Group Chat Navigation & Share
+        els.convItemGroup?.addEventListener('click', () => navigateTo('screen-group-chat'));
+        els.btnShareToGroup?.addEventListener('click', shareToGroupChat);
+        els.btnBackFromGroup?.addEventListener('click', () => navigateTo('screen-inbox'));
+        els.btnOpenGardenView?.addEventListener('click', () => navigateTo('screen-garden'));
+        els.btnBackFromGarden?.addEventListener('click', () => navigateTo('screen-inbox'));
+        els.btnGroupToGarden?.addEventListener('click', () => navigateTo('screen-garden'));
+        els.btnGardenToGroup?.addEventListener('click', () => navigateTo('screen-group-chat'));
+
+        // Bottom Bar Tabs
+        els.tabGarden?.addEventListener('click', () => navigateTo('screen-garden'));
+        els.tabMessages?.addEventListener('click', () => navigateTo('screen-inbox'));
+
+        // Tabs chọn đối tác trong Profile
+        els.profileSynergyTabs?.querySelectorAll('.synergy-tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            els.profileSynergyTabs.querySelectorAll('.synergy-tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const partnerKey = btn.getAttribute('data-partner');
+            renderProfileSynergy(partnerKey);
+          });
+        });
+
+        // Chọn chậu hoa trong Vườn hoa (Garden pots)
+        document.querySelectorAll('.garden-member-pot').forEach(pot => {
+          pot.addEventListener('click', () => {
+            document.querySelectorAll('.garden-member-pot').forEach(p => p.classList.remove('active-inspect'));
+            pot.classList.add('active-inspect');
+            const partnerKey = pot.getAttribute('data-garden-partner');
+            if (partnerKey && partnerKey !== 'self') {
+              renderGardenSynergy(partnerKey);
+            } else {
+              renderGardenSynergy('sen_da');
+            }
+          });
+        });
+
+        // Group chat input
+        els.btnSendGroupMessage?.addEventListener('click', () => {
+          const val = els.inputGroupMessage.value.trim();
+          if (!val) return;
+          const now = new Date();
+          const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          const msg = `
+            <div class="message-row self">
+              <div class="msg-bubble">
+                <div>${val}</div>
+                <div class="msg-meta-row"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+              </div>
+            </div>
+          `;
+          els.groupMessageStream.insertAdjacentHTML('beforeend', msg);
+          els.inputGroupMessage.value = '';
+          els.groupMessageStream.scrollTop = els.groupMessageStream.scrollHeight;
+        });
+
+        els.inputGroupMessage?.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            els.btnSendGroupMessage.click();
+          }
+        });
+
+        els.btnToggleTheme.addEventListener('click', () => document.body.classList.toggle('dark-env'));
+        els.btnRestartAssessment.addEventListener('click', resetLikertTest);
+      }
+
+      setupEvents();
+    })();
+  </script>
+</body>
+
+</html>

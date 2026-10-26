@@ -1,0 +1,3436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duhat - Khám Phá Tính Cách Qua Chat AI (72 Loài Hoa)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & COLOR TOKENS (DUHAT SPECIFICATION)
+       ========================================================================== */
+    :root {
+      --color-primary: #FDC830;
+      --color-primary-hover: #F5B800;
+      --color-primary-light: #FEF5D1;
+      --color-primary-subtle: #FFFDF5;
+      
+      --color-bg-app: #FFFFFF;
+      --color-bg-chat: #F4F6F4;
+      --color-bg-input: #F2F3F5;
+      --color-bg-hover: #F9FAFB;
+      --color-bg-active: #F3F4F6;
+      
+      --color-text-main: #1A1A1A;
+      --color-text-secondary: #555555;
+      --color-text-muted: #757575;
+      --color-border: #E5E7EB;
+      --color-border-dark: #D1D5DB;
+      --color-online: #22C55E;
+      --color-read-tick: #0284C7;
+      --color-unread-badge: #EF4444;
+
+      /* Flower Archetype Accent Colors */
+      --color-flower-accent: #E11D48;
+      --color-flower-bg: #FFE4E6;
+      --color-trait-val: #D97706;
+      --color-trait-lead: #2563EB;
+      --color-trait-think: #7C3AED;
+
+      --radius-full: 9999px;
+      --radius-2xl: 20px;
+      --radius-xl: 16px;
+      --radius-lg: 12px;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-floating-nav: 0 12px 30px -4px rgba(0, 0, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+
+      --phone-width: 412px;
+      --phone-height: 870px;
+      --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: radial-gradient(circle at 10% 20%, #F8FAFC 0%, #E2E8F0 100%);
+      color: var(--color-text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-env {
+      background: radial-gradient(circle at 10% 20%, #1E293B 0%, #0F172A 100%);
+    }
+
+    body.dark-env .prototype-control-bar {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #F8FAFC;
+    }
+
+    body.dark-env .ctrl-btn {
+      background: #334155;
+      color: #F8FAFC;
+      border-color: #475569;
+    }
+
+    /* Outer Control Bar */
+    .prototype-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 620px;
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: var(--shadow-md);
+      z-index: 100;
+    }
+
+    .brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .duck-icon {
+      font-size: 1.35rem;
+      animation: duckBob 2s infinite ease-in-out;
+    }
+
+    .brand-title {
+      font-size: 0.95rem;
+      letter-spacing: -0.2px;
+    }
+
+    .badge-version {
+      font-size: 0.7rem;
+      background: var(--color-primary-light);
+      color: #B45309;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+    }
+
+    .control-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      background: #FFFFFF;
+      color: var(--color-text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ctrl-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+
+    /* Mobile Device Chassis */
+    .device-viewport {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .iphone-chassis {
+      position: relative;
+      width: var(--phone-width);
+      height: var(--phone-height);
+      background-color: var(--color-bg-app);
+      border-radius: 50px;
+      box-shadow: 0 0 0 12px #1E293B, 0 0 0 14px #475569, 0 25px 60px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dynamic Island */
+    .dynamic-island {
+      position: absolute;
+      top: 11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 122px;
+      height: 32px;
+      background-color: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+    }
+
+    .island-camera {
+      width: 10px;
+      height: 10px;
+      background: #111827;
+      border-radius: 50%;
+      border: 1.5px solid #1F2937;
+    }
+
+    .island-sensor {
+      width: 9px;
+      height: 9px;
+      background: #030712;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    /* Phone Status Bar */
+    .phone-status-bar {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 26px 0 26px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      z-index: 40;
+      user-select: none;
+    }
+
+    .status-indicators {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .battery-icon {
+      width: 22px;
+      height: 11px;
+      border: 1.5px solid currentColor;
+      border-radius: 3.5px;
+      padding: 1px;
+      position: relative;
+    }
+
+    .battery-icon::after {
+      content: '';
+      position: absolute;
+      right: -3.5px;
+      top: 2.5px;
+      width: 2px;
+      height: 4px;
+      background: currentColor;
+      border-radius: 0 1px 1px 0;
+    }
+
+    .battery-level {
+      width: 82%;
+      height: 100%;
+      background: currentColor;
+      border-radius: 1.5px;
+    }
+
+    /* Screens Routing */
+    .app-screen {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 48px);
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-bg-app);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(30px);
+      transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .app-screen.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .scrollable-content {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 96px;
+      scrollbar-width: none;
+    }
+
+    .scrollable-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ==========================================================================
+       2. SCREEN 1: INBOX & MAIN DASHBOARD
+       ========================================================================== */
+    .inbox-header {
+      padding: 12px 20px 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-duck-badge {
+      font-size: 1.45rem;
+      background: var(--color-primary-light);
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 1.5px solid var(--color-primary);
+    }
+
+    .logo-text {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--color-text-main);
+    }
+
+    .header-action-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-circle-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--color-bg-input);
+      border: none;
+      color: var(--color-text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .icon-circle-btn:hover {
+      background-color: var(--color-primary-light);
+      color: #B45309;
+      transform: scale(1.05);
+    }
+
+    /* Search Bar */
+    .search-container {
+      padding: 8px 20px 12px 20px;
+    }
+
+    .search-bar-pill {
+      display: flex;
+      align-items: center;
+      background-color: var(--color-bg-input);
+      border-radius: var(--radius-full);
+      padding: 10px 16px;
+      transition: box-shadow 0.2s, background-color 0.2s;
+    }
+
+    .search-bar-pill:focus-within {
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 2px var(--color-primary);
+    }
+
+    .search-icon {
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .search-bar-pill input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--color-text-main);
+    }
+
+    .search-bar-pill input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .btn-clear {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    /* Mascot Banner (Khám phá tính cách loài hoa) */
+    .banner-wrapper {
+      padding: 4px 20px 14px 20px;
+    }
+
+    .interactive-banner {
+      background: linear-gradient(135deg, #FDC830 0%, #F59E0B 100%);
+      border-radius: var(--radius-2xl);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 8px 20px -4px rgba(253, 200, 48, 0.45);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+
+    .interactive-banner:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 12px 24px -4px rgba(253, 200, 48, 0.55);
+    }
+
+    .interactive-banner:active {
+      transform: scale(0.98);
+    }
+
+    .banner-content {
+      flex: 1;
+      z-index: 2;
+    }
+
+    .banner-pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #854D0E;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .banner-heading {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #1A1A1A;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .banner-cta-button {
+      background-color: #1A1A1A;
+      color: #FFFFFF;
+      border: none;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .banner-mascot-visual {
+      width: 95px;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .duck-svg {
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .interactive-banner:hover .duck-svg {
+      transform: rotate(6deg) scale(1.08);
+    }
+
+    /* Filter Pill Bar */
+    .filter-pill-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 20px 14px 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filter-pill-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pill-btn {
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      background-color: #FFFFFF;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn:hover {
+      background-color: var(--color-bg-input);
+      color: var(--color-text-main);
+    }
+
+    .pill-btn.active {
+      background-color: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: #1A1A1A;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(253, 200, 48, 0.25);
+    }
+
+    .count-bubble {
+      background-color: #EF4444;
+      color: #FFFFFF;
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+    }
+
+    /* Conversation List */
+    .conversation-section {
+      padding: 0 12px;
+    }
+
+    .conversation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .conversation-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 10px;
+      border-radius: var(--radius-xl);
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .conversation-item:hover {
+      background-color: var(--color-bg-hover);
+    }
+
+    .conversation-item:active {
+      background-color: var(--color-bg-active);
+      transform: scale(0.99);
+    }
+
+    .conv-avatar-wrap {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      margin-right: 14px;
+    }
+
+    .conv-avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: var(--color-bg-input);
+    }
+
+    .conv-avatar.group-avatar {
+      border-radius: var(--radius-xl);
+      background: var(--color-primary-light);
+    }
+
+    .conv-avatar.ai-avatar {
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, #FEF5D1 0%, #FDE047 100%);
+      border: 1.5px solid var(--color-primary);
+    }
+
+    .presence-dot {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background-color: var(--color-online);
+      border: 2.5px solid #FFFFFF;
+    }
+
+    .conv-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .conv-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .conv-name-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow: hidden;
+    }
+
+    .conv-name {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badge-tag-ai {
+      background: #EDE9FE;
+      color: #6D28D9;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+    }
+
+    .conv-meta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .conv-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .conv-snippet {
+      font-size: 0.86rem;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .conv-snippet.unread-bold {
+      color: var(--color-text-main);
+      font-weight: 600;
+    }
+
+    .unread-badge {
+      background-color: var(--color-primary);
+      color: #1A1A1A;
+      font-size: 0.72rem;
+      font-weight: 800;
+      min-width: 20px;
+      height: 20px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+      flex-shrink: 0;
+    }
+
+    /* Floating Bottom Navigation Bar */
+    .bottom-nav-bar {
+      position: absolute;
+      bottom: 22px;
+      left: 20px;
+      right: 20px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 8px;
+      box-shadow: var(--shadow-floating-nav);
+      border: 1px solid rgba(229, 231, 235, 0.8);
+      z-index: 30;
+    }
+
+    .nav-tab-item {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .nav-tab-item:hover {
+      color: var(--color-text-main);
+    }
+
+    .nav-icon-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-unread-dot {
+      position: absolute;
+      top: -2px;
+      right: -3px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--color-unread-badge);
+    }
+
+    .nav-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .nav-tab-item.active {
+      background-color: var(--color-primary-light);
+      color: #1A1A1A;
+      padding: 6px 16px;
+    }
+
+    .nav-tab-item.active .nav-label {
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       3. SCREEN 2: CHAT ROOM VIEW (AI ASSESSMENT STREAM)
+       ========================================================================== */
+    .chat-header {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+      background-color: #FFFFFF;
+      z-index: 10;
+    }
+
+    .chat-back-btn {
+      background: none;
+      border: none;
+      color: var(--color-text-main);
+      padding: 6px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+
+    .chat-back-btn:hover {
+      background-color: var(--color-bg-input);
+    }
+
+    .chat-recipient-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 10px;
+    }
+
+    .recipient-avatar-wrapper {
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+
+    .header-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      background: var(--color-bg-input);
+    }
+
+    .header-avatar.group-avatar {
+      border-radius: 12px;
+      background: var(--color-primary-light);
+    }
+
+    .header-avatar.ai-avatar {
+      border-radius: 12px;
+      background: linear-gradient(135deg, #FEF5D1 0%, #FDE047 100%);
+      border: 1px solid var(--color-primary);
+    }
+
+    .recipient-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .recipient-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+      line-height: 1.2;
+    }
+
+    .recipient-status {
+      font-size: 0.72rem;
+      color: var(--color-online);
+      font-weight: 600;
+    }
+
+    .chat-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--color-text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+
+    .action-icon-btn:hover {
+      background-color: var(--color-bg-input);
+    }
+
+    /* Message Stream with Doodle Wallpaper */
+    .message-stream {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background-color: var(--color-bg-chat);
+      background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+
+    .system-event-pill {
+      align-self: center;
+      background: rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(4px);
+      color: var(--color-text-secondary);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      margin: 4px 0;
+      text-align: center;
+    }
+
+    .message-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      max-width: 86%;
+      animation: messagePop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .message-row.self {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-row.others {
+      align-self: flex-start;
+    }
+
+    .msg-sender-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: var(--color-bg-input);
+      flex-shrink: 0;
+    }
+
+    .msg-bubble {
+      padding: 11px 15px;
+      border-radius: var(--radius-2xl);
+      font-size: 0.92rem;
+      line-height: 1.42;
+      position: relative;
+      word-break: break-word;
+    }
+
+    .message-row.self .msg-bubble {
+      background-color: var(--color-primary-light);
+      color: #1A1A1A;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .message-row.others .msg-bubble {
+      background-color: #FFFFFF;
+      color: var(--color-text-main);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    .msg-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      margin-top: 5px;
+      font-size: 0.68rem;
+      color: var(--color-text-muted);
+    }
+
+    .tick-icon {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-read-tick);
+    }
+
+    /* SCENARIO CARD / INTERACTIVE DILEMMA CARD (Theo file Word Yeu_cau_content) */
+    .scenario-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      box-shadow: var(--shadow-md);
+      margin-top: 4px;
+    }
+
+    .scenario-header-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--color-primary-light);
+      color: #854D0E;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      margin-bottom: 8px;
+    }
+
+    .scenario-title {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .scenario-context {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.45;
+      margin-bottom: 12px;
+      background: var(--color-bg-input);
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+    }
+
+    .scenario-choices {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .choice-option-btn {
+      font-family: inherit;
+      background: #FFFFFF;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .choice-option-btn:hover {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-subtle);
+      transform: translateY(-1px);
+    }
+
+    .choice-option-btn.selected {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-light);
+      font-weight: 700;
+    }
+
+    .choice-key-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--color-bg-input);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .choice-option-btn.selected .choice-key-badge {
+      background: var(--color-primary);
+      color: #1A1A1A;
+    }
+
+    /* RESULTS TRIGGER CARD IN CHAT */
+    .result-trigger-card {
+      background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+      border: 2px solid #FDA4AF;
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      margin-top: 6px;
+    }
+
+    .result-flower-hero {
+      font-size: 3.5rem;
+      line-height: 1;
+      margin-bottom: 8px;
+      animation: flowerBloom 1.5s infinite alternate ease-in-out;
+    }
+
+    .result-trigger-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #9F1239;
+      margin-bottom: 4px;
+    }
+
+    .result-trigger-sub {
+      font-size: 0.82rem;
+      color: #BE123C;
+      margin-bottom: 12px;
+    }
+
+    .btn-view-flower-card {
+      background: #E11D48;
+      color: #FFFFFF;
+      border: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-view-flower-card:hover {
+      background: #BE123C;
+      transform: scale(1.03);
+    }
+
+    /* Typing Indicator */
+    .typing-indicator-wrapper {
+      padding: 4px 16px 8px 16px;
+      background: var(--color-bg-chat);
+    }
+
+    .typing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .typing-dots {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .typing-dots span {
+      width: 5px;
+      height: 5px;
+      background-color: var(--color-primary-hover);
+      border-radius: 50%;
+      animation: typingBounce 1.2s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    /* Action Drawer */
+    .action-drawer-popup {
+      background: #FFFFFF;
+      border-top: 1px solid var(--color-border);
+      padding: 14px 20px;
+      animation: slideUp 0.2s ease-out;
+    }
+
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      text-align: center;
+    }
+
+    .drawer-item {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+
+    .drawer-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .drawer-icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bg-red { background: #FFE4E6; color: #E11D48; }
+    .bg-green { background: #DCFCE7; color: #15803D; }
+    .bg-yellow { background: var(--color-primary-light); color: #B45309; }
+    .bg-purple { background: #F3E8FF; color: #7E22CE; }
+
+    /* Chat Input Bar */
+    .chat-input-bar {
+      padding: 10px 14px;
+      background-color: #FFFFFF;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .btn-input-accessory {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .btn-input-accessory:hover {
+      background-color: var(--color-bg-input);
+      color: var(--color-text-main);
+    }
+
+    .chat-input-pill {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background-color: var(--color-bg-input);
+      border-radius: var(--radius-full);
+      padding: 6px 12px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .chat-input-pill:focus-within {
+      background-color: #FFFFFF;
+      border-color: var(--color-primary);
+    }
+
+    .chat-input-pill input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--color-text-main);
+    }
+
+    .btn-pill-icon {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 2px;
+      line-height: 1;
+    }
+
+    .chat-send-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-send-main {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(253, 200, 48, 0.4);
+      flex-shrink: 0;
+    }
+
+    .btn-send-main:hover {
+      background-color: var(--color-primary-hover);
+      transform: scale(1.05);
+    }
+
+    /* ==========================================================================
+       4. SCREEN 3: FLOWER PERSONALITY PROFILE & DECODING (72 HÌNH MẪU HOA)
+       ========================================================================== */
+    .flower-profile-header {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+      background: #FFFFFF;
+    }
+
+    .flower-card-container {
+      padding: 16px;
+    }
+
+    .flower-main-card {
+      background: linear-gradient(145deg, #FFF1F2 0%, #FFFFFF 60%, #FEF5D1 100%);
+      border-radius: 24px;
+      border: 1.5px solid #FECDD3;
+      padding: 22px 18px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .flower-badge-ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFE4E6;
+      color: #9F1239;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .flower-visual-hero {
+      text-align: center;
+      margin: 10px 0 16px 0;
+    }
+
+    .flower-emoji-large {
+      font-size: 4.5rem;
+      filter: drop-shadow(0 6px 12px rgba(225, 29, 72, 0.25));
+    }
+
+    .flower-name-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #881337;
+      margin-top: 4px;
+    }
+
+    .flower-tagline {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #9F1239;
+      margin-top: 2px;
+    }
+
+    /* 3-Dimensional Dimension Badges */
+    .dimensions-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed #FECDD3;
+    }
+
+    .dim-badge-box {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(229, 231, 235, 0.8);
+      border-radius: var(--radius-lg);
+      padding: 8px 6px;
+      text-align: center;
+    }
+
+    .dim-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .dim-value {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+    }
+
+    .val-accent-1 { color: #D97706; }
+    .val-accent-2 { color: #2563EB; }
+    .val-accent-3 { color: #7C3AED; }
+
+    /* Sections of the Report */
+    .profile-section-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-head-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .profile-paragraph {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--color-text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .highlight-tip-box {
+      background: #F0FDF4;
+      border-left: 3px solid #22C55E;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: #166534;
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    .warning-box {
+      background: #FFFBEB;
+      border-left: 3px solid #F59E0B;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: #92400E;
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    .btn-share-flower {
+      width: 100%;
+      background: linear-gradient(135deg, #FDC830 0%, #F59E0B 100%);
+      color: #1A1A1A;
+      border: none;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 800;
+      padding: 14px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 24px;
+      transition: transform 0.2s;
+    }
+
+    .btn-share-flower:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       5. SCREEN 4: COMMUNITY HUB (VSF CONNECT / VƯỜN HOA ĐỒNG ĐỘI)
+       ========================================================================== */
+    .community-header {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+      background: #FFFFFF;
+    }
+
+    .community-header-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comm-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .comm-title-row h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-text-main);
+    }
+
+    .comm-tag-status {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+
+    .community-nav-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 20px;
+      background: #FFFFFF;
+    }
+
+    .comm-tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .comm-tab.active {
+      color: #1A1A1A;
+      font-weight: 800;
+    }
+
+    .comm-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 25%;
+      right: 25%;
+      height: 3px;
+      background-color: #1A1A1A;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .team-flower-banner {
+      margin: 16px 20px 8px 20px;
+      background: linear-gradient(135deg, #FEF5D1 0%, #FDE047 100%);
+      border: 1px solid #FACC15;
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .team-flower-badge {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .team-flower-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #854D0E;
+    }
+
+    .team-flower-desc {
+      font-size: 0.78rem;
+      color: #A16207;
+      margin-top: 2px;
+    }
+
+    .subgroups-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px 20px 0 20px;
+    }
+
+    .subgroup-item-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .subgroup-item-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    .subgroup-info-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .subgroup-badge-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--color-primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .subgroup-texts h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+    }
+
+    .subgroup-texts p {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    .btn-join-group {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border-dark);
+      background: #FFFFFF;
+      color: var(--color-text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-join-group:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .btn-join-group.joined {
+      background: var(--color-bg-input);
+      border-color: transparent;
+      color: var(--color-text-muted);
+    }
+
+    /* Home Indicator */
+    .home-indicator-bar {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      pointer-events: none;
+    }
+
+    .home-indicator {
+      width: 135px;
+      height: 5px;
+      background-color: #000000;
+      border-radius: 3px;
+      opacity: 0.35;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes duckBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px) rotate(5deg); }
+    }
+
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1.1); opacity: 1; }
+    }
+
+    @keyframes messagePop {
+      0% { opacity: 0; transform: translateY(8px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes flowerBloom {
+      0% { transform: scale(0.95); }
+      100% { transform: scale(1.05) rotate(3deg); }
+    }
+  
+    /* Quick Reply Suggestion Chips Bar (Hybrid Interaction) */
+    .chat-quick-chips-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px 6px 14px;
+      background: var(--color-bg-chat);
+      overflow-x: auto;
+      scrollbar-width: none;
+      transition: all 0.2s ease;
+    }
+
+    .chat-quick-chips-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chat-chip-btn {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-border);
+      background: #FFFFFF;
+      color: var(--color-text-main);
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .chat-chip-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(253, 200, 48, 0.25);
+    }
+
+    .chat-chip-btn:active {
+      transform: scale(0.97);
+    }
+
+    .chat-chip-btn.accent-chip {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: #854D0E;
+    }
+
+    .chat-chip-btn.next-chip {
+      background: #EDE9FE;
+      border-color: #C4B5FD;
+      color: #6D28D9;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="prototype-environment">
+    <!-- Thanh điều khiển Toolbar giả lập bên ngoài -->
+    <header class="prototype-control-bar">
+      <div class="brand-tag">
+        <span class="duck-icon">🦆</span>
+        <span class="brand-title">Duhat AI - Khám Phá Tính Cách</span>
+        <span class="badge-version">72 Loài Hoa</span>
+      </div>
+      <div class="control-actions">
+        <button id="btn-toggle-theme" class="ctrl-btn" title="Chuyển chế độ Nền">🌓 Đổi nền</button>
+        <button id="btn-restart-assessment" class="ctrl-btn" title="Làm lại bài test từ đầu">🌸 Làm lại bài test</button>
+      </div>
+    </header>
+
+    <!-- Khung thiết bị di động (Mobile Device Shell) -->
+    <main class="device-viewport">
+      <div class="iphone-chassis">
+        <!-- Dynamic Island & Camera -->
+        <div class="dynamic-island">
+          <div class="island-camera"></div>
+          <div class="island-sensor"></div>
+        </div>
+
+        <!-- Phone Status Bar -->
+        <div class="phone-status-bar">
+          <span id="phone-clock" class="status-clock">09:41</span>
+          <div class="status-indicators">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+            </svg>
+            <div class="battery-icon">
+              <div class="battery-level"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÀN HÌNH 1: INBOX & MAIN VIEW -->
+        <section id="screen-inbox" class="app-screen active">
+          <!-- Top App Header -->
+          <header class="inbox-header">
+            <div class="header-logo-group">
+              <span class="logo-duck-badge">🦆</span>
+              <h1 class="logo-text">Duhat</h1>
+            </div>
+            <div class="header-action-group">
+              <button id="btn-scan-qr" class="icon-circle-btn" aria-label="Quét mã QR" title="Quét mã QR">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                  <rect x="7" y="7" width="10" height="10" rx="2"></rect>
+                </svg>
+              </button>
+              <button id="btn-add-contact" class="icon-circle-btn" aria-label="Thêm bạn mới" title="Thêm cuộc trò chuyện">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+          </header>
+
+          <div class="scrollable-content">
+            <!-- Search Bar -->
+            <div class="search-container">
+              <div class="search-bar-pill">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#757575" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input id="input-search" type="text" placeholder="Tìm kiếm đồng đội, phòng chat" autocomplete="off">
+                <button id="btn-clear-search" class="btn-clear hidden" aria-label="Xóa tìm kiếm">✕</button>
+              </div>
+            </div>
+
+            <!-- Interactive Banner: KHÁM PHÁ HÌNH MẪU HOA QUA CHAT AI -->
+            <div class="banner-wrapper">
+              <div id="banner-start-assessment" class="interactive-banner" role="button" tabindex="0">
+                <div class="banner-content">
+                  <span class="banner-pill-tag">🌸 BÀI TEST TÍNH CÁCH AI</span>
+                  <h2 class="banner-heading">Khám phá hình mẫu loài hoa<br>của bạn & hiểu đồng đội!</h2>
+                  <button class="banner-cta-button">
+                    <span>Chat cùng Duhat AI ngay ✨</span>
+                  </button>
+                </div>
+                <div class="banner-mascot-visual">
+                  <div class="duck-mascot-container">
+                    <svg class="duck-svg" viewBox="0 0 120 120" width="100" height="100">
+                      <defs>
+                        <linearGradient id="duckGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#FFE066"/>
+                          <stop offset="100%" stop-color="#F5B800"/>
+                        </linearGradient>
+                        <linearGradient id="beakGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#FF922B"/>
+                          <stop offset="100%" stop-color="#F76707"/>
+                        </linearGradient>
+                      </defs>
+                      <ellipse cx="60" cy="76" rx="42" ry="34" fill="url(#duckGrad)"/>
+                      <circle cx="60" cy="42" r="30" fill="url(#duckGrad)"/>
+                      <ellipse cx="48" cy="36" rx="5" ry="7" fill="#1A1A1A"/>
+                      <circle cx="47" cy="34" r="2" fill="#FFFFFF"/>
+                      <ellipse cx="72" cy="36" rx="5" ry="7" fill="#1A1A1A"/>
+                      <circle cx="71" cy="34" r="2" fill="#FFFFFF"/>
+                      <ellipse cx="40" cy="46" rx="6" ry="4" fill="#FF8787" opacity="0.6"/>
+                      <ellipse cx="80" cy="46" rx="6" ry="4" fill="#FF8787" opacity="0.6"/>
+                      <ellipse cx="60" cy="48" rx="14" ry="9" fill="url(#beakGrad)"/>
+                      <rect x="74" y="58" width="22" height="36" rx="4" fill="#1F2937" transform="rotate(-15 74 58)" stroke="#4B5563" stroke-width="1.5"/>
+                      <circle cx="82" cy="64" r="2" fill="#60A5FA"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pill Filter Bar -->
+            <nav class="filter-pill-nav" aria-label="Bộ lọc tin nhắn">
+              <button class="pill-btn active" data-filter="all">Tất cả</button>
+              <button class="pill-btn" data-filter="ai">Chat AI 🌸</button>
+              <button class="pill-btn" data-filter="unread">Chưa đọc <span id="badge-unread-count" class="count-bubble">2</span></button>
+              <button class="pill-btn" data-filter="group">Nhóm</button>
+            </nav>
+
+            <!-- Conversation List Section -->
+            <section class="conversation-section">
+              <div id="conversation-list" class="conversation-list">
+                <!-- Rendered dynamically -->
+              </div>
+            </section>
+          </div>
+
+          <!-- Floating Bottom Navigation Bar (5 tabs) -->
+          <footer class="bottom-nav-bar">
+            <button class="nav-tab-item" data-tab="contacts" id="tab-contacts">
+              <div class="nav-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <span class="nav-label">Danh bạ</span>
+            </button>
+
+            <button class="nav-tab-item" data-tab="explore" id="tab-explore">
+              <div class="nav-icon-wrap">
+                <span style="font-size: 1.25rem; line-height: 1;">🌸</span>
+              </div>
+              <span class="nav-label">Vườn hoa</span>
+            </button>
+
+            <button class="nav-tab-item active" data-tab="messages" id="tab-messages">
+              <div class="nav-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="nav-unread-dot"></span>
+              </div>
+              <span class="nav-label">Tin nhắn</span>
+            </button>
+
+            <button class="nav-tab-item" data-tab="calls" id="tab-calls">
+              <div class="nav-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <span class="nav-label">Cuộc gọi</span>
+            </button>
+
+            <button class="nav-tab-item" data-tab="settings" id="tab-settings">
+              <div class="nav-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </div>
+              <span class="nav-label">Cài đặt</span>
+            </button>
+          </footer>
+        </section>
+
+        <!-- MÀN HÌNH 2: CHAT ROOM VIEW (HỘI THOẠI AI KHÁM PHÁ TÍNH CÁCH) -->
+        <section id="screen-chat" class="app-screen">
+          <!-- Chat Header -->
+          <header class="chat-header">
+            <button id="btn-back-inbox" class="chat-back-btn" aria-label="Quay lại">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <div class="chat-recipient-info">
+              <div class="recipient-avatar-wrapper">
+                <div id="chat-header-avatar" class="header-avatar ai-avatar">🌸</div>
+                <span id="chat-header-status-dot" class="presence-dot"></span>
+              </div>
+              <div class="recipient-meta">
+                <h3 id="chat-header-name" class="recipient-name">Duhat AI Guide</h3>
+                <span id="chat-header-subtext" class="recipient-status">Người dẫn dắt khám phá</span>
+              </div>
+            </div>
+
+            <div class="chat-header-actions">
+              <button class="action-icon-btn" id="btn-show-flower-card-direct" title="Xem thẻ hoa của bạn">
+                🌸
+              </button>
+            </div>
+          </header>
+
+          <!-- Messages Stream with Doodle Wallpaper & Dilemma Cards -->
+          <div id="message-stream-container" class="message-stream">
+            <!-- Messages rendered dynamically -->
+          </div>
+
+          <!-- Typing Indicator Bubble -->
+          <div id="typing-indicator-bar" class="typing-indicator-wrapper hidden">
+            <div class="typing-pill">
+              <span class="typing-duck">🦆</span>
+              <span id="typing-sender-label">Duhat AI đang phân tích</span>
+              <div class="typing-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Drawer (Khi bấm dấu +) -->
+          <div id="chat-action-drawer" class="action-drawer-popup hidden">
+            <div class="drawer-grid">
+              <button class="drawer-item" id="btn-action-view-card">
+                <div class="drawer-icon-circle bg-red">🌸</div>
+                <span>Thẻ kết quả</span>
+              </button>
+              <button class="drawer-item" id="btn-action-garden">
+                <div class="drawer-icon-circle bg-green">🌿</div>
+                <span>Vườn hoa</span>
+              </button>
+              <button class="drawer-item" id="btn-action-restart">
+                <div class="drawer-icon-circle bg-yellow">🔄</div>
+                <span>Test lại</span>
+              </button>
+              <button class="drawer-item" id="btn-action-tips">
+                <div class="drawer-icon-circle bg-purple">💡</div>
+                <span>Mẹo kết nối</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Input Bar -->
+          
+          <!-- Quick Reply Suggestion Chips Bar (Hybrid Interaction: Vừa chọn vừa chat) -->
+          <div id="chat-quick-chips-bar" class="chat-quick-chips-bar">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <footer class="chat-input-bar">
+            <button id="btn-toggle-actions" class="btn-input-accessory" aria-label="Mở rộng tiện ích" title="Tiện ích mở rộng">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+
+            <div class="chat-input-pill">
+              <input id="input-message" type="text" placeholder="Nhập lý do hoặc bấm chọn lựa chọn..." autocomplete="off">
+              <button id="btn-open-emoji" class="btn-pill-icon" aria-label="Biểu tượng cảm xúc">
+                🙂
+              </button>
+            </div>
+
+            <div class="chat-send-actions">
+              <button id="btn-submit-message" class="btn-send-main" aria-label="Gửi tin nhắn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </footer>
+        </section>
+
+        <!-- MÀN HÌNH 3: THẺ HÌNH MẪU LOÀI HOA (FLOWER PERSONALITY PROFILE) -->
+        <section id="screen-flower-profile" class="app-screen">
+          <header class="flower-profile-header">
+            <button id="btn-back-from-flower" class="chat-back-btn" aria-label="Quay lại">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <h3 style="font-size: 1rem; font-weight: 800;">Hồ Sơ Tính Cách 72 Loài Hoa</h3>
+            <button class="icon-circle-btn" id="btn-share-header">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </button>
+          </header>
+
+          <div class="scrollable-content">
+            <div class="flower-card-container">
+              <!-- Main Flower Archetype Card -->
+              <div class="flower-main-card">
+                <div class="flower-badge-ribbon">
+                  <span>✨ HÌNH MẪU ĐẠI DIỆN</span>
+                </div>
+                <div class="flower-visual-hero">
+                  <div id="flower-card-emoji" class="flower-emoji-large">🌻</div>
+                  <h2 id="flower-card-name" class="flower-name-title">Hoa Hướng Dương</h2>
+                  <p id="flower-card-tagline" class="flower-tagline">Người Tiên Phong Đáng Tin Cậy & Hệ Thống</p>
+                </div>
+
+                <!-- 3 Bộ Khung Cốt Lõi (Theo Yeu_cau_content_bai_test_AI.docx) -->
+                <div class="dimensions-summary-grid">
+                  <div class="dim-badge-box">
+                    <div class="dim-label">Giá Trị Cốt Lõi</div>
+                    <div id="dim-core-val" class="dim-value val-accent-1">Tín (Cam kết)</div>
+                  </div>
+                  <div class="dim-badge-box">
+                    <div class="dim-label">Phong Cách</div>
+                    <div id="dim-leadership" class="dim-value val-accent-2">Độc đoán thiên tài</div>
+                  </div>
+                  <div class="dim-badge-box">
+                    <div class="dim-label">Kiểu Tư Duy</div>
+                    <div id="dim-thinking" class="dim-value val-accent-3">Hệ thống</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 1. Chân dung & Nét riêng -->
+              <div class="profile-section-card">
+                <h4 class="section-head-title">🌟 Chân dung & Nét riêng</h4>
+                <p id="flower-portrait-text" class="profile-paragraph">
+                  Bạn là người luôn coi trọng cam kết và sự tin cậy tuyệt đối trong quá trình phối hợp. Khi bắt tay vào công việc, bạn tự xác lập hướng đi rõ ràng dựa trên chuyên môn vững chắc và sẵn sàng đứng mũi chịu sào, nhận trách nhiệm cho kết quả của nhóm.
+                </p>
+                <div class="highlight-tip-box" id="flower-strength-box">
+                  <strong>💪 Điểm mạnh:</strong> Nhìn rõ bức tranh tổng thể, dự báo trước các điểm nghẽn và giữ cho kế hoạch của cả nhóm luôn vận hành đúng quỹ đạo cam kết.
+                </div>
+              </div>
+
+              <!-- 2. Điểm dễ bị hiểu nhầm -->
+              <div class="profile-section-card">
+                <h4 class="section-head-title">🔍 Điểm dễ bị hiểu nhầm</h4>
+                <p id="flower-misunderstood-text" class="profile-paragraph">
+                  Khi phát sinh tình huống bất ngờ, sự kiên định bám sát cam kết cũ hoặc mong muốn kiểm tra kỹ các mối quan hệ giữa các khâu đôi khi có thể bị đồng đội hiểu nhầm là khó linh hoạt hoặc chậm thay đổi.
+                </p>
+                <div class="warning-box" id="flower-limit-box">
+                  <strong>💡 Góc nhìn thực tế:</strong> Thực chất, bạn chỉ muốn bảo vệ uy tín chung của nhóm và đảm bảo giải pháp không gây ra rủi ro dây chuyền về sau.
+                </div>
+              </div>
+
+              <!-- 3. Gợi ý phối hợp hiệu quả -->
+              <div class="profile-section-card">
+                <h4 class="section-head-title">🤝 Gợi ý phối hợp cùng đồng đội</h4>
+                <ul id="flower-collab-tips" style="padding-left: 18px; font-size: 0.84rem; line-height: 1.5; color: var(--color-text-secondary);">
+                  <li style="margin-bottom: 6px;"><strong>Khi giao việc hoặc phối hợp:</strong> Thống nhất rõ mốc kết quả (output) và quyền tự quyết; thông báo sớm cho bạn ngay khi có dữ kiện đầu vào thay đổi.</li>
+                  <li style="margin-bottom: 6px;"><strong>Khi thảo luận giải pháp:</strong> Cung cấp bức tranh toàn cảnh và logic dữ liệu thay vì chỉ yêu cầu xử lý tình huống rời rạc.</li>
+                  <li><strong>Cách giao tiếp ăn ý:</strong> Đánh giá cao tinh thần giữ lời hứa và sự chuẩn mực của bạn.</li>
+                </ul>
+              </div>
+
+              <button class="btn-share-flower" id="btn-share-to-garden">
+                <span>🌿 Lưu vào Vườn hoa & Xem đồng đội</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MÀN HÌNH 4: VƯỜN HOA ĐỒNG ĐỘI (VSF CONNECT) -->
+        <section id="screen-community" class="app-screen">
+          <header class="community-header">
+            <button id="btn-back-from-community" class="chat-back-btn" aria-label="Quay lại">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="community-header-title">
+              <div class="comm-title-row">
+                <h2>Vườn Hoa Đồng Đội</h2>
+                <span class="verified-icon">🌸</span>
+              </div>
+              <span class="comm-tag-status">Khám phá & Thấu hiểu đồng đội</span>
+            </div>
+            <button class="icon-circle-btn" id="btn-filter-garden">
+              🔍
+            </button>
+          </header>
+
+          <div class="scrollable-content">
+            <!-- Team Flower Banner -->
+            <div class="team-flower-banner">
+              <div class="team-flower-badge">🌻</div>
+              <div>
+                <h3 class="team-flower-title">Bạn thuộc hình mẫu: Hoa Hướng Dương</h3>
+                <p class="team-flower-desc">Đã có 42/50 thành viên trong tổ chức hoàn thành bài test khám phá!</p>
+              </div>
+            </div>
+
+            <!-- Community Tabs -->
+            <div class="community-nav-tabs">
+              <button class="comm-tab active" data-comm-tab="teammates">Đồng đội (6)</button>
+              <button class="comm-tab" data-comm-tab="clubs">CLB Sở thích</button>
+            </div>
+
+            <!-- Teammates Flower Cards List -->
+            <div id="teammates-garden-container" class="subgroups-grid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Home Bar Indicator -->
+        <div class="home-indicator-bar">
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       6. JAVASCRIPT STATE ENGINE & ASSESSMENT LOGIC
+       (DỰA TRÊN CHÍNH XÁC YÊU CẦU NỘI DUNG TỪ Yeu_cau_content_bai_test_AI.docx)
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // --- 1. NGÂN HÀNG HÌNH MẪU LOÀI HOA (TỔ HỢP 6 GIÁ TRỊ x 3 PHONG CÁCH x 4 TƯ DUY) ---
+      const flowerArchetypes = {
+        'tin_docdoan_hethong': {
+          flowerName: 'Hoa Hướng Dương',
+          emoji: '🌻',
+          tagline: 'Người Tiên Phong Đáng Tin Cậy & Hệ Thống',
+          coreVal: 'Tín (Trọng cam kết)',
+          leadership: 'Độc đoán thiên tài',
+          thinking: 'Hệ thống (Bức tranh tổng thể)',
+          portrait: 'Bạn coi trọng cam kết và sự tin cậy tuyệt đối trong quá trình phối hợp. Khi đối mặt bài toán khó, bạn tự xác lập hướng đi rõ ràng dựa trên chuyên môn vững vàng, dám đứng mũi chịu sào và luôn tính toán tác động dây chuyền giữa các khâu.',
+          strength: 'Giữ cho cả nhóm luôn đúng hạn cam kết, dự báo trước rủi ro và điều hướng công việc có lớp lang bài bản.',
+          misunderstood: 'Sự kiên định bám cam kết cũ đôi khi có thể bị đồng nghiệp hiểu nhầm là chậm linh hoạt khi hoàn cảnh đột ngột thay đổi.',
+          collabTips: [
+            'Thống nhất đầu ra (output) và quyền tự quyết rõ ràng ngay từ đầu.',
+            'Cung cấp bức tranh toàn cảnh khi cần bạn đưa ra quyết định mới.',
+            'Báo sớm cho bạn ngay khi có dữ liệu đầu vào bị trễ hạn.'
+          ]
+        },
+        'tin_ecosystem_khoahoc': {
+          flowerName: 'Hoa Cẩm Tú Cầu',
+          emoji: '🌸',
+          tagline: 'Người Kết Nối Dựa Trên Bằng Chứng & Cam Kết',
+          coreVal: 'Tín & Trí',
+          leadership: 'Hệ sinh thái (Kết nối đa bên)',
+          thinking: 'Khoa học (Dữ liệu khách quan)',
+          portrait: 'Bạn chủ động tìm đúng người ở các nhóm khác nhau, kết nối các năng lực bổ trợ để giải quyết vấn đề chung, đồng thời luôn dùng dữ liệu và giả thuyết đã kiểm chứng để đảm bảo lời hứa với đối tác.',
+          strength: 'Tạo dựng mạng lưới hợp tác đa chiều cực kỳ uy tín và giải quyết vấn đề dựa trên bằng chứng xác thực.',
+          misunderstood: 'Đôi khi việc đòi hỏi kiểm tra kỹ dữ liệu trước khi kết luận có thể khiến người khác cảm thấy bạn hơi cẩn trọng.',
+          collabTips: [
+            'Trình bày đề xuất kèm số liệu đo lường cụ thể.',
+            'Tận dụng thế mạnh kết nối của bạn để làm cầu nối giữa các phòng ban.'
+          ]
+        },
+        'tam_nen_hethong': {
+          flowerName: 'Hoa Sen Đá',
+          emoji: '🪴',
+          tagline: 'Kiến Trúc Sư Vững Vàng & Tận Tụy',
+          coreVal: 'Tâm (Trách nhiệm & Tận tụy)',
+          leadership: 'Nền tảng (Xây cơ chế tự vận hành)',
+          thinking: 'Hệ thống (Quy trình chuẩn mực)',
+          portrait: 'Bạn luôn hết lòng vì chất lượng công việc và trải nghiệm của người nhận. Bạn thích tạo ra hướng dẫn, công cụ, checklist dùng chung để đồng nghiệp tự xử lý mượt mà mà không phải phụ thuộc vào ai.',
+          strength: 'Xây dựng nền tảng vững chắc, bền bỉ và chuẩn mực cho tập thể vận hành dài hạn.',
+          misunderstood: 'Mong muốn quy trình hóa mọi thứ đôi khi có thể bị xem là rườm rà đối với những việc cần xử lý gấp.',
+          collabTips: [
+            'Cùng bạn thiết lập các mốc kiểm tra định kỳ thay vì theo dõi vi mô.',
+            'Ghi nhận sự tận tâm thầm lặng của bạn đối với thành công của đội ngũ.'
+          ]
+        },
+        'toc_docdoan_dongian': {
+          flowerName: 'Hoa Đỗ Quyên',
+          emoji: '🌺',
+          tagline: 'Tia Chớp Hành Động & Đi Thẳng Vào Trọng Tâm',
+          coreVal: 'Tốc (Tốc độ & Linh hoạt)',
+          leadership: 'Độc đoán thiên tài',
+          thinking: 'Đơn giản (Lược bỏ rườm rà)',
+          portrait: 'Bạn hành động cực nhanh, không ngại ra quyết định dứt khoát để chớp thời cơ. Bạn lược bỏ mọi quy trình rườm rà để tập trung thẳng vào điều cốt lõi tạo ra giá trị nhanh nhất.',
+          strength: 'Phá vỡ các điểm nghẽn, tạo động lực bứt phá và đưa giải pháp ra thị trường trong thời gian ngắn kỷ lục.',
+          misunderstood: 'Tốc độ quá nhanh đôi khi khiến đồng nghiệp chưa kịp theo kịp, dễ hiểu nhầm bạn nóng vội.',
+          collabTips: [
+            'Trao đổi ngắn gọn, đi thẳng vào kết quả cần đạt được.',
+            'Cho bạn không gian tự do xử lý linh hoạt.'
+          ]
+        },
+        'nhan_ecosystem_sangtao': {
+          flowerName: 'Hoa Bồ Công Anh',
+          emoji: '🌼',
+          tagline: 'Người Truyền Cảm Hứng & Sáng Tạo Vị Nhân Sinh',
+          coreVal: 'Nhân (Con người là trung tâm)',
+          leadership: 'Hệ sinh thái',
+          thinking: 'Sáng tạo (Đổi mới cách làm)',
+          portrait: 'Bạn luôn đặt con người và cảm xúc của đồng đội lên hàng đầu, lắng nghe và nâng đỡ mọi người bằng những ý tưởng mới lạ, ấm áp và truyền cảm hứng tích cực cho cả phòng ban.',
+          strength: 'Gắn kết các thành viên, khơi gợi tiềm năng sáng tạo và tạo môi trường làm việc tâm lý an toàn.',
+          misunderstood: 'Có thể bị hiểu là quá quan tâm đến cảm xúc mà đôi lúc do dự khi cần ra quyết định cứng rắn.',
+          collabTips: [
+            'Lắng nghe và khuyến khích các ý tưởng đột phá của bạn.',
+            'Hỗ trợ bạn ở các khâu chốt số liệu hoặc thủ tục hành chính.'
+          ]
+        }
+      };
+
+      // --- 2. BỘ TÌNH HUỐNG MINH HỌA (TRÍCH XUẤT NGUYÊN BẢN TỪ FILE WORD) ---
+      const assessmentScenarios = [
+        {
+          id: 'sc1',
+          tag: 'TÌNH HUỐNG 1: CAM KẾT & CHẤT LƯỢNG',
+          title: 'Khi dữ kiện quan trọng đột ngột thay đổi lúc cận kề thời hạn',
+          context: 'Nhóm bạn đã hẹn gửi tài liệu cho đối tác lúc 17 giờ. Đến 15 giờ, một dữ kiện quan trọng thay đổi khiến 30% nội dung cần kiểm tra lại, 70% còn lại vẫn dùng tốt. Bạn thường sẽ xử lý thế nào?',
+          choices: [
+            {
+              key: 'A',
+              text: 'Gửi đúng 17h phần 70% đã xác minh, nói rõ phần chờ cập nhật và cam kết mốc bù.',
+              trait: { val: 'tin', lead: 'docdoan', think: 'dongian' },
+              rationale: 'Ưu tiên cao nhất là giữ đúng lời hứa về thời gian và sự minh bạch với đối tác.'
+            },
+            {
+              key: 'B',
+              text: 'Chủ động trao đổi với đối tác để dời sang sáng mai, kiểm tra lại toàn bộ cho thật chuẩn xác.',
+              trait: { val: 'tam', lead: 'nen', think: 'khoahoc' },
+              rationale: 'Ưu tiên sự chỉn chu tuyệt đối và độ tin cậy của dữ liệu gửi đi.'
+            },
+            {
+              key: 'C',
+              text: 'Huy động ngay 2 đồng nghiệp khác cùng kiểm tra chéo song song để cố gắng giữ mốc 17h.',
+              trait: { val: 'toc', lead: 'ecosystem', think: 'hethong' },
+              rationale: 'Ưu tiên kết nối sức mạnh tập thể để vừa giữ được hạn vừa đảm bảo chất lượng.'
+            }
+          ]
+        },
+        {
+          id: 'sc2',
+          tag: 'TÌNH HUỐNG 2: PHƯƠNG PHÁP GIẢI QUYẾT BÀI TOÁN',
+          title: 'Tiếp cận sự cố quy trình vận hành bị chậm trễ',
+          context: 'Phòng ban nhận phản hồi quy trình phối hợp đang bị nghẽn ở nhiều khâu, làm giảm hiệu suất chung. Hành động đầu tiên bạn cảm thấy tự nhiên nhất là gì?',
+          choices: [
+            {
+              key: 'A',
+              text: 'Vẽ lại luồng quy trình tổng thể từ đầu đến cuối, lần theo mối quan hệ phụ thuộc giữa các khâu.',
+              trait: { val: 'tri', lead: 'nen', think: 'hethong' },
+              rationale: 'Nhìn bức tranh toàn cảnh để phát hiện điểm nghẽn mang tính hệ thống.'
+            },
+            {
+              key: 'B',
+              text: 'Thu thập số liệu đo lường thời gian thực tế ở từng bước để kiểm tra bằng chứng trước khi kết luận.',
+              trait: { val: 'tri', lead: 'docdoan', think: 'khoahoc' },
+              rationale: 'Dùng dữ liệu khách quan để làm rõ nguyên nhân gốc rễ thay vì phỏng đoán.'
+            },
+            {
+              key: 'C',
+              text: 'Cắt bỏ ngay các bước phê duyệt rườm rà, áp dụng cách làm tinh gọn, đi thẳng vào kết quả.',
+              trait: { val: 'toc', lead: 'docdoan', think: 'dongian' },
+              rationale: 'Đơn giản hóa để giải phóng năng lượng cho nhóm ngay lập tức.'
+            },
+            {
+              key: 'D',
+              text: 'Tổ chức buổi brainstorm thử nghiệm công cụ tự động hóa hoặc AI mới để thay đổi hoàn toàn cách làm cũ.',
+              trait: { val: 'tinh', lead: 'ecosystem', think: 'sangtao' },
+              rationale: 'Đổi mới sáng tạo để tạo bước nhảy vọt thay vì vá víu quy trình cũ.'
+            }
+          ]
+        },
+        {
+          id: 'sc3',
+          tag: 'TÌNH HUỐNG 3: PHONG CÁCH PHỐI HỢP & DẪN DẮT',
+          title: 'Triển khai công việc mới mà nhóm chưa từng có kinh nghiệm',
+          context: 'Cả nhóm cần triển khai một nhiệm vụ quan trọng trong 2 tuần nhưng chưa ai có chuyên môn sâu về mảng này. Bạn sẽ dẫn dắt thế nào?',
+          choices: [
+            {
+              key: 'A',
+              text: 'Tự mình nghiên cứu sâu, vạch phương án cụ thể, phân công rõ và nhận trách nhiệm chính.',
+              trait: { val: 'tin', lead: 'docdoan', think: 'hethong' },
+              rationale: 'Chủ động dẫn dắt, đứng mũi chịu sào để tạo sự an tâm cho đồng đội.'
+            },
+            {
+              key: 'B',
+              text: 'Tìm kiếm và kết nối các chuyên gia từ phòng ban khác có kinh nghiệm để vào cố vấn cho nhóm.',
+              trait: { val: 'nhan', lead: 'ecosystem', think: 'hethong' },
+              rationale: 'Tận dụng sức mạnh mạng lưới và năng lực bổ trợ của các bên.'
+            },
+            {
+              key: 'C',
+              text: 'Tạo bộ khung checklist, tài liệu mẫu và quy chuẩn bàn giao để cả nhóm cùng tự vận hành.',
+              trait: { val: 'tam', lead: 'nen', think: 'dongian' },
+              rationale: 'Xây dựng nền tảng dùng chung để sau này ai cũng có thể tự làm được.'
+            }
+          ]
+        },
+        {
+          id: 'sc4',
+          tag: 'TÌNH HUỐNG 4: THẤU CẢM VÀ HỖ TRỢ ĐỒNG ĐỘI',
+          title: 'Khi đồng đội kề vai sát cánh đang bị quá tải',
+          context: 'Một bạn trong nhóm đang chịu áp lực lớn về tiến độ cá nhân, có nguy cơ ảnh hưởng kế hoạch chung. Bạn sẽ phản ứng ra sao?',
+          choices: [
+            {
+              key: 'A',
+              text: 'Ngồi lại lắng nghe, hỗ trợ bạn ấy sắp xếp lại thứ tự ưu tiên và chia sẻ áp lực tinh thần.',
+              trait: { val: 'nhan', lead: 'ecosystem', think: 'dongian' },
+              rationale: 'Con người là trung tâm - đồng đội vững vàng thì công việc mới bền vững.'
+            },
+            {
+              key: 'B',
+              text: 'Chủ động nhận gánh vác phần kỹ thuật phức tạp nhất để đảm bảo mục tiêu chung cán đích an toàn.',
+              trait: { val: 'tam', lead: 'docdoan', think: 'hethong' },
+              rationale: 'Tận tụy vì mục tiêu chung và giải quyết thẳng vào điểm nghẽn chuyên môn.'
+            }
+          ]
+        }
+      ];
+
+      // --- 3. STATE CỦA HỆ THỐNG ---
+      const state = {
+        activeScreen: 'screen-inbox',
+        activeFilter: 'all',
+        searchQuery: '',
+        currentScenarioIndex: 0,
+        userScores: {
+          val: { tin: 0, tam: 0, tri: 0, toc: 0, tinh: 0, nhan: 0 },
+          lead: { docdoan: 0, ecosystem: 0, nen: 0 },
+          think: { dongian: 0, hethong: 0, khoahoc: 0, sangtao: 0 }
+        },
+        matchedFlowerKey: 'tin_docdoan_hethong',
+        isActionDrawerOpen: false,
+        assessmentCompleted: false,
+        onboardingCompleted: false,
+        conversations: [
+          {
+            id: 'conv-ai-assessment',
+            type: 'ai',
+            name: 'Duhat AI Guide',
+            avatar: '🌸',
+            isOnline: true,
+            isPinned: true,
+            unreadCount: 1,
+            lastMessage: {
+              sender: 'Duhat AI',
+              text: 'Chào bạn! Mình sẽ đồng hành cùng bạn khám phá hình mẫu loài hoa tính cách nhé!',
+              timestamp: '09:41',
+              status: 'read'
+            }
+          },
+          {
+            id: 'conv-group-football',
+            type: 'group',
+            name: 'CLB Bóng đá VSF',
+            avatar: '⚽',
+            isOnline: true,
+            isPinned: false,
+            unreadCount: 3,
+            lastMessage: {
+              sender: 'Bùi Văn Thái (Hoa Đỗ Quyên)',
+              text: 'Tối nay 19h sân Cầu Giấy nha anh em!',
+              timestamp: 'Hôm qua',
+              status: 'read'
+            }
+          },
+          {
+            id: 'conv-minh-thu',
+            type: 'direct',
+            name: 'Minh Thư (Hoa Cẩm Tú Cầu)',
+            avatar: '👩‍🎨',
+            isOnline: true,
+            isPinned: false,
+            unreadCount: 0,
+            lastMessage: {
+              sender: 'Minh Thư',
+              text: 'Mình vừa xem kết quả bài test hoa của cậu, đúng chuẩn luôn!',
+              timestamp: 'Thứ 4',
+              status: 'read'
+            }
+          }
+        ],
+        teammates: [
+          { name: 'Bùi Văn Thái', flower: 'Hoa Đỗ Quyên 🌺', role: 'Team Lead', traits: 'Tốc độ · Độc đoán thiên tài · Đơn giản', tip: 'Nói ngắn gọn, đi thẳng vào kết quả.' },
+          { name: 'Minh Thư', flower: 'Hoa Cẩm Tú Cầu 🌸', role: 'Product Designer', traits: 'Tín · Hệ sinh thái · Khoa học', tip: 'Cung cấp số liệu và bằng chứng trực quan.' },
+          { name: 'Nguyễn Hoàng Nam', flower: 'Hoa Sen Đá 🪴', role: 'DevOps Engineer', traits: 'Tâm · Nền tảng · Hệ thống', tip: 'Thống nhất chuẩn quy trình và checklist.' },
+          { name: 'Lê Mai Lan', flower: 'Hoa Bồ Công Anh 🌼', role: 'HR & Văn Hóa', traits: 'Nhân · Hệ sinh thái · Sáng tạo', tip: 'Lắng nghe và khuyến khích ý tưởng mới.' }
+        ]
+      };
+
+      // --- 4. DOM REFERENCES ---
+      const els = {
+        phoneClock: document.getElementById('phone-clock'),
+        screenInbox: document.getElementById('screen-inbox'),
+        screenChat: document.getElementById('screen-chat'),
+        screenFlowerProfile: document.getElementById('screen-flower-profile'),
+        screenCommunity: document.getElementById('screen-community'),
+        conversationList: document.getElementById('conversation-list'),
+        inputSearch: document.getElementById('input-search'),
+        btnClearSearch: document.getElementById('btn-clear-search'),
+        filterPills: document.querySelectorAll('.pill-btn'),
+        badgeUnreadCount: document.getElementById('badge-unread-count'),
+        bannerStartAssessment: document.getElementById('banner-start-assessment'),
+        bottomTabs: document.querySelectorAll('.nav-tab-item'),
+        
+        // Chat View
+        btnBackInbox: document.getElementById('btn-back-inbox'),
+        btnShowFlowerCardDirect: document.getElementById('btn-show-flower-card-direct'),
+        messageStreamContainer: document.getElementById('message-stream-container'),
+        typingIndicatorBar: document.getElementById('typing-indicator-bar'),
+        typingSenderLabel: document.getElementById('typing-sender-label'),
+        chatActionDrawer: document.getElementById('chat-action-drawer'),
+        btnToggleActions: document.getElementById('btn-toggle-actions'),
+        inputMessage: document.getElementById('input-message'),
+        btnSubmitMessage: document.getElementById('btn-submit-message'),
+        btnActionViewCard: document.getElementById('btn-action-view-card'),
+        btnActionGarden: document.getElementById('btn-action-garden'),
+        btnActionRestart: document.getElementById('btn-action-restart'),
+        btnActionTips: document.getElementById('btn-action-tips'),
+
+        // Flower Profile View
+        btnBackFromFlower: document.getElementById('btn-back-from-flower'),
+        flowerCardEmoji: document.getElementById('flower-card-emoji'),
+        flowerCardName: document.getElementById('flower-card-name'),
+        flowerCardTagline: document.getElementById('flower-card-tagline'),
+        dimCoreVal: document.getElementById('dimCoreVal') || document.getElementById('dim-core-val'),
+        dimLeadership: document.getElementById('dimLeadership') || document.getElementById('dim-leadership'),
+        dimThinking: document.getElementById('dimThinking') || document.getElementById('dim-thinking'),
+        flowerPortraitText: document.getElementById('flower-portrait-text'),
+        flowerStrengthBox: document.getElementById('flower-strength-box'),
+        flowerMisunderstoodText: document.getElementById('flower-misunderstood-text'),
+        flowerLimitBox: document.getElementById('flower-limit-box'),
+        flowerCollabTips: document.getElementById('flower-collab-tips'),
+        btnShareToGarden: document.getElementById('btn-share-to-garden'),
+
+        // Community Garden
+        btnBackFromCommunity: document.getElementById('btn-back-from-community'),
+        teammatesGardenContainer: document.getElementById('teammates-garden-container'),
+
+        // Controls
+        btnToggleTheme: document.getElementById('btn-toggle-theme'),
+        btnRestartAssessment: document.getElementById('btn-restart-assessment')
+      };
+
+      // --- CLOCK CONTROLLER ---
+      function updatePhoneClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        if (els.phoneClock) els.phoneClock.textContent = `${hours}:${minutes}`;
+      }
+      setInterval(updatePhoneClock, 1000);
+      updatePhoneClock();
+
+      // --- SCREEN ROUTING ---
+      function navigateTo(screenId) {
+        state.activeScreen = screenId;
+        [els.screenInbox, els.screenChat, els.screenFlowerProfile, els.screenCommunity].forEach(s => {
+          if (s) s.classList.remove('active');
+        });
+        const target = document.getElementById(screenId);
+        if (target) target.classList.add('active');
+
+        if (screenId === 'screen-chat') {
+          scrollChatToBottom();
+        }
+      }
+
+      function scrollChatToBottom() {
+        setTimeout(() => {
+          if (els.messageStreamContainer) {
+            els.messageStreamContainer.scrollTop = els.messageStreamContainer.scrollHeight;
+          }
+        }, 60);
+      }
+
+      // --- RENDER CONVERSATION LIST ---
+      function renderConversations() {
+        let filtered = state.conversations;
+
+        if (state.activeFilter === 'ai') {
+          filtered = filtered.filter(c => c.type === 'ai');
+        } else if (state.activeFilter === 'unread') {
+          filtered = filtered.filter(c => c.unreadCount > 0);
+        } else if (state.activeFilter === 'group') {
+          filtered = filtered.filter(c => c.type === 'group');
+        }
+
+        if (state.searchQuery.trim()) {
+          const q = state.searchQuery.toLowerCase();
+          filtered = filtered.filter(c => c.name.toLowerCase().includes(q) || c.lastMessage.text.toLowerCase().includes(q));
+        }
+
+        els.conversationList.innerHTML = filtered.map(c => {
+          const isAI = c.type === 'ai';
+          const avatarClass = isAI ? 'conv-avatar ai-avatar' : (c.type === 'group' ? 'conv-avatar group-avatar' : 'conv-avatar');
+          return `
+            <div class="conversation-item" data-id="${c.id}">
+              <div class="conv-avatar-wrap">
+                <div class="${avatarClass}">${c.avatar}</div>
+                ${c.isOnline ? '<span class="presence-dot"></span>' : ''}
+              </div>
+              <div class="conv-content">
+                <div class="conv-top-row">
+                  <div class="conv-name-group">
+                    <span class="conv-name">${c.name}</span>
+                    ${isAI ? '<span class="badge-tag-ai">AI ASSESSMENT</span>' : ''}
+                  </div>
+                  <div class="conv-meta">
+                    ${c.isPinned ? '<span class="pin-icon">📌</span>' : ''}
+                    <span>${c.lastMessage.timestamp}</span>
+                  </div>
+                </div>
+                <div class="conv-bottom-row">
+                  <span class="conv-snippet ${c.unreadCount > 0 ? 'unread-bold' : ''}">
+                    ${c.lastMessage.text}
+                  </span>
+                  ${c.unreadCount > 0 ? `<span class="unread-badge">${c.unreadCount}</span>` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        els.conversationList.querySelectorAll('.conversation-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const id = item.getAttribute('data-id');
+            if (id === 'conv-ai-assessment') {
+              startOrResumeAssessment();
+            } else {
+              alert('Đang mở cuộc trò chuyện thông thường. Hãy thử tính năng chính: Bài test AI cùng Duhat!');
+            }
+          });
+        });
+      }
+
+            // --- KHỞI ĐỘNG BÀI TEST & ĐOẠN DẪN DẮT NHẬP CUỘC (CONVERSATIONAL ONBOARDING) ---
+      function startOrResumeAssessment() {
+        navigateTo('screen-chat');
+
+        // Nếu mới bắt đầu lần đầu, chạy đoạn dẫn dắt nhập cuộc ấm áp
+        if (!state.onboardingCompleted && els.messageStreamContainer.children.length === 0) {
+          renderConversationalOnboarding();
+        } else if (state.onboardingCompleted && state.currentScenarioIndex === 0 && els.messageStreamContainer.children.length === 0) {
+          renderAssessmentScenario(0);
+        }
+      }
+
+      function renderConversationalOnboarding() {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        // Bước 1: Lời chào và giới thiệu hành trình
+        const welcomeHtml = `
+          <div class="message-row others">
+            <div class="msg-sender-avatar">🌸</div>
+            <div class="msg-bubble">
+              <div>Quak quak! 🦆 Chào bạn, mình là <strong>Duhat AI Guide</strong> – người đồng hành cùng bạn trên hành trình <em>khám phá bản thân và thấu hiểu đồng đội</em>.</div>
+              <div class="msg-meta-row"><span>${timeStr}</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', welcomeHtml);
+        scrollChatToBottom();
+
+        // Bước 2: Dẫn dắt triết lý 72 loài hoa và tinh thần phi phán xét
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          const philosophyHtml = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>Mỗi chúng ta trong công việc đều mang một <strong>"hình mẫu loài hoa"</strong> độc đáo riêng trong cách <em>hành động, ra quyết định và kết nối cùng tập thể</em> 🌺.</div>
+                
+                <div style="background: rgba(254, 243, 199, 0.6); border-left: 3px solid #F59E0B; padding: 8px 10px; border-radius: 6px; margin: 8px 0; font-size: 0.84rem; color: #92400E; line-height: 1.45;">
+                  🌟 <strong>Nguyên tắc đồng hành:</strong> Tại đây không có câu trả lời nào là đúng hay sai tuyệt đối, cũng không dùng để đánh giá năng lực hay phân loại tốt - xấu. Mỗi quyết định đều là một mảnh ghép phản ánh giá trị bạn đang ưu tiên bảo vệ.
+                </div>
+
+                <div>Bạn sẽ cùng mình trải nghiệm qua <strong>4 tình huống thực tế ngắn</strong>. Sau đó, AI sẽ giải mã và gửi tặng bạn <strong>Thẻ Hình Mẫu Loài Hoa</strong> của riêng bạn kèm các mẹo phối hợp ăn ý nhất cùng anh em đồng đội!</div>
+
+                <div style="margin-top: 10px; font-weight: 700; color: #881337;">
+                  👉 Bạn đã sẵn sàng bước vào tình huống đầu tiên cùng mình chưa?
+                </div>
+                <div class="msg-meta-row"><span>${timeStr}</span></div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', philosophyHtml);
+          scrollChatToBottom();
+
+          // Render Chips dẫn dắt
+          renderOnboardingChips();
+        }, 1200);
+      }
+
+      function renderOnboardingChips() {
+        const chipsBar = document.getElementById('chat-quick-chips-bar');
+        if (!chipsBar) return;
+
+        chipsBar.innerHTML = `
+          <button class="chat-chip-btn accent-chip" id="chip-start-ready">
+            🌸 Sẵn sàng, bắt đầu thôi!
+          </button>
+          <button class="chat-chip-btn" id="chip-learn-more">
+            💡 Cho mình biết thêm về bài test
+          </button>
+          <button class="chat-chip-btn" id="chip-why-72">
+            ❓ 72 Loài hoa gồm những gì?
+          </button>
+        `;
+
+        chipsBar.querySelector('#chip-start-ready')?.addEventListener('click', () => {
+          userAcceptsStart();
+        });
+
+        chipsBar.querySelector('#chip-learn-more')?.addEventListener('click', () => {
+          userAsksLearnMore();
+        });
+
+        chipsBar.querySelector('#chip-why-72')?.addEventListener('click', () => {
+          userAsksWhy72();
+        });
+      }
+
+      function userAcceptsStart() {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        
+        const userMsg = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>Mình sẵn sàng rồi, bắt đầu thôi! 🌸</div>
+              <div class="msg-meta-row"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsg);
+        scrollChatToBottom();
+
+        state.onboardingCompleted = true;
+        showTypingIndicator(true);
+
+        setTimeout(() => {
+          showTypingIndicator(false);
+          const botReady = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>Tuyệt vời! Cảm ơn bạn. Hãy cùng mình bước vào <strong>Tình huống 1</strong> ngay nhé 🚀:</div>
+                <div class="msg-meta-row"><span>${timeStr}</span></div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', botReady);
+          scrollChatToBottom();
+
+          setTimeout(() => {
+            renderAssessmentScenario(0);
+          }, 800);
+        }, 900);
+      }
+
+      function userAsksLearnMore() {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const userMsg = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>Cho mình biết thêm về bài test này nhé!</div>
+              <div class="msg-meta-row"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsg);
+        scrollChatToBottom();
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          const botExplain = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>Bài test được thiết kế theo format <strong>đánh đổi tình huống (dilemma)</strong>. Bạn sẽ không chọn điều đúng hay sai, mà chọn <em>điều bạn ưu tiên bảo vệ</em> khi gặp áp lực (ví dụ: giữa việc giữ lời hứa về thời gian hay dừng lại kiểm tra chất lượng dữ liệu).</div>
+                <div style="margin-top: 8px;">Bạn có thể <strong>bấm chọn A, B, C</strong> hoặc <strong>gõ trực tiếp suy nghĩ của bạn</strong> vào ô chat bất cứ lúc nào!</div>
+                <div class="msg-meta-row"><span>${timeStr}</span></div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', botExplain);
+          scrollChatToBottom();
+
+          renderOnboardingChips();
+        }, 1100);
+      }
+
+      function userAsksWhy72() {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const userMsg = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>Tại sao lại là 72 loài hoa?</div>
+              <div class="msg-meta-row"><span>${timeStr}</span><span class="tick-icon">✓✓</span></div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsg);
+        scrollChatToBottom();
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          const botExplain = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>Bộ khung 72 loài hoa được tạo nên từ 3 chiều kích thước:<br>
+                  • <strong>6 Giá trị cốt lõi:</strong> Tín, Tâm, Trí, Tốc, Tinh, Nhân<br>
+                  • <strong>3 Phong cách lãnh đạo & dẫn dắt:</strong> Độc đoán thiên tài, Hệ sinh thái, Nền tảng<br>
+                  • <strong>4 Kiểu tư duy giải quyết vấn đề:</strong> Đơn giản, Hệ thống, Khoa học, Sáng tạo<br>
+                  👉 <em>6 × 3 × 4 = 72 loài hoa đại diện cho 72 màu sắc phong phú trong tổ chức!</em>
+                </div>
+                <div class="msg-meta-row"><span>${timeStr}</span></div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', botExplain);
+          scrollChatToBottom();
+
+          renderOnboardingChips();
+        }, 1100);
+      }
+
+      function renderAssessmentScenario(idx) {
+        if (idx >= assessmentScenarios.length) {
+          // Hoàn thành tất cả các tình huống -> Kết luận hình mẫu hoa
+          showAssessmentResultInChat();
+          return;
+        }
+
+        const scenario = assessmentScenarios[idx];
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        // 1. Bot AI giới thiệu tình huống
+        const introHtml = `
+          <div class="message-row others">
+            <div class="msg-sender-avatar">🌸</div>
+            <div class="msg-bubble">
+              <div>Chào bạn! Chúng ta cùng đến với <strong>${scenario.tag}</strong> nhé:</div>
+              <div class="scenario-card">
+                <span class="scenario-header-tag">📖 Tình huống ${idx + 1}/${assessmentScenarios.length}</span>
+                <div class="scenario-title">${scenario.title}</div>
+                <div class="scenario-context">${scenario.context}</div>
+                <div class="scenario-choices">
+                  ${scenario.choices.map(c => `
+                    <button class="choice-option-btn" data-choice-key="${c.key}" data-scenario-idx="${idx}">
+                      <span class="choice-key-badge">${c.key}</span>
+                      <span>${c.text}</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+              <div class="msg-meta-row">
+                <span>${timeStr}</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', introHtml);
+        scrollChatToBottom();
+
+        // Gắn sự kiện click vào các lựa chọn tình huống
+        attachScenarioChoiceEvents();
+        renderScenarioQuickChips(idx);
+      }
+
+      function attachScenarioChoiceEvents() {
+        const buttons = els.messageStreamContainer.querySelectorAll('.choice-option-btn:not([disabled])');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const scenarioIdx = parseInt(btn.getAttribute('data-scenario-idx'), 10);
+            const choiceKey = btn.getAttribute('data-choice-key');
+            handleUserChoice(scenarioIdx, choiceKey);
+          });
+        });
+      }
+
+      // --- XỬ LÝ KHI NGƯỜI DÙNG CHỌN ĐÁP ÁN HOẶC GÕ TỰ NHIÊN (HYBRID CONVERSATIONAL ENGINE) ---
+      function handleUserChoice(scenarioIdx, choiceKey, customTextReason = '') {
+        const scenario = assessmentScenarios[scenarioIdx];
+        if (!scenario) return;
+        const selectedChoice = scenario.choices.find(c => c.key === choiceKey);
+        if (!selectedChoice) return;
+
+        // Vô hiệu hóa các nút trong card này để tránh click lặp
+        const cardButtons = els.messageStreamContainer.querySelectorAll(`[data-scenario-idx="${scenarioIdx}"]`);
+        cardButtons.forEach(b => {
+          b.setAttribute('disabled', 'true');
+          if (b.getAttribute('data-choice-key') === choiceKey) {
+            b.classList.add('selected');
+          }
+        });
+
+        // Ghi điểm tổ hợp
+        const t = selectedChoice.trait;
+        if (t.val && state.userScores.val[t.val] !== undefined) state.userScores.val[t.val]++;
+        if (t.lead && state.userScores.lead[t.lead] !== undefined) state.userScores.lead[t.lead]++;
+        if (t.think && state.userScores.think[t.think] !== undefined) state.userScores.think[t.think]++;
+
+        // 1. Optimistic UI: Hiển thị tin nhắn người dùng
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const displayedText = customTextReason 
+          ? `<strong>Phương án ${choiceKey}:</strong> ${selectedChoice.text}<br><em style="color:#854D0E; font-size:0.86rem;">💬 "${customTextReason}"</em>`
+          : `<strong>Tôi chọn phương án ${choiceKey}:</strong> ${selectedChoice.text}`;
+
+        const userMsgHtml = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>${displayedText}</div>
+              <div class="msg-meta-row">
+                <span>${timeStr}</span>
+                <span class="tick-icon">✓✓</span>
+              </div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsgHtml);
+        scrollChatToBottom();
+
+        // 2. Bot AI hiển thị typing và phản hồi câu hỏi đào sâu động cơ (Two-step Clarification)
+        showTypingIndicator(true);
+
+        setTimeout(() => {
+          showTypingIndicator(false);
+
+          const botFeedbackHtml = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>✨ Lựa chọn này cho thấy bạn có khuynh hướng: <em>"${selectedChoice.rationale}"</em>.</div>
+                <div style="margin-top: 8px; font-weight: 700; color: #881337;">
+                  ❓ Điều gì khiến bạn ưu tiên cách này nhất? Hoặc có thông tin nào sẽ khiến bạn đổi quyết định?
+                </div>
+                <div style="margin-top: 4px; font-size: 0.8rem; color: var(--color-text-muted);">
+                  👉 Bạn có thể <strong>gõ tự do cảm nghĩ</strong> vào ô chat bên dưới, chọn gợi ý nhanh, hoặc bấm <strong>"Tiếp tục"</strong> để sang tình huống kế tiếp!
+                </div>
+                <div class="msg-meta-row">
+                  <span>${timeStr}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', botFeedbackHtml);
+          scrollChatToBottom();
+
+          // Render các Chip gợi ý động cơ đào sâu
+          renderClarificationChips(scenarioIdx, choiceKey);
+        }, 1000);
+      }
+
+      // --- RENDER GỢI Ý CHIPS (HYBRID INTERACTION) ---
+      function renderScenarioQuickChips(scenarioIdx) {
+        const chipsBar = document.getElementById('chat-quick-chips-bar');
+        if (!chipsBar) return;
+
+        if (scenarioIdx >= assessmentScenarios.length) {
+          chipsBar.innerHTML = `
+            <button class="chat-chip-btn accent-chip" id="chip-view-result">🌸 Xem thẻ hoa của bạn</button>
+            <button class="chat-chip-btn" id="chip-view-garden">🌿 Khám phá vườn hoa</button>
+          `;
+          chipsBar.querySelector('#chip-view-result')?.addEventListener('click', () => {
+            renderFlowerProfile(state.matchedFlowerKey);
+            navigateTo('screen-flower-profile');
+          });
+          chipsBar.querySelector('#chip-view-garden')?.addEventListener('click', () => {
+            renderTeammatesGarden();
+            navigateTo('screen-community');
+          });
+          return;
+        }
+
+        const scenario = assessmentScenarios[scenarioIdx];
+        chipsBar.innerHTML = `
+          ${scenario.choices.map(c => `
+            <button class="chat-chip-btn" data-chip-key="${c.key}">
+              <span style="font-weight:800; color:#B45309;">${c.key}.</span> ${c.text.substring(0, 32)}...
+            </button>
+          `).join('')}
+          <button class="chat-chip-btn accent-chip" id="chip-custom-input">
+            💬 Gõ cách xử lý khác...
+          </button>
+        `;
+
+        chipsBar.querySelectorAll('[data-chip-key]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const key = btn.getAttribute('data-chip-key');
+            handleUserChoice(scenarioIdx, key);
+          });
+        });
+
+        chipsBar.querySelector('#chip-custom-input')?.addEventListener('click', () => {
+          els.inputMessage.focus();
+          els.inputMessage.placeholder = 'Nhập suy nghĩ hoặc cách giải quyết của riêng bạn...';
+        });
+      }
+
+      function renderClarificationChips(scenarioIdx, chosenKey) {
+        const chipsBar = document.getElementById('chat-quick-chips-bar');
+        if (!chipsBar) return;
+
+        let suggestions = [
+          'Vì uy tín và cam kết với người khác',
+          'Vì muốn dữ liệu hoàn toàn chuẩn xác',
+          'Vì muốn tối ưu tốc độ cho đối tác'
+        ];
+        if (scenarioIdx === 1) {
+          suggestions = ['Để lần theo gốc rễ vấn đề', 'Để chứng minh bằng số liệu cụ thể', 'Muốn đổi mới cách làm'];
+        } else if (scenarioIdx === 2) {
+          suggestions = ['Để anh em có thể tự vận hành', 'Muốn đứng ra chịu trách nhiệm', 'Tận dụng chuyên môn bổ trợ'];
+        }
+
+        chipsBar.innerHTML = `
+          ${suggestions.map(s => `
+            <button class="chat-chip-btn chip-reason-btn" data-reason="${s}">💬 ${s}</button>
+          `).join('')}
+          <button class="chat-chip-btn next-chip" id="chip-next-scenario">
+            ➡️ Tiếp tục tình huống sau
+          </button>
+        `;
+
+        chipsBar.querySelectorAll('.chip-reason-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const reason = btn.getAttribute('data-reason');
+            submitClarificationReason(reason);
+          });
+        });
+
+        chipsBar.querySelector('#chip-next-scenario')?.addEventListener('click', () => {
+          advanceToNextScenario();
+        });
+      }
+
+      function submitClarificationReason(reasonText) {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        
+        const userMsgHtml = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>💬 <em>"${reasonText}"</em></div>
+              <div class="msg-meta-row">
+                <span>${timeStr}</span>
+                <span class="tick-icon">✓✓</span>
+              </div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsgHtml);
+        scrollChatToBottom();
+
+        // Phân tích từ khóa ngữ nghĩa để cộng thêm điểm sâu
+        analyzeAndScoreNaturalLanguage(reasonText);
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+
+          const botAckHtml = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>Đồng cảm với bạn! Động cơ này giúp AI nhận diện rất rõ nét nét đặc trưng trong phong cách giải quyết công việc của bạn.</div>
+                <div class="msg-meta-row"><span>${timeStr}</span></div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', botAckHtml);
+          scrollChatToBottom();
+
+          setTimeout(advanceToNextScenario, 1000);
+        }, 900);
+      }
+
+      function advanceToNextScenario() {
+        state.currentScenarioIndex++;
+        renderAssessmentScenario(state.currentScenarioIndex);
+      }
+
+      // --- BỘ PHÂN TÍCH NGÔN NGỮ TỰ NHIÊN (NLP INTENT & KEYWORD MATCHER) ---
+      function analyzeAndScoreNaturalLanguage(text) {
+        const lower = text.toLowerCase();
+        let detected = [];
+
+        // 6 Giá trị cốt lõi
+        if (/cam kết|uy tín|lời hứa|đúng hạn|deadline|thất hứa|báo sớm/.test(lower)) {
+          state.userScores.val.tin += 2;
+          detected.push('Tín (Trọng cam kết)');
+        }
+        if (/tận tụy|chất lượng|trách nhiệm|chỉn chu|chuẩn xác|hoàn hảo|sợ sai/.test(lower)) {
+          state.userScores.val.tam += 2;
+          detected.push('Tâm (Tận tụy)');
+        }
+        if (/dữ liệu|số liệu|chứng minh|khoa học|bằng chứng|phân tích|bản chất/.test(lower)) {
+          state.userScores.think.khoahoc += 2;
+          state.userScores.val.tri += 1;
+          detected.push('Tư duy Khoa học & Giá trị Trí');
+        }
+        if (/tổng thể|hệ thống|quy trình|chuỗi|phụ thuộc|bức tranh/.test(lower)) {
+          state.userScores.think.hethong += 2;
+          detected.push('Tư duy Hệ thống');
+        }
+        if (/nhanh|ngay|tốc độ|kịp thời|linh hoạt|chớp thời cơ/.test(lower)) {
+          state.userScores.val.toc += 2;
+          detected.push('Tốc (Tốc độ & Linh hoạt)');
+        }
+        if (/đồng đội|con người|cảm xúc|lắng nghe|giúp đỡ|chia sẻ|tâm lý|nâng đỡ/.test(lower)) {
+          state.userScores.val.nhan += 2;
+          detected.push('Nhân (Con người là trung tâm)');
+        }
+        if (/sáng tạo|đổi mới|ý tưởng mới|tự động|ai|công nghệ mới/.test(lower)) {
+          state.userScores.think.sangtao += 2;
+          detected.push('Tư duy Sáng tạo');
+        }
+
+        return detected;
+      }
+
+      // --- XỬ LÝ CHAT NGÔN NGỮ TỰ NHIÊN KHI NGƯỜI DÙNG GÕ VÀO INPUT ---
+      function handleUserFreeTextInput(text) {
+        if (!text.trim()) return;
+        const lower = text.trim().toLowerCase();
+
+        // Nếu đang ở bước dẫn dắt nhập cuộc
+        if (!state.onboardingCompleted) {
+          if (/sẵn sàng|bắt đầu|ok|yes|go|tiếp tục|start/.test(lower)) {
+            userAcceptsStart();
+            return;
+          } else if (/thêm|tìm hiểu|giới thiệu/.test(lower)) {
+            userAsksLearnMore();
+            return;
+          } else if (/72|tại sao/.test(lower)) {
+            userAsksWhy72();
+            return;
+          }
+        }
+
+        // 1. Kiểm tra nếu đang ở một tình huống và người dùng gõ A, B, C, D hoặc từ khóa khớp lựa chọn
+        if (state.currentScenarioIndex < assessmentScenarios.length && !state.assessmentCompleted) {
+          const sc = assessmentScenarios[state.currentScenarioIndex];
+
+          // Khớp A, B, C, D trực tiếp
+          if (/^(chọn\s*)?a\b|phương án a|cách 1/.test(lower) || (sc.choices[0] && lower.includes(sc.choices[0].text.substring(0, 15).toLowerCase()))) {
+            handleUserChoice(state.currentScenarioIndex, 'A', text);
+            els.inputMessage.value = '';
+            return;
+          }
+          if (/^(chọn\s*)?b\b|phương án b|cách 2/.test(lower) || (sc.choices[1] && lower.includes(sc.choices[1].text.substring(0, 15).toLowerCase()))) {
+            handleUserChoice(state.currentScenarioIndex, 'B', text);
+            els.inputMessage.value = '';
+            return;
+          }
+          if (/^(chọn\s*)?c\b|phương án c|cách 3/.test(lower) || (sc.choices[2] && lower.includes(sc.choices[2].text.substring(0, 15).toLowerCase()))) {
+            handleUserChoice(state.currentScenarioIndex, 'C', text);
+            els.inputMessage.value = '';
+            return;
+          }
+          if (sc.choices.length > 3 && (/^(chọn\s*)?d\b|phương án d|cách 4/.test(lower) || (sc.choices[3] && lower.includes(sc.choices[3].text.substring(0, 15).toLowerCase())))) {
+            handleUserChoice(state.currentScenarioIndex, 'D', text);
+            els.inputMessage.value = '';
+            return;
+          }
+        }
+
+        // 2. Nếu người dùng nhập lý do hoặc câu diễn giải tự do
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const userMsgHtml = `
+          <div class="message-row self">
+            <div class="msg-bubble">
+              <div>${text}</div>
+              <div class="msg-meta-row">
+                <span>${timeStr}</span>
+                <span class="tick-icon">✓✓</span>
+              </div>
+            </div>
+          </div>
+        `;
+        els.messageStreamContainer.insertAdjacentHTML('beforeend', userMsgHtml);
+        els.inputMessage.value = '';
+        scrollChatToBottom();
+
+        // Phân tích nội dung tự nhiên
+        const detected = analyzeAndScoreNaturalLanguage(text);
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          let botReply = '';
+
+          // Trả lời các câu hỏi phổ biến
+          if (/72 loài hoa|là gì|bài test/.test(lower)) {
+            botReply = 'Bộ khung được xây dựng từ tổ hợp của <strong>6 Giá trị cốt lõi</strong> (Tín, Tâm, Trí, Tốc, Tinh, Nhân) × <strong>3 Phong cách lãnh đạo</strong> (Độc đoán thiên tài, Hệ sinh thái, Nền tảng) × <strong>4 Kiểu tư duy</strong> (Đơn giản, Hệ thống, Khoa học, Sáng tạo) = 72 hình mẫu hoa giúp thấu hiểu bản thân và phối hợp ăn ý cùng đồng đội!';
+          } else if (/hoa của tôi|kết quả/.test(lower) && state.assessmentCompleted) {
+            botReply = `Bạn thuộc hình mẫu <strong>${flowerArchetypes[state.matchedFlowerKey].flowerName} ${flowerArchetypes[state.matchedFlowerKey].emoji}</strong> (${flowerArchetypes[state.matchedFlowerKey].tagline}). Bạn có thể bấm biểu tượng 🌸 ở góc trên để xem chi tiết!`;
+          } else if (detected.length > 0) {
+            botReply = `AI nhận thấy qua chia sẻ của bạn có nét nổi bật của <strong>${detected.join(', ')}</strong>. Đây là một dữ kiện rất quý để hoàn thiện chân dung loài hoa của bạn!`;
+          } else {
+            botReply = 'Cảm ơn góc nhìn rất chân thực của bạn! Bạn có thể bấm chọn tiếp các lựa chọn ở trên hoặc gõ chia sẻ bất cứ lúc nào nhé 🌸.';
+          }
+
+          const botMsgHtml = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>${botReply}</div>
+                <div class="msg-meta-row">
+                  <span>${timeStr}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', botMsgHtml);
+          scrollChatToBottom();
+        }, 1000);
+      }
+
+      function showTypingIndicator(show) {
+        if (els.typingIndicatorBar) {
+          els.typingIndicatorBar.classList.toggle('hidden', !show);
+          if (show) scrollChatToBottom();
+        }
+      }
+
+      // --- TÍNH TOÁN KẾT QUẢ VÀ HIỂN THỊ TRONG CHAT ---
+      function showAssessmentResultInChat() {
+        state.assessmentCompleted = true;
+
+        // Tính tổ hợp loài hoa phù hợp nhất
+        let flowerKey = 'tin_docdoan_hethong'; // Mặc định là Hoa Hướng Dương
+        if (state.userScores.val.toc > 1) {
+          flowerKey = 'toc_docdoan_dongian';
+        } else if (state.userScores.val.nhan > 0 || state.userScores.lead.ecosystem > 1) {
+          flowerKey = 'nhan_ecosystem_sangtao';
+        } else if (state.userScores.lead.nen > 1) {
+          flowerKey = 'tam_nen_hethong';
+        } else if (state.userScores.think.khoahoc > 0) {
+          flowerKey = 'tin_ecosystem_khoahoc';
+        }
+        state.matchedFlowerKey = flowerKey;
+        const flower = flowerArchetypes[flowerKey];
+
+        showTypingIndicator(true);
+        setTimeout(() => {
+          showTypingIndicator(false);
+          const now = new Date();
+          const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+          const resultChatHtml = `
+            <div class="message-row others">
+              <div class="msg-sender-avatar">🌸</div>
+              <div class="msg-bubble">
+                <div>🎉 <strong>Chúc mừng bạn đã hoàn thành bài test khám phá!</strong></div>
+                <p style="margin: 6px 0;">Dựa trên các lựa chọn và phản hồi ngôn ngữ tự nhiên của bạn, AI đã giải mã bộ 3 chiều tính cách:</p>
+                
+                <div class="result-trigger-card">
+                  <div class="result-flower-hero">${flower.emoji}</div>
+                  <div class="result-trigger-title">${flower.flowerName}</div>
+                  <div class="result-trigger-sub">${flower.tagline}</div>
+                  <button class="btn-view-flower-card" id="btn-trigger-open-profile">
+                    🌸 Mở Thẻ Hình Mẫu & Lời Khuyên Phối Hợp
+                  </button>
+                </div>
+
+                <div class="msg-meta-row">
+                  <span>${timeStr}</span>
+                </div>
+              </div>
+            </div>
+          `;
+
+          els.messageStreamContainer.insertAdjacentHTML('beforeend', resultChatHtml);
+          scrollChatToBottom();
+
+          renderScenarioQuickChips(999);
+
+          // Gắn sự kiện nút mở Profile
+          const openBtn = document.getElementById('btn-trigger-open-profile');
+          if (openBtn) {
+            openBtn.addEventListener('click', () => {
+              renderFlowerProfile(flowerKey);
+              navigateTo('screen-flower-profile');
+            });
+          }
+        }, 1300);
+      }
+
+      // --- RENDER MÀN HÌNH CHI TIẾT THẺ HOA (SCREEN 3) ---
+      function renderFlowerProfile(flowerKey) {
+        const flower = flowerArchetypes[flowerKey] || flowerArchetypes['tin_docdoan_hethong'];
+
+        els.flowerCardEmoji.textContent = flower.emoji;
+        els.flowerCardName.textContent = flower.flowerName;
+        els.flowerCardTagline.textContent = flower.tagline;
+
+        // 3 Chiều cốt lõi
+        if (els.dimCoreVal) els.dimCoreVal.textContent = flower.coreVal;
+        if (els.dimLeadership) els.dimLeadership.textContent = flower.leadership;
+        if (els.dimThinking) els.dimThinking.textContent = flower.thinking;
+
+        // Nội dung chi tiết
+        els.flowerPortraitText.textContent = flower.portrait;
+        els.flowerStrengthBox.innerHTML = `<strong>💪 Điểm mạnh:</strong> ${flower.strength}`;
+        els.flowerMisunderstoodText.textContent = flower.misunderstood;
+        
+        els.flowerCollabTips.innerHTML = flower.collabTips.map(t => `<li style="margin-bottom: 6px;">${t}</li>`).join('');
+      }
+
+      // --- RENDER MÀN HÌNH VƯỜN HOA ĐỒNG ĐỘI (SCREEN 4) ---
+      function renderTeammatesGarden() {
+        els.teammatesGardenContainer.innerHTML = state.teammates.map(m => `
+          <div class="subgroup-item-card">
+            <div class="subgroup-info-wrap">
+              <div class="subgroup-badge-icon" style="font-size: 1.8rem; background: #FFF1F2;">
+                ${m.flower.split(' ')[0]}
+              </div>
+              <div class="subgroup-texts">
+                <h4>${m.name} · <span style="color:#E11D48; font-size:0.85rem;">${m.flower}</span></h4>
+                <p><strong>${m.role}</strong> · ${m.traits}</p>
+                <p style="margin-top: 4px; color:#15803D; font-size:0.75rem;">🤝 <em>Gợi ý: ${m.tip}</em></p>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // --- RESET BÀI TEST TỪ ĐẦU ---
+      function resetAssessment() {
+        state.currentScenarioIndex = 0;
+        state.assessmentCompleted = false;
+        state.onboardingCompleted = false;
+        state.userScores = {
+          val: { tin: 0, tam: 0, tri: 0, toc: 0, tinh: 0, nhan: 0 },
+          lead: { docdoan: 0, ecosystem: 0, nen: 0 },
+          think: { dongian: 0, hethong: 0, khoahoc: 0, sangtao: 0 }
+        };
+        els.messageStreamContainer.innerHTML = '';
+        startOrResumeAssessment();
+      }
+
+      function setupEvents() {
+        // Search
+        els.inputSearch.addEventListener('input', (e) => {
+          state.searchQuery = e.target.value;
+          els.btnClearSearch.classList.toggle('hidden', !state.searchQuery);
+          renderConversations();
+        });
+
+        els.btnClearSearch.addEventListener('click', () => {
+          els.inputSearch.value = '';
+          state.searchQuery = '';
+          els.btnClearSearch.classList.add('hidden');
+          renderConversations();
+        });
+
+        // Filter Pills
+        els.filterPills.forEach(pill => {
+          pill.addEventListener('click', () => {
+            els.filterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            state.activeFilter = pill.getAttribute('data-filter');
+            renderConversations();
+          });
+        });
+
+        // Banner Click -> Bắt đầu test
+        els.bannerStartAssessment.addEventListener('click', () => {
+          startOrResumeAssessment();
+        });
+
+        // Bottom Navigation
+        els.bottomTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            els.bottomTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const tabKey = tab.getAttribute('data-tab');
+
+            if (tabKey === 'messages') {
+              navigateTo('screen-inbox');
+            } else if (tabKey === 'explore') {
+              renderTeammatesGarden();
+              navigateTo('screen-community');
+            } else {
+              alert(`Tính năng "${tab.querySelector('.nav-label').textContent}" đang được liên kết trong hệ sinh thái Duhat.`);
+            }
+          });
+        });
+
+        // Back Buttons
+        els.btnBackInbox.addEventListener('click', () => navigateTo('screen-inbox'));
+        els.btnBackFromFlower.addEventListener('click', () => navigateTo('screen-chat'));
+        els.btnBackFromCommunity.addEventListener('click', () => navigateTo('screen-inbox'));
+
+        // View Flower Card Direct from Chat Header
+        els.btnShowFlowerCardDirect.addEventListener('click', () => {
+          renderFlowerProfile(state.matchedFlowerKey);
+          navigateTo('screen-flower-profile');
+        });
+
+        // Chat Input Submission
+        els.btnSubmitMessage.addEventListener('click', () => {
+          handleUserFreeTextInput(els.inputMessage.value);
+        });
+
+        els.inputMessage.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleUserFreeTextInput(els.inputMessage.value);
+          }
+        });
+
+        // Toggle Drawer
+        els.btnToggleActions.addEventListener('click', () => {
+          state.isActionDrawerOpen = !state.isActionDrawerOpen;
+          els.chatActionDrawer.classList.toggle('hidden', !state.isActionDrawerOpen);
+        });
+
+        // Drawer Actions
+        els.btnActionViewCard.addEventListener('click', () => {
+          renderFlowerProfile(state.matchedFlowerKey);
+          navigateTo('screen-flower-profile');
+        });
+
+        els.btnActionGarden.addEventListener('click', () => {
+          renderTeammatesGarden();
+          navigateTo('screen-community');
+        });
+
+        els.btnActionRestart.addEventListener('click', () => {
+          resetAssessment();
+          els.chatActionDrawer.classList.add('hidden');
+        });
+
+        els.btnActionTips.addEventListener('click', () => {
+          handleUserFreeTextInput('Hãy cho mình biết một số mẹo để phối hợp hiệu quả hơn với đồng đội khác loài hoa!');
+          els.chatActionDrawer.classList.add('hidden');
+        });
+
+        // Share to Garden
+        els.btnShareToGarden.addEventListener('click', () => {
+          renderTeammatesGarden();
+          navigateTo('screen-community');
+        });
+
+        // Environment Theme Toggle
+        els.btnToggleTheme.addEventListener('click', () => {
+          document.body.classList.toggle('dark-env');
+        });
+
+        // Outside Restart Button
+        els.btnRestartAssessment.addEventListener('click', () => {
+          resetAssessment();
+        });
+      }
+
+      // --- INITIALIZE ---
+      function init() {
+        renderConversations();
+        renderTeammatesGarden();
+        setupEvents();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>

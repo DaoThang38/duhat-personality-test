@@ -5,13 +5,17 @@
 **Mục tiêu văn bản:** Làm rõ hai câu hỏi cốt lõi:  
 1. **Cần AI ở chỗ nào?** *(Phân định rõ ranh giới: AI-Powered vs Deterministic Rule-Based để tối ưu chi phí & độ chính xác)*  
 2. **Khả năng đáp ứng của AI đến đâu?** *(Thẩm định tính khả thi kỹ thuật, SLA thời gian phản hồi, rủi ro ảo giác, chiến lược dự phòng Fallback & chi phí vận hành)*  
-**Bản mẫu tương tác Online (Live Demo):** [https://daothang38.github.io/duhat-personality-test/](https://daothang38.github.io/duhat-personality-test/)
+
+🌐 **Bản mẫu tương tác Trực Tuyến (Live Online Links):**
+* **Link Trực Tiếp (Không chặn bởi tường lửa công ty):** [https://duhat-personality.surge.sh/](https://duhat-personality.surge.sh/)
+* **Link Dự Phòng (GitHub Pages):** [https://daothang38.github.io/duhat-personality-test/](https://daothang38.github.io/duhat-personality-test/)
+* **Bản Trình Diễn Báo Cáo Trực Quan (Interactive Executive Deck):** [https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html](https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html)
 
 ---
 
 ## 1. Bản Đồ Tri Thức AI (AI Knowledge Tree & System Topology)
 
-Sơ đồ cây dưới đây phân định toàn bộ kiến trúc tính năng thành 2 nhánh: **Nhánh Thuật Toán Cố Định (Deterministic Engine)** và **Nhánh Trí Tuệ Nhân Tạo (AI Touchpoints)**.
+Sơ đồ cây phân định toàn bộ kiến trúc tính năng thành 2 nhánh: **Nhánh Thuật Toán Cố Định (Deterministic Engine)** và **Nhánh Trí Tuệ Nhân Tạo (6 AI Touchpoints)**.
 
 ```mermaid
 mindmap
@@ -47,13 +51,17 @@ mindmap
       Touchpoint 5: Generative Visual Identity
         Tạo avatar Vịt kết hợp Loài hoa độc bản
         Thẻ bài chia sẻ mạng xã hội
+      Touchpoint 6: Interactive Archetype QA Copilot
+        Hỏi đáp tại sao tôi là hoa này mà không phải hoa kia
+        Đối soát điểm khác biệt với Cẩm Tú Cầu hay Sen Đá
+        Chỉ rõ điểm mù & mẹo thuyết phục đồng đội trái ngược
 ```
 
 ---
 
 ## 2. Bong Bóng Phân Cấp Năng Lực (Bubble Architecture: Feasibility vs Impact)
 
-Biểu đồ bong bóng dưới đây định vị 5 điểm chạm AI theo 2 trục: **Mức Độ Ảnh Hưởng Đến Trải Nghiệm (User Impact)** và **Độ Khó / Khả Năng Đáp Ứng Kỹ Thuật (Technical Feasibility)**.
+Biểu đồ bong bóng định vị 6 điểm chạm AI theo 2 trục: **Mức Độ Ảnh Hưởng Đến Trải Nghiệm (User Impact)** và **Độ Khó / Khả Năng Đáp Ứng Kỹ Thuật (Technical Feasibility)**.
 
 ```mermaid
 quadrantChart
@@ -69,6 +77,7 @@ quadrantChart
     "TP3: Dynamic Synergy Report theo dự án": [0.55, 0.90]
     "TP4: Duhat Mascot Empathy Guardrail": [0.30, 0.75]
     "TP5: GenAI Avatar Vịt Hoa Độc Bản": [0.80, 0.65]
+    "TP6: Hỏi đáp với loài hoa (Why this flower?)": [0.35, 0.95]
 ```
 
 ---
@@ -77,9 +86,9 @@ quadrantChart
 
 ### 3.1 Nguyên Tắc Vàng Phân Định Ranh Giới (Gold Principle)
 > *"Dùng Thuật toán Cố định (Deterministic) để đảm bảo Tính Khoa Học, Độ Công Bằng và Tốc Độ tức thì (0ms).  
-> Dùng AI Generative & NLU để mang lại Sự Thấu Cảm, Cá Nhân Hóa Đậm Nét và Trải Nghiệm Tương Tác Sống Động."*
+> Dùng AI Generative & NLU để mang lại Sự Thấu Cảm, Cá Nhân Hóa Đậm Nét, Khả Năng Đối Soát Sâu Sắc và Trải Nghiệm Tương Tác Sống Động."*
 
-### 3.2 Bảng Phân Tích 5 Điểm Chạm AI Cụ Thể
+### 3.2 Bảng Phân Tích 6 Điểm Chạm AI Cụ Thể
 
 | Điểm Chạm AI | Mô Tả & Nhiệm Vụ Cụ Thể | Vì Sao Bắt Buộc Cần AI? | Nếu KHÔNG Dùng AI (Fallback)? |
 | :--- | :--- | :--- | :--- |
@@ -88,6 +97,7 @@ quadrantChart
 | **Touchpoint 3: Dynamic Context-Aware Synergy Generator** | Trong Group Chat hoặc Góc Vườn, khi 2 thành viên muốn xem cách phối hợp. Thay vì chỉ đọc văn bản tĩnh cố định, AI cho phép nhập bối cảnh: *"Team mình chuẩn bị chạy chiến dịch Flash Sale 3 ngày"*. AI sinh ra cẩm nang phối hợp may đo riêng cho *🌻 Hướng Dương + 🪴 Sen Đá* trong chiến dịch đó. | Ma trận tĩnh chỉ có 1 nội dung chung chung. Bối cảnh dự án thực tế muôn hình vạn trạng. | Fallback về nội dung tĩnh đã được biên soạn sẵn trong ma trận `synergyMatrix` (như bản prototype hiện tại). |
 | **Touchpoint 4: Duhat Tone & Empathy Guardrail** | Kiểm soát giọng điệu của chú vịt Duhat (hóm hỉnh, dùng từ ngữ Việt Nam tươi vui, dùng biểu tượng cảm xúc vịt `🦆🌸`). Đồng thời chặn mọi từ ngữ mang tính đánh giá năng lực, phán xét nhân sự (*"bạn yếu kém ở điểm..."*). | Giữ chuẩn Brand Voice nhất quán trên toàn bộ các câu trả lời động của bot. | Sử dụng System Prompt và tập mẫu Few-Shot có sẵn. |
 | **Touchpoint 5: Generative Visual Identity (Duhat Flower Mascot Avatar)** | Sinh hình ảnh chú vịt Duhat mang phụ kiện đặc trưng của loài hoa kết quả (VD: Vịt Duhat cài hoa sen đá, mặc áo kiến trúc sư cầm thước kẻ). | Tạo cảm giác sở hữu độc bản, kích hoạt mong muốn chia sẻ (Shareability) lên Story Facebook, Zalo, Instagram. | Fallback: Dùng ảnh vector SVG/3D cố định của 72 loài hoa do Design vẽ sẵn. |
+| **Touchpoint 6: Interactive Archetype Q&A Copilot ("Tại sao tôi là hoa này mà không phải hoa kia?")** | Cho phép người dùng trực tiếp chất vấn và hỏi đáp với AI về kết quả của mình: *"Tại sao tôi là Hoa Hướng Dương mà không phải Cẩm Tú Cầu hay Sen Đá?", "Điểm mù lớn nhất của tôi khi chịu áp lực?", "Làm sao để tôi phối hợp với sếp có tính cách đối lập?"*. AI đối soát trực tiếp với 10 câu trả lời của user và chỉ ra sự khác biệt giữa các loài hoa. | Người dùng luôn có tâm lý hoài nghi và tò mò về kết quả trắc nghiệm. Một bài test không cho phép người dùng hỏi lại lý do sẽ tạo cảm giác áp đặt, thiếu thuyết phục. | Fallback về bộ câu trả lời mẫu (FAQ templates) biên soạn sẵn cho từng cặp hoa. |
 
 ---
 
@@ -95,60 +105,57 @@ quadrantChart
 
 ### 4.1 Bảng Đánh Giá Mức Độ Khả Thi Kỹ Thuật (Technical Feasibility Matrix)
 
-| Tiêu Chí Thẩm Định | Touchpoint 1 (NLU Text) | Touchpoint 2 (Adaptive Probe) | Touchpoint 3 (Dynamic Synergy) | Touchpoint 5 (GenAI Image) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Mức độ khả thi (Feasibility)** | **Cực kỳ cao (95%)** | **Rất cao (90%)** | **Cao (85%)** | **Trung bình (70%)** |
-| **Model kiến nghị** | Small LLM (Gemini 1.5 Flash / Claude Haiku) | Fast LLM (Gemini Flash) | Fast LLM (Gemini Flash) | Imagen 3 / Stable Diffusion XL |
-| **Độ trễ mục tiêu (Latency SLA)** | **$\le 500\text{ms}$** | **$\le 800\text{ms}$** | **$\le 1200\text{ms}$ (Stream)** | $3000\text{ms} - 5000\text{ms}$ (Chạy nền) |
-| **Rủi ro ảo giác (Hallucination)** | Thấp (Structured JSON output) | Thấp (Có khung đề cương) | Trung bình (Cần Guardrail) | Không có (Visual style) |
-| **Chi phí ước tính / 1 User** | $\sim \$0.0003$ | $\sim \$0.0005$ | $\sim \$0.0008$ | $\sim \$0.015 - \$0.02$ |
-| **Đề xuất của PMM** | **Bật ngay bản MVP v1.0** | **Bật ngay bản MVP v1.0** | **Bật ở bản v1.1** | **Để sang Phase 2 (Sau GTM)** |
+| Tiêu Chí Thẩm Định | TP1 (NLU Text) | TP2 (Adaptive Probe) | TP3 (Dynamic Synergy) | TP6 (Hỏi Đáp Loài Hoa) | TP5 (GenAI Image) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Mức độ khả thi (Feasibility)** | **Cực kỳ cao (95%)** | **Rất cao (90%)** | **Cao (85%)** | **Cực kỳ cao (95%)** | **Trung bình (70%)** |
+| **Model kiến nghị** | Small LLM (Gemini 1.5 Flash / Claude Haiku) | Fast LLM (Gemini Flash) | Fast LLM (Gemini Flash) | Fast LLM (Gemini Flash) + RAG Profiles | Imagen 3 / Stable Diffusion XL |
+| **Độ trễ mục tiêu (Latency SLA)** | **$\le 500\text{ms}$** | **$\le 800\text{ms}$** | **$\le 1200\text{ms}$ (Stream)** | **$\le 650\text{ms}$ (Stream)** | $3000\text{ms} - 5000\text{ms}$ (Chạy nền) |
+| **Rủi ro ảo giác (Hallucination)** | Thấp (Structured JSON output) | Thấp (Có khung đề cương) | Trung bình (Cần Guardrail) | Rất thấp (Có dữ liệu 10 câu & Ma trận hoa) | Không có (Visual style) |
+| **Chi phí ước tính / 1 User** | $\sim \$0.0003$ | $\sim \$0.0005$ | $\sim \$0.0008$ | $\sim \$0.0006$ / câu hỏi | $\sim \$0.015 - \$0.02$ |
+| **Đề xuất của PMM** | **Bật ngay bản MVP v1.0** | **Bật ngay bản MVP v1.0** | **Bật ở bản v1.1** | **Bật ngay bản MVP v1.0 (Hook cực mạnh)** | **Để sang Phase 2 (Sau GTM)** |
 
 ### 4.2 Sơ Đồ Xử Lý Dữ Liệu & Cơ Chế Dự Phòng Tuyệt Đối (Zero-Failure Fallback Flow)
 
 ```mermaid
 flowchart TD
-    A[Người Dùng Nhập Ý Kiến / Gửi Tin Nhắn] --> B{Kiểm Tra Định Dạng Đầu Vào}
+    A[Người Dùng Nhập Ý Kiến / Gửi Tin Nhắn / Đặt Câu Hỏi] --> B{Kiểm Tra Loại Tương Tác}
     
     B -->|Click 5 Nút Likert Chuẩn| C[Deterministic Engine]
     C -->|Ghi điểm trực tiếp 0ms| D[Cập nhật Thanh Tiến Độ & Lưu Điểm]
     
-    B -->|Gõ Text Hoặc Voice| E[Gọi AI NLU Engine]
+    B -->|Gõ Text Hoặc Voice Trả Lời Câu Hỏi| E[Gọi AI NLU Engine]
     E --> F{AI Phản Hồi Trong Vòng 1.5 Giây?}
-    
     F -->|Thành Công| G[Trích Xuất JSON: {level, score, motivation}]
     G --> D
-    
-    F -->|Timeout / Quá Tải / Mất Mạng| H[Cơ Chế Dự Phòng Fallback]
-    H -->|Hiển thị phản hồi nhẹ| I["Duhat: 'Cảm ơn chia sẻ của bạn! Hãy chạm nhanh 1 nút Likert bên dưới để chốt mức độ nhé!'"]
+    F -->|Timeout / Lỗi Mạng| H[Cơ Chế Dự Phòng Fallback]
+    H -->|Phản hồi nhẹ| I["Duhat: 'Cảm ơn bạn! Hãy chạm nhanh 1 nút Likert bên dưới để chốt mức độ nhé!'"]
     I --> C
+
+    B -->|Hỏi Đáp: Tại sao tôi là hoa này?| J[AI Archetype Explainer Agent]
+    J --> K[Inject Context: Điểm 10 câu + Hồ sơ 72 Loài Hoa]
+    K --> L{AI Hoàn Tất Sinh Lời Giải Thích?}
+    L -->|Thành Công| M[Render Phân Tích So Sánh Chi Tiết + Lời Khuyên]
+    L -->|Timeout| N[Fallback Trả Về Câu Trả Lời Mẫu FAQ Của Hoa Đó]
 ```
 
 ---
 
 ## 5. Đề Xuất Lộ Trình Triển Khai Dành Cho Product & Tech Leads (Rollout Roadmap)
 
-### Giai Đoạn 1: MVP Đóng Gói (Hiện Tại - Đã Có Prototype Online)
+### Giai Đoạn 1: MVP Đóng Gói (Hiện Tại - Đã Có Prototype Online Sẵn Sàng)
 * **Phạm vi:**
   * 100% Deterministic Engine cho 10 tình huống Likert chuẩn hóa.
   * Nhận diện văn bản cơ bản (Keyword & Sentiment Regex).
   * Hiển thị kết quả 72 Loài hoa và Ma trận Ăn ý (Synergy Matrix) tĩnh.
   * Tương tác Group Chat và Góc Vườn Đồng Đội (Team Garden).
-* **Trạng thái:** Đã hoàn thiện mã nguồn và chạy thực tế tại [https://daothang38.github.io/duhat-personality-test/](https://daothang38.github.io/duhat-personality-test/).
+  * **Tính năng Hỏi Đáp Loài Hoa (Flower AI Copilot)** với bộ phản hồi so sánh trực tiếp các loài hoa và phân tích điểm mù.
+* **Trạng thái:** Đã hoàn thiện mã nguồn và chạy thực tế tại [https://duhat-personality.surge.sh/](https://duhat-personality.surge.sh/).
 
-### Giai Đoạn 2: Tích Hợp AI Nâng Cao (Sprint Kế Tiếp)
-* **Tích hợp API LLM (Gemini 1.5 Flash):**
+### Giai Đoạn 2: Tích Hợp API LLM Động (Sprint Kế Tiếp)
+* **Tích hợp API LLM (Gemini 1.5/2.0 Flash):**
   * Xử lý **Touchpoint 1 (NLU)**: Phân tích động cơ ngầm đằng sau câu trả lời tự nhiên.
   * Xử lý **Touchpoint 2 (Adaptive Probing)**: Tự động mở câu hỏi phụ khi điểm hòa.
-* **Định dạng dữ liệu trả về chuẩn (Structured Outputs):**
-  ```json
-  {
-    "matched_likert_level": 4,
-    "calculated_score": 1,
-    "underlying_motivation": "Coi trọng cam kết nhưng linh hoạt theo đối tượng giao tiếp",
-    "bot_empathic_reply": "Hiểu bạn luôn nè! Với bạn bè thân thì thoải mái một xíu vẫn vui vẻ, miễn là báo trước đúng không nè! 🦆✨"
-  }
-  ```
+  * Xử lý **Touchpoint 6 (Q&A Copilot)**: Dynamic streaming response giải thích cặn kẽ mọi câu hỏi đối soát của người dùng.
 
 ### Giai Đoạn 3: Generative Team Garden & Social Badges
 * Tích hợp tính năng tạo Avatar linh vật hoa độc bản (Touchpoint 5).
@@ -158,6 +165,7 @@ flowchart TD
 
 ## 6. Kết Luận & Đề Xuất Thẩm Định Của Product Marketing
 
-1. **Về tính khả thi:** Tính năng trắc nghiệm 5 mức độ Likert hoàn toàn khả thi và sẵn sàng đưa vào vận hành ngay lập tức nhờ phần lõi Deterministic đã được kiểm chứng trên bản prototype.
-2. **Về ứng dụng AI:** Đội ngũ AI chỉ cần tập trung vào **Touchpoint 1 (NLU text parsing)** và **Touchpoint 2 (Adaptive probe)** trong giai đoạn đầu. Điều này giúp tối ưu hóa chi phí API ($< \$0.001$ / lượt hoàn thành), đảm bảo độ trễ phản hồi luôn dưới 1 giây và loại bỏ hoàn toàn rủi ro sập hệ thống nhờ cơ chế Fallback đã được thiết kế sẵn.
-3. **Bước tiếp theo:** Kính mời Product Team và Tech Lead trải nghiệm trực tiếp trên link online và phê duyệt kiến trúc trên để tiến hành đóng gói API backend.
+1. **Về tính khả thi:** Tính năng trắc nghiệm 5 mức độ Likert và tính năng Hỏi đáp với loài hoa hoàn toàn khả thi và sẵn sàng đưa vào vận hành ngay lập tức.
+2. **Về ứng dụng AI:** Việc bổ sung **Touchpoint 6 (Hỏi đáp với loài hoa)** là "vũ khí đắc lực" giúp tăng tỷ lệ tin tưởng (trust factor) và kích hoạt thảo luận sôi nổi trong các nhóm làm việc.
+3. **Cách trình chiếu trực quan:** Để tiện trình bày trong các cuộc họp Ban Giám đốc hoặc họp Sprint Review, team PMM đã dựng sẵn **Trang Báo Cáo Trình Diễn Tương Tác** tại:  
+👉 **[https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html](https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html)**

@@ -4,7 +4,10 @@
 **Đối tượng nhận bàn giao & thẩm định:** Product Owner, Lead Product Manager, AI Engineering Team, UI/UX Design Team  
 **Phiên bản:** 1.0 - Bản Hoàn Thiện (Ready for Review)  
 **Trạng thái:** Sẵn sàng thẩm định & triển khai  
-**Bản mẫu tương tác Online (Live Demo):** [https://daothang38.github.io/duhat-personality-test/](https://daothang38.github.io/duhat-personality-test/)
+🌐 **Bản mẫu tương tác Online (Live Demo):**
+* **Link Trực Tiếp (Không bị chặn tường lửa):** [https://duhat-personality.surge.sh/](https://duhat-personality.surge.sh/)
+* **Bản Báo Cáo Trình Diễn C-Suite (Executive Deck):** [https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html](https://duhat-personality.surge.sh/AI_KNOWLEDGE_BASE_PRESENTATION.html)
+* **Link Dự Phòng (GitHub Pages):** [https://daothang38.github.io/duhat-personality-test/](https://daothang38.github.io/duhat-personality-test/)
 
 ---
 
@@ -134,6 +137,11 @@ sequenceDiagram
     LikertEngine->>DuhatApp: Tính toán ma trận 3 chiều -> Xác định Loài Hoa (VD: Hoa Hướng Dương)
     DuhatApp->>User: Hiển thị Thẻ Hồ Sơ 72 Loài Hoa (Chân dung, thế mạnh, hiểu nhầm, lời khuyên)
     
+    opt Người dùng thắc mắc về kết quả (Touchpoint 6: Flower AI Copilot)
+        User->>AIEngine: Hỏi: "Tại sao tôi là Hướng Dương mà không phải Cẩm Tú Cầu hay Sen Đá?"
+        AIEngine-->>User: Đối soát điểm 10 câu -> Phân tích khác biệt về phong cách Dẫn dắt & Tư duy + Lời khuyên
+    end
+
     User->>DuhatApp: Bấm "Chia sẻ vào nhóm chat"
     DuhatApp->>Team: Render Thẻ Hoa trong Group Chat
     Team-->>DuhatApp: Đồng nghiệp bấm "Xem cách phối hợp cùng bạn"

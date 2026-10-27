@@ -62,6 +62,9 @@ mindmap
       Bảng Ma Trận Ánh Xạ 72 Loài Hoa
         Lookup Table 6x3x4
         Zero Hallucination
+      Bộ Ảnh 72 Hình Mẫu Hoa Cá Nhân
+        Design chuẩn bị sẵn 100%
+        0ms Tải ảnh - Zero API Cost
       Quản Lý Trạng Thái UI & Điều Hướng
         Chuyển màn hình Inbox sang Chat
         Thanh tiến độ % hoàn thành
@@ -78,9 +81,9 @@ mindmap
       Touchpoint 4: Duhat Tone & Empathy Guard
         Linh vật Vịt Duhat ấm áp dí dỏm
         Chặn tuyệt đối từ ngữ phán xét HR
-      Touchpoint 5: Generative Visual Identity
-        Tạo avatar Vịt kết hợp Loài hoa độc bản
-        Thẻ bài chia sẻ mạng xã hội
+      Touchpoint 5: Generative Living Team Garden
+        Ghép nhiều loài hoa thành 1 vườn hoa nhóm
+        Tự động phối cảnh ánh sáng bố cục độc bản
       Touchpoint 6: Interactive Archetype QA Copilot
         Hỏi đáp tại sao tôi là hoa này mà không phải hoa kia
         Đối soát điểm khác biệt với Cẩm Tú Cầu hay Sen Đá
@@ -106,7 +109,7 @@ quadrantChart
     "TP2: Adaptive Probing (Hỏi sâu khi hòa điểm)": [0.45, 0.82]
     "TP3: Dynamic Synergy Report theo dự án": [0.55, 0.90]
     "TP4: Duhat Mascot Empathy Guardrail": [0.30, 0.75]
-    "TP5: GenAI Avatar Vịt Hoa Độc Bản": [0.80, 0.65]
+    "TP5: GenAI Living Garden (Ghép Vườn Hoa Nhóm)": [0.80, 0.75]
     "TP6: Hỏi đáp với loài hoa (Why this flower?)": [0.35, 0.95]
 ```
 
@@ -126,7 +129,7 @@ quadrantChart
 | **Touchpoint 2: Adaptive Probing Agent (Người Hỏi Đào Sâu Khi Giằng Co)** | Khi người dùng liên tục chọn **"⚪ Trung lập"** hoặc khi kết thúc bài test có 2 chiều điểm ngang nhau (VD: Điểm *Tốc* bằng điểm *Tín*). AI sinh ra duy nhất **1 câu hỏi vi mô (Micro-Probe)** dựa trên ngữ cảnh đã làm: *"Nếu dự án bắt buộc phải hy sinh 1 thứ giữa Deadline và Chất lượng dữ liệu, bạn sẽ nghiêng về bên nào?"*. | Bộ câu hỏi tĩnh không thể tự thích ứng theo điểm số động của từng người dùng. | Fallback: Lấy giá trị đầu tiên hoặc hiển thị hình mẫu hoa lai (hybrid badge). |
 | **Touchpoint 3: Dynamic Context-Aware Synergy Generator** | Trong Group Chat hoặc Góc Vườn, khi 2 thành viên muốn xem cách phối hợp. Thay vì chỉ đọc văn bản tĩnh cố định, AI cho phép nhập bối cảnh: *"Team mình chuẩn bị chạy chiến dịch Flash Sale 3 ngày"*. AI sinh ra cẩm nang phối hợp may đo riêng cho *🌻 Hướng Dương + 🪴 Sen Đá* trong chiến dịch đó. | Ma trận tĩnh chỉ có 1 nội dung chung chung. Bối cảnh dự án thực tế muôn hình vạn trạng. | Fallback về nội dung tĩnh đã được biên soạn sẵn trong ma trận `synergyMatrix` (như bản prototype hiện tại). |
 | **Touchpoint 4: Duhat Tone & Empathy Guardrail** | Kiểm soát giọng điệu của chú vịt Duhat (hóm hỉnh, dùng từ ngữ Việt Nam tươi vui, dùng biểu tượng cảm xúc vịt `🦆🌸`). Đồng thời chặn mọi từ ngữ mang tính đánh giá năng lực, phán xét nhân sự (*"bạn yếu kém ở điểm..."*). | Giữ chuẩn Brand Voice nhất quán trên toàn bộ các câu trả lời động của bot. | Sử dụng System Prompt và tập mẫu Few-Shot có sẵn. |
-| **Touchpoint 5: Generative Visual Identity (Duhat Flower Mascot Avatar)** | Sinh hình ảnh chú vịt Duhat mang phụ kiện đặc trưng của loài hoa kết quả (VD: Vịt Duhat cài hoa sen đá, mặc áo kiến trúc sư cầm thước kẻ). | Tạo cảm giác sở hữu độc bản, kích hoạt mong muốn chia sẻ (Shareability) lên Story Facebook, Zalo, Instagram. | Fallback: Dùng ảnh vector SVG/3D cố định của 72 loài hoa do Design vẽ sẵn. |
+| **Touchpoint 5: Generative Living Team Garden (AI Ghép Vườn Hoa Nhóm)** | **Với 72 hình mẫu hoa cá nhân:** Toàn bộ ảnh đã được chuẩn bị sẵn từ trước (Deterministic Design Assets) để load tức thì 0ms khi nhận kết quả cá nhân 1:1. **AI can thiệp ở khâu:** Khi các thành viên trong nhóm gom hoa lại, AI tổng hợp nhiều loài hoa khác nhau thành 1 bức tranh "Vườn Hoa Sống (Living Team Garden)" tổng hòa, tự động sắp đặt bố cục xa gần, hòa sắc và biểu đạt mối quan hệ tương hỗ của cả nhóm. | Tổ hợp hoa của các thành viên trong nhóm là vô hạn ($72^N$ biến thể tùy quy mô nhóm), không thể vẽ sẵn hàng triệu bức tranh nhóm. Chỉ AI Generative / Compositional Canvas mới tạo ra khu vườn độc bản đại diện cho tập thể. | Fallback: Dùng layout CSS Grid/Flexbox xếp các chậu hoa tĩnh cạnh nhau. |
 | **Touchpoint 6: Interactive Archetype Q&A Copilot ("Tại sao tôi là hoa này mà không phải hoa kia?")** | Cho phép người dùng trực tiếp chất vấn và hỏi đáp với AI về kết quả của mình: *"Tại sao tôi là Hoa Hướng Dương mà không phải Cẩm Tú Cầu hay Sen Đá?", "Điểm mù lớn nhất của tôi khi chịu áp lực?", "Làm sao để tôi phối hợp với sếp có tính cách đối lập?"*. AI đối soát trực tiếp với 10 câu trả lời của user và chỉ ra sự khác biệt giữa các loài hoa. | Người dùng luôn có tâm lý hoài nghi và tò mò về kết quả trắc nghiệm. Một bài test không cho phép người dùng hỏi lại lý do sẽ tạo cảm giác áp đặt, thiếu thuyết phục. | Fallback về bộ câu trả lời mẫu (FAQ templates) biên soạn sẵn cho từng cặp hoa. |
 
 ---
@@ -135,13 +138,13 @@ quadrantChart
 
 ### 4.1 Bảng Đánh Giá Mức Độ Khả Thi Kỹ Thuật (Technical Feasibility Matrix)
 
-| Tiêu Chí Thẩm Định | TP1 (NLU Text) | TP2 (Adaptive Probe) | TP3 (Dynamic Synergy) | TP6 (Hỏi Đáp Loài Hoa) | TP5 (GenAI Image) |
+| Tiêu Chí Thẩm Định | TP1 (NLU Text) | TP2 (Adaptive Probe) | TP3 (Dynamic Synergy) | TP6 (Hỏi Đáp Loài Hoa) | TP5 (GenAI Team Garden) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Mức độ khả thi (Feasibility)** | **Cực kỳ cao (95%)** | **Rất cao (90%)** | **Cao (85%)** | **Cực kỳ cao (95%)** | **Trung bình (70%)** |
-| **Model kiến nghị** | Small LLM (Gemini 1.5 Flash / Claude Haiku) | Fast LLM (Gemini Flash) | Fast LLM (Gemini Flash) | Fast LLM (Gemini Flash) + RAG Profiles | Imagen 3 / Stable Diffusion XL |
-| **Độ trễ mục tiêu (Latency SLA)** | **$\le 500\text{ms}$** | **$\le 800\text{ms}$** | **$\le 1200\text{ms}$ (Stream)** | **$\le 650\text{ms}$ (Stream)** | $3000\text{ms} - 5000\text{ms}$ (Chạy nền) |
-| **Rủi ro ảo giác (Hallucination)** | Thấp (Structured JSON output) | Thấp (Có khung đề cương) | Trung bình (Cần Guardrail) | Rất thấp (Có dữ liệu 10 câu & Ma trận hoa) | Không có (Visual style) |
-| **Chi phí ước tính / 1 User** | $\sim \$0.0003$ | $\sim \$0.0005$ | $\sim \$0.0008$ | $\sim \$0.0006$ / câu hỏi | $\sim \$0.015 - \$0.02$ |
+| **Mức độ khả thi (Feasibility)** | **Cực kỳ cao (95%)** | **Rất cao (90%)** | **Cao (85%)** | **Cực kỳ cao (95%)** | **Khá (75%)** |
+| **Model kiến nghị** | Small LLM (Gemini 1.5 Flash / Claude Haiku) | Fast LLM (Gemini Flash) | Fast LLM (Gemini Flash) | Fast LLM (Gemini Flash) + RAG Profiles | Compositional Diffusion / Canvas (Imagen 3 / SDXL) |
+| **Độ trễ mục tiêu (Latency SLA)** | **$\le 500\text{ms}$** | **$\le 800\text{ms}$** | **$\le 1200\text{ms}$ (Stream)** | **$\le 650\text{ms}$ (Stream)** | $3000\text{ms} - 5000\text{ms}$ (Chạy nền khi vào group) |
+| **Rủi ro ảo giác (Hallucination)** | Thấp (Structured JSON output) | Thấp (Có khung đề cương) | Trung bình (Cần Guardrail) | Rất thấp (Có dữ liệu 10 câu & Ma trận hoa) | Không có (Visual compositional canvas) |
+| **Chi phí ước tính / 1 User** | $\sim \$0.0003$ | $\sim \$0.0005$ | $\sim \$0.0008$ | $\sim \$0.0006$ / câu hỏi | $\sim \$0.01 - \$0.015$ / vườn nhóm |
 | **Đề xuất của PMM** | **Bật ngay bản MVP v1.0** | **Bật ngay bản MVP v1.0** | **Bật ở bản v1.1** | **Bật ngay bản MVP v1.0 (Hook cực mạnh)** | **Để sang Phase 2 (Sau GTM)** |
 
 ### 4.2 Sơ Đồ Xử Lý Dữ Liệu & Cơ Chế Dự Phòng Tuyệt Đối (Zero-Failure Fallback Flow)
@@ -175,9 +178,10 @@ flowchart TD
 ### Giai Đoạn 1: MVP Đóng Gói (Hiện Tại - Đã Có Prototype Online Sẵn Sàng)
 * **Phạm vi:**
   * 100% Deterministic Engine cho 10 tình huống Likert chuẩn hóa.
+  * Bộ ảnh 72 hình mẫu hoa cá nhân chuẩn bị sẵn 100% (Static Assets, load 0ms).
   * Nhận diện văn bản cơ bản (Keyword & Sentiment Regex).
   * Hiển thị kết quả 72 Loài hoa và Ma trận Ăn ý (Synergy Matrix) tĩnh.
-  * Tương tác Group Chat và Góc Vườn Đồng Đội (Team Garden).
+  * Tương tác Group Chat và Góc Vườn Đồng Đội (Team Garden layout tĩnh).
   * **Tính năng Hỏi Đáp Loài Hoa (Flower AI Copilot)** với bộ phản hồi so sánh trực tiếp các loài hoa và phân tích điểm mù.
 * **Trạng thái:** Đã hoàn thiện mã nguồn và chạy thực tế tại [https://duhat-personality.surge.sh/](https://duhat-personality.surge.sh/).
 
@@ -187,8 +191,9 @@ flowchart TD
   * Xử lý **Touchpoint 2 (Adaptive Probing)**: Tự động mở câu hỏi phụ khi điểm hòa.
   * Xử lý **Touchpoint 6 (Q&A Copilot)**: Dynamic streaming response giải thích cặn kẽ mọi câu hỏi đối soát của người dùng.
 
-### Giai Đoạn 3: Generative Team Garden & Social Badges
-* Tích hợp tính năng tạo Avatar linh vật hoa độc bản (Touchpoint 5).
+### Giai Đoạn 3: Generative Team Living Garden & Social Badges
+* Tích hợp tính năng **AI ghép nhiều loài hoa thành 1 Vườn Hoa Đội Ngũ (Generative Living Team Garden)** sống động (Touchpoint 5).
+* Tự động tái tổng hợp (re-synthesize) bố cục vườn hoa khi có thành viên mới (+1 Bạn) gia nhập.
 * Cho phép xuất ảnh Story (9:16) và Infographic đội ngũ để chia sẻ lên LinkedIn / Facebook nội bộ.
 
 ---

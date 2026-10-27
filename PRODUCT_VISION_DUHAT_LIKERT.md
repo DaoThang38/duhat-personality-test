@@ -82,10 +82,12 @@ mindmap
 * Tích hợp bộ khung 3 chiều:
   $$\text{6 Giá trị} \times \text{3 Phong cách lãnh đạo} \times \text{4 Kiểu tư duy} = \mathbf{72\ \text{Hình Mẫu Loài Hoa}}$$
 * **Nguyên tắc nhân văn bất di bất dịch:** Tuyệt đối không có loài hoa nào "tốt hơn" hay "kém cỏi hơn" loài hoa khác. Mỗi đóa hoa đều có vẻ đẹp riêng, thế mạnh rực rỡ và những điểm cần được đồng đội hỗ trợ che chở.
+* **Chiến lược Visual Asset Chuẩn Bị Sẵn:** Toàn bộ 72 hình ảnh minh họa loài hoa cá nhân đã được đội ngũ thiết kế chuẩn bị sẵn từ trước (Static Pre-rendered Assets). Nhờ đó thẻ hoa cá nhân tải ngay tức thì 0ms, chi phí $0, chuẩn nhận diện Duhat 100% mà không phụ thuộc vào việc gen ảnh đơn lẻ.
 
-### 3.3 Trụ cột 3: Team Synergy & Living Garden (Cộng Hưởng Nhóm Thực Chiến)
+### 3.3 Trụ cột 3: Team Synergy & AI Living Garden (Cộng Hưởng Nhóm Thực Chiến)
 * Tính năng không kết thúc khi nhận kết quả. Điểm bùng nổ nằm ở nút **"Chia sẻ vào nhóm chat"**.
 * Khi chia sẻ, bot tự động kích hoạt thẻ tương tác: Đồng nghiệp trong nhóm phản hồi, hệ thống lập tức mở màn hình **Góc Vườn Đồng Đội (Team Garden)** cho thấy:
+  * **AI Generative Living Garden (Ghép Vườn Hoa Nhóm):** AI can thiệp ở khâu kết hợp các loài hoa khác nhau của các thành viên trong nhóm thành 1 bức tranh "Vườn Hoa Sống (Living Garden Canvas)" duy nhất: tự động phân bổ chiều sâu, hòa sắc tương hỗ và tái tổng hợp mỗi khi có thành viên mới (+1 Bạn) gia nhập.
   * Sự kết hợp giữa các loài hoa (VD: *🌻 Hướng Dương + 🪴 Sen Đá: Độ ăn ý 94%*).
   * Điểm bù trừ bứt phá (Strengths synergy).
   * Vùng va chạm tiềm ẩn (Friction warning).

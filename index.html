@@ -2089,160 +2089,181 @@
       stroke: #1A1A1A;
     }
 
+    
     /* ==========================================================================
-       6. DILEMMA (SONG ĐỀ CÂN NÃO) & REASONING PROBES & ADAPTIVE STYLES
+       6. DILEMMA (SONG ĐỀ CÂN NÃO) - GIAO DIỆN ĐỒNG BỘ 100% VỚI LIKERT
        ========================================================================== */
-    .dilemma-card-compact {
+    .dilemma-compact {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
     }
 
-    .dilemma-wings-container {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 8px;
-      align-items: stretch;
-      background: #F8FAFC;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 14px;
-      padding: 10px;
-    }
-
-    .dilemma-wing {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 10px;
-      padding: 8px 10px;
-      transition: all 0.2s ease;
-    }
-
-    .dilemma-wing.wing-a {
-      border-left: 3px solid #0284C7;
-    }
-
-    .dilemma-wing.wing-b {
-      border-right: 3px solid #7C3AED;
-    }
-
-    .wing-tag {
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .wing-a .wing-tag { color: #0284C7; }
-    .wing-b .wing-tag { color: #7C3AED; }
-
-    .wing-text {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #1E293B;
-      line-height: 1.35;
-    }
-
-    .dilemma-vs-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 900;
-      color: #64748B;
-      background: #E2E8F0;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      align-self: center;
-    }
-
-    .dilemma-scale-dock {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 14px;
-      padding: 10px 8px 8px 8px;
+    .dilemma-wings-stacked {
       display: flex;
       flex-direction: column;
       gap: 6px;
+      width: 100%;
+      margin: 4px 0 8px 0;
     }
 
-    .dilemma-track {
-      position: relative;
+    .dilemma-wing-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .dilemma-wing-card.wing-a {
+      border-left: 4px solid #0284C7;
+      background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
+    }
+
+    .dilemma-wing-card.wing-b {
+      border-left: 4px solid #7C3AED;
+      background: linear-gradient(135deg, #FAF5FF 0%, #FFFFFF 100%);
+    }
+
+    .wing-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
-      height: 48px;
+    }
+
+    .wing-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.3px;
+    }
+
+    .wing-badge.badge-a {
+      background: #E0F2FE;
+      color: #0369A1;
+    }
+
+    .wing-badge.badge-b {
+      background: #F3E8FF;
+      color: #6D28D9;
+    }
+
+    .wing-hint {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .wing-statement {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1E293B;
+      line-height: 1.4;
+    }
+
+    .dilemma-vs-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       padding: 0 4px;
     }
 
-    .dilemma-connecting-line {
-      position: absolute;
-      left: 20px;
-      right: 20px;
-      top: 50%;
-      height: 3px;
-      background: linear-gradient(90deg, #0284C7 0%, #CBD5E1 50%, #7C3AED 100%);
-      transform: translateY(-50%);
-      z-index: 1;
-      border-radius: 2px;
+    .vs-line {
+      flex: 1;
+      height: 1px;
+      background: #CBD5E1;
     }
 
-    .dilemma-node {
-      position: relative;
-      z-index: 2;
-      width: 48px;
-      height: 48px;
-      background: transparent;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .dilemma-node:hover { transform: scale(1.12); }
-    .dilemma-node[disabled] { cursor: default; pointer-events: none; }
-
-    .dilemma-dot {
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    .vs-circle {
       font-size: 0.68rem;
-      font-weight: 800;
-    }
-
-    .dilemma-node.d-step-a2 .dilemma-dot { width: 36px; height: 36px; background: #0284C7; border: 3px solid #BAE6FD; color: #FFF; }
-    .dilemma-node.d-step-a1 .dilemma-dot { width: 28px; height: 28px; background: #38BDF8; border: 2.5px solid #E0F2FE; color: #FFF; }
-    .dilemma-node.d-step-mid .dilemma-dot { width: 22px; height: 22px; background: #94A3B8; border: 2px solid #E2E8F0; color: #FFF; font-size: 0.62rem; }
-    .dilemma-node.d-step-b1 .dilemma-dot { width: 28px; height: 28px; background: #A855F7; border: 2.5px solid #F3E8FF; color: #FFF; }
-    .dilemma-node.d-step-b2 .dilemma-dot { width: 36px; height: 36px; background: #7C3AED; border: 3px solid #DDD6FE; color: #FFF; }
-
-    .dilemma-node.selected .dilemma-dot {
-      box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px currentColor;
-      transform: scale(1.15);
-    }
-    .dilemma-node.dimmed { opacity: 0.35; filter: grayscale(0.6); }
-
-    .dilemma-live-indicator {
-      text-align: center;
-      font-size: 0.74rem;
-      font-weight: 700;
-      min-height: 20px;
-      line-height: 20px;
+      font-weight: 900;
       color: #64748B;
-      background: rgba(241, 245, 249, 0.7);
-      border-radius: 6px;
-      padding: 1px 6px;
+      background: #F1F5F9;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      border: 1px solid #E2E8F0;
     }
+
+    /* 5 DILEMMA CIRCLE SIZES - 100% IDENTICAL TO LIKERT */
+    .dilemma-line {
+      background: linear-gradient(90deg, #BAE6FD 0%, #E2E8F0 50%, #DDD6FE 100%) !important;
+    }
+
+    /* Level A2: To nhất 38px (Xanh dương đậm) */
+    .dilemma-node.d-lvl-a2 .dot-circle {
+      width: 38px;
+      height: 38px;
+      background: #0284C7;
+      border: 3px solid #BAE6FD;
+      color: #0284C7;
+    }
+
+    /* Level A1: Vừa 28px (Xanh dương sáng) */
+    .dilemma-node.d-lvl-a1 .dot-circle {
+      width: 28px;
+      height: 28px;
+      background: #38BDF8;
+      border: 2.5px solid #E0F2FE;
+      color: #38BDF8;
+    }
+
+    /* Level MID: Nhỏ nhất 20px (Xám tinh tế) */
+    .dilemma-node.d-lvl-mid .dot-circle {
+      width: 20px;
+      height: 20px;
+      background: #CBD5E1;
+      border: 2px solid #E2E8F0;
+      color: #475569;
+    }
+
+    /* Level B1: Vừa 28px (Tím sáng) */
+    .dilemma-node.d-lvl-b1 .dot-circle {
+      width: 28px;
+      height: 28px;
+      background: #A855F7;
+      border: 2.5px solid #F3E8FF;
+      color: #A855F7;
+    }
+
+    /* Level B2: To nhất 38px (Tím đậm) */
+    .dilemma-node.d-lvl-b2 .dot-circle {
+      width: 38px;
+      height: 38px;
+      background: #7C3AED;
+      border: 3px solid #DDD6FE;
+      color: #7C3AED;
+    }
+
+    /* Selected state: White check icon + halo ring */
+    .dilemma-node.selected .dot-circle {
+      box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px currentColor !important;
+      transform: scale(1.15) !important;
+    }
+
+    .dilemma-node.selected .dot-check-icon {
+      display: block !important;
+      color: #FFFFFF !important;
+      font-size: 0.85rem !important;
+      font-weight: 800 !important;
+    }
+
+    .dilemma-node.dimmed {
+      opacity: 0.35 !important;
+      filter: grayscale(0.6) !important;
+    }
+
+    /* Quick thumbpad for dilemma */
+    .quick-likert-btn.d-lvl-a2 { border-color: #0284C7; color: #0284C7; }
+    .quick-likert-btn.d-lvl-a1 { border-color: #38BDF8; color: #0369A1; }
+    .quick-likert-btn.d-lvl-mid { border-color: #94A3B8; color: #475569; }
+    .quick-likert-btn.d-lvl-b1 { border-color: #A855F7; color: #6D28D9; }
+    .quick-likert-btn.d-lvl-b2 { border-color: #7C3AED; color: #7C3AED; }
 
     /* Reasoning probe styling */
     .reasoning-probe-card {
@@ -3252,12 +3273,13 @@
   ];
 
   // Thang đo 5 mức độ Song đề (Dilemma Balance)
+  // Thang đo 5 mức độ Song đề (Dilemma Balance) - Đồng bộ 100% với Likert
   const dilemmaScaleOptions = [
-    { step: 'A2', weight: 2, glyph: '🔵', label: 'Nghiêng hẳn về Vế A', quickLabel: 'Vế A hoàn toàn', cssClass: 'd-step-a2', color: '#0284C7' },
-    { step: 'A1', weight: 1, glyph: '🔵', label: 'Nghiêng nhẹ Vế A', quickLabel: 'Nghiêng A', cssClass: 'd-step-a1', color: '#38BDF8' },
-    { step: 'MID', weight: 0, glyph: '⚖️', label: 'Cân nhau, khó chọn', quickLabel: '⚖️ Cân nhau', cssClass: 'd-step-mid', color: '#94A3B8' },
-    { step: 'B1', weight: -1, glyph: '🟣', label: 'Nghiêng nhẹ Vế B', quickLabel: 'Nghiêng B', cssClass: 'd-step-b1', color: '#A855F7' },
-    { step: 'B2', weight: -2, glyph: '🟣', label: 'Nghiêng hẳn về Vế B', quickLabel: 'Vế B hoàn toàn', cssClass: 'd-step-b2', color: '#7C3AED' }
+    { step: 'A2', weight: 2, glyph: '🔵', label: 'Nghiêng hẳn về Vế A', quickLabel: 'Vế A', cssClass: 'd-lvl-a2', color: '#0284C7' },
+    { step: 'A1', weight: 1, glyph: '🔵', label: 'Nghiêng nhẹ Vế A', quickLabel: 'Nghiêng A', cssClass: 'd-lvl-a1', color: '#38BDF8' },
+    { step: 'MID', weight: 0, glyph: '⚖️', label: 'Cân nhau, khó chọn', quickLabel: 'Cân nhau', cssClass: 'd-lvl-mid', color: '#64748B' },
+    { step: 'B1', weight: -1, glyph: '🟣', label: 'Nghiêng nhẹ Vế B', quickLabel: 'Nghiêng B', cssClass: 'd-lvl-b1', color: '#A855F7' },
+    { step: 'B2', weight: -2, glyph: '🟣', label: 'Nghiêng hẳn về Vế B', quickLabel: 'Vế B', cssClass: 'd-lvl-b2', color: '#7C3AED' }
   ];
 
   // ==========================================================================
@@ -3636,7 +3658,7 @@
     });
   }
 
-  // --- RENDER DẠNG 2: SONG ĐỀ CÂN NÃO (VẾ A VS VẾ B) ---
+  // --- RENDER DẠNG 2: SONG ĐỀ CÂN NÃO (VẾ A VS VẾ B) - GIAO DIỆN ĐỒNG BỘ 100% VỚI LIKERT ---
   function renderDilemmaCard(idx, dilemma) {
     const now = new Date();
     const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
@@ -3645,38 +3667,57 @@
       <div class="message-row others statement-message-row">
         <div class="msg-sender-avatar">⚖️</div>
         <div class="msg-bubble statement-bubble">
-          <div class="dilemma-card-compact">
+          <div class="likert-statement-compact dilemma-compact">
             <div class="statement-top-pill">
               <span class="pill-badge" style="background:#EDE9FE; color:#5B21B6;">⚖️ Song Đề ${idx + 1}/${state.targetTotal}</span>
               <span class="pill-category">${dilemma.title}</span>
             </div>
 
-            <div class="dilemma-wings-container">
-              <div class="dilemma-wing wing-a">
-                <span class="wing-tag">VẾ A</span>
-                <div class="wing-text">${dilemma.wingA}</div>
+            <!-- Hai thẻ vế A & B rõ ràng, dễ đọc trên di động -->
+            <div class="dilemma-wings-stacked">
+              <div class="dilemma-wing-card wing-a">
+                <div class="wing-header">
+                  <span class="wing-badge badge-a">🔵 VẾ A</span>
+                  <span class="wing-hint">${dilemma.labelA || 'Lựa chọn A'}</span>
+                </div>
+                <div class="wing-statement">${dilemma.wingA}</div>
               </div>
 
-              <div class="dilemma-vs-divider">VS</div>
+              <div class="dilemma-vs-row">
+                <div class="vs-line"></div>
+                <span class="vs-circle">VS</span>
+                <div class="vs-line"></div>
+              </div>
 
-              <div class="dilemma-wing wing-b">
-                <span class="wing-tag">VẾ B</span>
-                <div class="wing-text">${dilemma.wingB}</div>
+              <div class="dilemma-wing-card wing-b">
+                <div class="wing-header">
+                  <span class="wing-badge badge-b">🟣 VẾ B</span>
+                  <span class="wing-hint">${dilemma.labelB || 'Lựa chọn B'}</span>
+                </div>
+                <div class="wing-statement">${dilemma.wingB}</div>
               </div>
             </div>
 
-            <div class="dilemma-scale-dock">
-              <div class="dilemma-track" data-d-idx="${idx}">
-                <div class="dilemma-connecting-line"></div>
+            <!-- Thước đo 5 nút tròn đồng bộ hoàn hảo với Likert (38px, 28px, 20px, 28px, 38px) -->
+            <div class="likert-scale-dock">
+              <div class="likert-scale-labels">
+                <span class="scale-lbl-agree" style="color: #0284C7;">🔵 Nghiêng Vế A</span>
+                <span class="scale-lbl-disagree" style="color: #7C3AED;">Nghiêng Vế B 🟣</span>
+              </div>
+              
+              <div class="likert-dots-track dilemma-track" data-d-idx="${idx}">
+                <div class="track-connecting-line dilemma-line"></div>
                 ${dilemmaScaleOptions.map(opt => `
-                  <button class="dilemma-node ${opt.cssClass}" data-step="${opt.step}" data-weight="${opt.weight}" title="${opt.label}">
-                    <span class="dilemma-dot">${opt.glyph}</span>
+                  <button class="likert-dot-node dilemma-node ${opt.cssClass}" data-step="${opt.step}" data-weight="${opt.weight}" title="${opt.label}">
+                    <span class="dot-circle">
+                      <span class="dot-check-icon">✓</span>
+                    </span>
                   </button>
                 `).join('')}
               </div>
 
-              <div class="dilemma-live-indicator" id="d-live-ind-${idx}">
-                Trượt để chọn cán cân nghiêng về bên nào
+              <div class="likert-live-indicator" id="d-live-ind-${idx}">
+                Chạm vòng tròn để chọn cán cân nghiêng về bên nào
               </div>
             </div>
           </div>
@@ -3710,10 +3751,24 @@
 
       btn.addEventListener('mouseleave', () => {
         if (btn.hasAttribute('disabled')) return;
-        if (liveInd) liveInd.textContent = 'Trượt để chọn cán cân nghiêng về bên nào';
+        if (liveInd) liveInd.textContent = 'Chạm vòng tròn để chọn cán cân nghiêng về bên nào';
       });
 
       btn.addEventListener('click', () => {
+        // Active visual state
+        track.querySelectorAll('.dilemma-node').forEach(b => {
+          b.setAttribute('disabled', 'true');
+          if (b.getAttribute('data-step') === step) {
+            b.classList.add('selected');
+          } else {
+            b.classList.add('dimmed');
+          }
+        });
+
+        if (liveInd && opt) {
+          liveInd.innerHTML = `<span style="color:${opt.color}; font-weight:800;">✓ Đã chọn: ${opt.label}</span>`;
+        }
+
         handleDilemmaSelection(idx, dilemma, step, weight);
       });
     });
@@ -3722,7 +3777,7 @@
   function renderDilemmaQuickChips(idx, dilemma) {
     els.chatQuickChipsBar.className = 'chat-quick-chips-bar quick-likert-dock';
     els.chatQuickChipsBar.innerHTML = dilemmaScaleOptions.map(opt => `
-      <button class="quick-likert-btn" data-d-step="${opt.step}" data-d-weight="${opt.weight}" style="border-color:${opt.color};">
+      <button class="quick-likert-btn ${opt.cssClass}" data-d-step="${opt.step}" data-d-weight="${opt.weight}" title="${opt.label}">
         <span class="quick-dot-preview" style="background:${opt.color};"></span>
         <span class="quick-label-text">${opt.quickLabel}</span>
       </button>
@@ -3732,6 +3787,21 @@
       btn.addEventListener('click', () => {
         const step = btn.getAttribute('data-d-step');
         const weight = parseInt(btn.getAttribute('data-d-weight'), 10);
+        
+        const track = els.messageStreamContainer.querySelector(`.dilemma-track[data-d-idx="${idx}"]`);
+        const liveInd = els.messageStreamContainer.querySelector(`#d-live-ind-${idx}`);
+        const opt = dilemmaScaleOptions.find(o => o.step === step);
+        if (track && opt) {
+          track.querySelectorAll('.dilemma-node').forEach(b => {
+            b.setAttribute('disabled', 'true');
+            if (b.getAttribute('data-step') === step) b.classList.add('selected');
+            else b.classList.add('dimmed');
+          });
+        }
+        if (liveInd && opt) {
+          liveInd.innerHTML = `<span style="color:${opt.color}; font-weight:800;">✓ Đã chọn: ${opt.label}</span>`;
+        }
+
         handleDilemmaSelection(idx, dilemma, step, weight);
       });
     });

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Script to inject Adaptive Engine, 48 Statements, 12 Dilemmas, Grounding Probes, 
-and 3-Layer Alignment into index.html
+Script to inject unified Dilemma styles (identical circle sizes, buttons, checkmark to Likert) into index.html
 """
 import sys
 
@@ -9,162 +8,182 @@ def build_adaptive_index():
     with open('index.html', 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # 1. New CSS block to inject before </style>
-    new_css = """
+    # Unified CSS for Dilemma matching Likert circle sizes & styling
+    unified_dilemma_css = """
     /* ==========================================================================
-       6. DILEMMA (SONG ĐỀ CÂN NÃO) & REASONING PROBES & ADAPTIVE STYLES
+       6. DILEMMA (SONG ĐỀ CÂN NÃO) - GIAO DIỆN ĐỒNG BỘ 100% VỚI LIKERT
        ========================================================================== */
-    .dilemma-card-compact {
+    .dilemma-compact {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
     }
 
-    .dilemma-wings-container {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 8px;
-      align-items: stretch;
-      background: #F8FAFC;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 14px;
-      padding: 10px;
-    }
-
-    .dilemma-wing {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 10px;
-      padding: 8px 10px;
-      transition: all 0.2s ease;
-    }
-
-    .dilemma-wing.wing-a {
-      border-left: 3px solid #0284C7;
-    }
-
-    .dilemma-wing.wing-b {
-      border-right: 3px solid #7C3AED;
-    }
-
-    .wing-tag {
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .wing-a .wing-tag { color: #0284C7; }
-    .wing-b .wing-tag { color: #7C3AED; }
-
-    .wing-text {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #1E293B;
-      line-height: 1.35;
-    }
-
-    .dilemma-vs-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 900;
-      color: #64748B;
-      background: #E2E8F0;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      align-self: center;
-    }
-
-    .dilemma-scale-dock {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 14px;
-      padding: 10px 8px 8px 8px;
+    .dilemma-wings-stacked {
       display: flex;
       flex-direction: column;
       gap: 6px;
+      width: 100%;
+      margin: 4px 0 8px 0;
     }
 
-    .dilemma-track {
-      position: relative;
+    .dilemma-wing-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .dilemma-wing-card.wing-a {
+      border-left: 4px solid #0284C7;
+      background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
+    }
+
+    .dilemma-wing-card.wing-b {
+      border-left: 4px solid #7C3AED;
+      background: linear-gradient(135deg, #FAF5FF 0%, #FFFFFF 100%);
+    }
+
+    .wing-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
-      height: 48px;
+    }
+
+    .wing-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.3px;
+    }
+
+    .wing-badge.badge-a {
+      background: #E0F2FE;
+      color: #0369A1;
+    }
+
+    .wing-badge.badge-b {
+      background: #F3E8FF;
+      color: #6D28D9;
+    }
+
+    .wing-hint {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .wing-statement {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1E293B;
+      line-height: 1.4;
+    }
+
+    .dilemma-vs-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       padding: 0 4px;
     }
 
-    .dilemma-connecting-line {
-      position: absolute;
-      left: 20px;
-      right: 20px;
-      top: 50%;
-      height: 3px;
-      background: linear-gradient(90deg, #0284C7 0%, #CBD5E1 50%, #7C3AED 100%);
-      transform: translateY(-50%);
-      z-index: 1;
-      border-radius: 2px;
+    .vs-line {
+      flex: 1;
+      height: 1px;
+      background: #CBD5E1;
     }
 
-    .dilemma-node {
-      position: relative;
-      z-index: 2;
-      width: 48px;
-      height: 48px;
-      background: transparent;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .dilemma-node:hover { transform: scale(1.12); }
-    .dilemma-node[disabled] { cursor: default; pointer-events: none; }
-
-    .dilemma-dot {
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    .vs-circle {
       font-size: 0.68rem;
-      font-weight: 800;
-    }
-
-    .dilemma-node.d-step-a2 .dilemma-dot { width: 36px; height: 36px; background: #0284C7; border: 3px solid #BAE6FD; color: #FFF; }
-    .dilemma-node.d-step-a1 .dilemma-dot { width: 28px; height: 28px; background: #38BDF8; border: 2.5px solid #E0F2FE; color: #FFF; }
-    .dilemma-node.d-step-mid .dilemma-dot { width: 22px; height: 22px; background: #94A3B8; border: 2px solid #E2E8F0; color: #FFF; font-size: 0.62rem; }
-    .dilemma-node.d-step-b1 .dilemma-dot { width: 28px; height: 28px; background: #A855F7; border: 2.5px solid #F3E8FF; color: #FFF; }
-    .dilemma-node.d-step-b2 .dilemma-dot { width: 36px; height: 36px; background: #7C3AED; border: 3px solid #DDD6FE; color: #FFF; }
-
-    .dilemma-node.selected .dilemma-dot {
-      box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px currentColor;
-      transform: scale(1.15);
-    }
-    .dilemma-node.dimmed { opacity: 0.35; filter: grayscale(0.6); }
-
-    .dilemma-live-indicator {
-      text-align: center;
-      font-size: 0.74rem;
-      font-weight: 700;
-      min-height: 20px;
-      line-height: 20px;
+      font-weight: 900;
       color: #64748B;
-      background: rgba(241, 245, 249, 0.7);
-      border-radius: 6px;
-      padding: 1px 6px;
+      background: #F1F5F9;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      border: 1px solid #E2E8F0;
     }
+
+    /* 5 DILEMMA CIRCLE SIZES - 100% IDENTICAL TO LIKERT */
+    .dilemma-line {
+      background: linear-gradient(90deg, #BAE6FD 0%, #E2E8F0 50%, #DDD6FE 100%) !important;
+    }
+
+    /* Level A2: To nhất 38px (Xanh dương đậm) */
+    .dilemma-node.d-lvl-a2 .dot-circle {
+      width: 38px;
+      height: 38px;
+      background: #0284C7;
+      border: 3px solid #BAE6FD;
+      color: #0284C7;
+    }
+
+    /* Level A1: Vừa 28px (Xanh dương sáng) */
+    .dilemma-node.d-lvl-a1 .dot-circle {
+      width: 28px;
+      height: 28px;
+      background: #38BDF8;
+      border: 2.5px solid #E0F2FE;
+      color: #38BDF8;
+    }
+
+    /* Level MID: Nhỏ nhất 20px (Xám tinh tế) */
+    .dilemma-node.d-lvl-mid .dot-circle {
+      width: 20px;
+      height: 20px;
+      background: #CBD5E1;
+      border: 2px solid #E2E8F0;
+      color: #475569;
+    }
+
+    /* Level B1: Vừa 28px (Tím sáng) */
+    .dilemma-node.d-lvl-b1 .dot-circle {
+      width: 28px;
+      height: 28px;
+      background: #A855F7;
+      border: 2.5px solid #F3E8FF;
+      color: #A855F7;
+    }
+
+    /* Level B2: To nhất 38px (Tím đậm) */
+    .dilemma-node.d-lvl-b2 .dot-circle {
+      width: 38px;
+      height: 38px;
+      background: #7C3AED;
+      border: 3px solid #DDD6FE;
+      color: #7C3AED;
+    }
+
+    /* Selected state: White check icon + halo ring */
+    .dilemma-node.selected .dot-circle {
+      box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px currentColor !important;
+      transform: scale(1.15) !important;
+    }
+
+    .dilemma-node.selected .dot-check-icon {
+      display: block !important;
+      color: #FFFFFF !important;
+      font-size: 0.85rem !important;
+      font-weight: 800 !important;
+    }
+
+    .dilemma-node.dimmed {
+      opacity: 0.35 !important;
+      filter: grayscale(0.6) !important;
+    }
+
+    /* Quick thumbpad for dilemma */
+    .quick-likert-btn.d-lvl-a2 { border-color: #0284C7; color: #0284C7; }
+    .quick-likert-btn.d-lvl-a1 { border-color: #38BDF8; color: #0369A1; }
+    .quick-likert-btn.d-lvl-mid { border-color: #94A3B8; color: #475569; }
+    .quick-likert-btn.d-lvl-b1 { border-color: #A855F7; color: #6D28D9; }
+    .quick-likert-btn.d-lvl-b2 { border-color: #7C3AED; color: #7C3AED; }
 
     /* Reasoning probe styling */
     .reasoning-probe-card {
@@ -327,17 +346,21 @@ def build_adaptive_index():
     }
     """
 
-    if '/* 6. DILEMMA (SONG ĐỀ CÂN NÃO)' not in content:
-        content = content.replace('  </style>', new_css + '\n  </style>')
+    # Replace old section 6 CSS in style
+    style_start = content.find('/* ==========================================================================\n       6. DILEMMA')
+    if style_start == -1:
+        style_start = content.find('/* ==========================================================================\r\n       6. DILEMMA')
+    
+    style_end = content.find('</style>')
 
-    # 2. Write the new Javascript section
-    # We will load the script code from a separate js file or string
-    print("CSS injected successfully. Reading JS template...")
+    if style_start != -1 and style_end != -1:
+        content = content[:style_start] + unified_dilemma_css + '\n  ' + content[style_end:]
+    else:
+        content = content.replace('</style>', unified_dilemma_css + '\n  </style>')
 
     with open('build_engine.js', 'r', encoding='utf-8') as js_file:
         new_js = js_file.read()
 
-    # Find <script> tag and closing </script> tag
     start_tag = '<script>'
     end_tag = '</script>'
     
@@ -350,7 +373,7 @@ def build_adaptive_index():
             out_f.write(updated_content)
         with open('Tinh_cach_likert_scale.html', 'w', encoding='utf-8') as out_f2:
             out_f2.write(updated_content)
-        print("Updated index.html and Tinh_cach_likert_scale.html successfully!")
+        print("Updated index.html and Tinh_cach_likert_scale.html with unified dilemma UI!")
     else:
         print("Error: Could not find script tags!")
 

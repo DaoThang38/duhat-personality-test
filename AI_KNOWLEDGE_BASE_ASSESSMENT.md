@@ -13,7 +13,7 @@
 
 > ⚠️ **LƯU Ý QUAN TRỌNG CHO TEAM PRODUCT:**  
 > 1. **Đối tượng định vị:** Dân văn phòng hiện đại (xóa bỏ tâm lý thi cử, e ngại HR của MBTI/DISC để hướng đến sự an toàn tâm lý và thấu hiểu đồng đội).  
-> 2. **Tình huống trắc nghiệm:** 10 tình huống đời thường trong bản demo **chỉ là đề xuất prototype, không cố định**. Hệ thống sẽ hỗ trợ Ngân Hàng Tình Huống Động (Dynamic Scenario Bank) có thể tùy biến theo bối cảnh công việc thực tế, dự án hoặc ngành nghề.
+> 2. **Kiến trúc câu hỏi & Thuật toán thích ứng:** Hệ thống đã tích hợp chính thức **Ngân Hàng 48 Mệnh Đề + 12 Song Đề Cân Não** (theo triết lý *La Bàn Tư Tưởng*). Bài test không dùng 10 câu tĩnh mà vận hành **Computerized Adaptive Testing**: Bắt đầu từ 12 câu cốt lõi và tự động mở rộng lên 24 hoặc 36 câu tuỳ theo mức độ phân hóa/lai tạp của người dùng (Xem tài liệu chi tiết tại [QUESTION_BANK_48_STATEMENTS_12_DILEMMAS.md](file:///c:/Users/ASUS/IdeaProjects/Test%20tinh%20cach%20prototype/QUESTION_BANK_48_STATEMENTS_12_DILEMMAS.md) & [QUESTION_METHODOLOGY_AND_ADAPTIVE_ENGINE.md](file:///c:/Users/ASUS/IdeaProjects/Test%20tinh%20cach%20prototype/QUESTION_METHODOLOGY_AND_ADAPTIVE_ENGINE.md)).
 
 ---
 

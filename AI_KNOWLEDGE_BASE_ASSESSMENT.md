@@ -7,8 +7,8 @@
 2. **Khả năng đáp ứng của AI đến đâu?** *(Thẩm định tính khả thi kỹ thuật, SLA thời gian phản hồi, rủi ro ảo giác, chiến lược dự phòng Fallback & chi phí vận hành)*  
 
 🌐 **Bản mẫu tương tác Trực Tuyến (Live Online Links):**
-* **Link Trực Tiếp (Không chặn bởi tường lửa công ty):** [https://tangy-limit-o13oa.ship.place/](https://tangy-limit-o13oa.ship.place/)
-* **Bản Báo Cáo Trình Diễn PMM Trực Quan (Executive Deck HTML):** [https://tangy-limit-o13oa.ship.place/AI_KNOWLEDGE_BASE_PRESENTATION.html](https://tangy-limit-o13oa.ship.place/AI_KNOWLEDGE_BASE_PRESENTATION.html)
+* **Link Trực Tiếp (Không chặn bởi tường lửa công ty):** [https://cottony-zydeco-34l1w.ship.place/](https://cottony-zydeco-34l1w.ship.place/)
+* **Bản Báo Cáo Trình Diễn PMM Trực Quan (Executive Deck HTML):** [https://cottony-zydeco-34l1w.ship.place/AI_KNOWLEDGE_BASE_PRESENTATION.html](https://cottony-zydeco-34l1w.ship.place/AI_KNOWLEDGE_BASE_PRESENTATION.html)
 * **Link Dự Phòng (GitHub Pages):** [https://daothang38.github.io/duhat-personality-test/](https://daothang38.github.io/duhat-personality-test/)
 
 > ⚠️ **LƯU Ý QUAN TRỌNG CHO TEAM PRODUCT:**  

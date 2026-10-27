@@ -643,10 +643,11 @@
     <nav class="deck-nav-pills" id="deck-nav">
       <button class="nav-pill active" data-slide="1">🏢 Định Vị Dân Văn Phòng</button>
       <button class="nav-pill" data-slide="2">🧩 Ma Trận 3x4x6</button>
-      <button class="nav-pill" data-slide="3">🎯 Cần AI Ở Chỗ Nào?</button>
-      <button class="nav-pill" data-slide="4">💬 Chat 1:1 & Group Chat</button>
-      <button class="nav-pill" data-slide="5">⚡ Moment +1 Bạn</button>
-      <button class="nav-pill" data-slide="6">🌸 Thử Nghiệm Hỏi Đáp</button>
+      <button class="nav-pill" data-slide="3">🧭 Ngân Hàng 48 Câu & 12 Song Đề</button>
+      <button class="nav-pill" data-slide="4">🎯 Cần AI Ở Chỗ Nào?</button>
+      <button class="nav-pill" data-slide="5">💬 Chat 1:1 & Group Chat</button>
+      <button class="nav-pill" data-slide="6">⚡ Moment +1 Bạn</button>
+      <button class="nav-pill" data-slide="7">🌸 Thử Nghiệm Hỏi Đáp</button>
     </nav>
 
     <!-- Header Actions -->
@@ -854,8 +855,246 @@
       </div>
     </section>
 
-    <!-- SLIDE 3: ĐẶC TẢ CHI TIẾT: CẦN AI Ở CHỖ NÀO? -->
+        <!-- SLIDE 3: NGÂN HÀNG 48 CÂU HỎI & 12 SONG ĐỀ CÂN NÃO (LA BÀN TƯ TƯỞNG) -->
     <section class="deck-slide" id="slide-3">
+      <div class="slide-banner">
+        <span class="slide-tag">Triết Lý Đặt Câu Hỏi (Questioning Architecture)</span>
+        <h2 class="slide-title">Ngân Hàng Đa Tầng: 48 Mệnh Đề & 12 Song Đề Cân Não</h2>
+        <p class="slide-desc">
+          Lấy cảm hứng từ triết lý <strong>La Bàn Tư Tưởng (The Cochinchine Pensées)</strong>: Không hỏi thói quen vụn vặt bề mặt, mà đánh thẳng vào <strong>sự đánh đổi giá trị cốt lõi</strong> (Value Trade-offs). Hệ thống vận hành <em>Computerized Adaptive Testing</em> tự động rẽ nhánh từ 12 lên 24 hoặc 36 câu.
+        </p>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
+        <a href="LOGIC_MATRIX_EXPLAINER.html" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; background:#EEF2FF; border:1.5px solid #C7D2FE; color:#4338CA; padding:8px 16px; border-radius:24px; font-weight:800; font-size:0.86rem;">
+          🧭 Mở Bảng Điều Khiển Ma Trận Logic (Sandbox Trực Quan) &rarr;
+        </a>
+        <a href="index.html" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; background:var(--primary); color:#1A1A1A; padding:8px 16px; border-radius:24px; font-weight:800; font-size:0.86rem;">
+          🚀 Trải Nghiệm Trực Tiếp Trên Live Prototype &rarr;
+        </a>
+      </div>
+
+      <!-- Interactive Question Bank Tabs -->
+      <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; box-shadow:var(--shadow-sm);">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;" id="qbank-tabs">
+          <button class="chip-btn active" data-qtab="t1" style="background:#0284C7; color:#FFF; font-weight:800;">🧭 Trục 1: Chiến Lược (12 câu)</button>
+          <button class="chip-btn" data-qtab="t2">🏛️ Trục 2: Quyền Lực (12 câu)</button>
+          <button class="chip-btn" data-qtab="t3">❤️ Trục 3: Con Người (12 câu)</button>
+          <button class="chip-btn" data-qtab="t4">🔥 Trục 4: Bản Sắc (12 câu)</button>
+          <button class="chip-btn" data-qtab="td" style="border-color:#7C3AED; color:#7C3AED; font-weight:800;">⚖️ 12 Song Đề Cân Não</button>
+          <button class="chip-btn" data-qtab="tr" style="border-color:#D97706; color:#D97706; font-weight:800;">🌾 Căn Cơ Động Cơ ("Vì sao?")</button>
+        </div>
+
+        <!-- TAB CONTENT: TRỤC 1 -->
+        <div class="qtab-content" id="qtab-t1" style="display:block;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#0369A1; margin-bottom:10px;">
+            🧭 Trục 1: Chiến Lược & Hành Động (Tốc độ, Thực dụng vs Thận trọng, Hoàn hảo)
+          </h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:#F0F9FF; border-left:3px solid #0284C7; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#0284C7;">CHIỀU A: TỐC ĐỘ & THỰC CHIẾN (+)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S1_1:</strong> "Một kế hoạch hoàn hảo nhưng triển khai muộn màng luôn tệ hơn một giải pháp chắp vá được hành động ngay tức khắc."</li>
+                <li><strong>S1_2:</strong> "Thà sửa sai hàng chục lần trên thực địa còn hơn mất hàng tuần chỉ để tranh cãi một phương án trên bàn giấy."</li>
+                <li><strong>S1_3:</strong> "Chỉ có kết quả cụ thể trong hiện tại mới chứng minh tính đúng đắn; mọi viễn cảnh dài hạn đều là thứ yếu."</li>
+                <li><strong>S1_4:</strong> "Khi cơ hội bất ngờ xuất hiện, việc chớp lấy ngay quan trọng hơn việc cân nhắc xem nó có trong lộ trình hay không."</li>
+                <li><strong>S1_5:</strong> "Một sản phẩm đưa ra thị trường nên là phiên bản vừa đủ dùng; trau chuốt quá kỹ là chậm chạp trá hình."</li>
+                <li><strong>S1_6:</strong> "Trong khủng hoảng, một quyết định sai lầm nhưng dứt khoát vẫn có ích hơn sự lưỡng lự để tìm phương án tối ưu."</li>
+              </ul>
+            </div>
+            <div style="background:#F8FAFC; border-left:3px solid #64748B; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#475569;">CHIỀU B: THẬN TRỌNG & NỀN MÓNG (-)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S1_7:</strong> "Mọi sự cẩu thả ở khâu nền móng chắc chắn sẽ phải trả giá bằng sự sụp đổ dây chuyền trong tương lai."</li>
+                <li><strong>S1_8:</strong> "Thà bỏ lỡ một cơ hội hấp dẫn còn hơn lao vào hành động khi chưa nhìn rõ toàn bộ các kịch bản tồi tệ nhất."</li>
+                <li><strong>S1_9:</strong> "Tiêu chuẩn chất lượng là ranh giới tuyệt đối không được hạ thấp, dù đối diện áp lực thời hạn bàn giao."</li>
+                <li><strong>S1_10:</strong> "Một người làm việc sâu sắc luôn dành nhiều thời gian để định nghĩa đúng bài toán trước khi viết giải pháp."</li>
+                <li><strong>S1_11:</strong> "Sự tăng trưởng bền vững luôn đòi hỏi quy trình được văn bản hóa bài bản, không dựa vào ngẫu hứng."</li>
+                <li><strong>S1_12:</strong> "Việc làm lại một sản phẩm hỏng hóc tốn kém gấp nhiều lần việc làm chậm mà chắc ngay từ đầu."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT: TRỤC 2 -->
+        <div class="qtab-content" id="qtab-t2" style="display:none;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#6D28D9; margin-bottom:10px;">
+            🏛️ Trục 2: Quyền Lực & Tổ Chức (Tập trung, Kỷ luật sắt vs Phân quyền, Đồng thuận)
+          </h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:#FAF5FF; border-left:3px solid #7C3AED; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#7C3AED;">CHIỀU A: TẬP TRUNG & KỶ LUẬT (+)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S2_1:</strong> "Tập thể cần một người dẫn đầu có tầm nhìn sắt đá để ra lệnh, thay vì lãng phí thời gian lấy ý kiến cào bằng."</li>
+                <li><strong>S2_2:</strong> "Kỷ luật và tuân thủ mệnh lệnh là xương sống tạo nên sức mạnh, quan trọng hơn nhiều so với tự do cá nhân."</li>
+                <li><strong>S2_3:</strong> "Khi mục tiêu chung đã chốt, mọi tranh luận cá nhân phải lập tức chấm dứt để toàn lực thi hành."</li>
+                <li><strong>S2_4:</strong> "Quyền lực nên tập trung vào tay người gánh trách nhiệm cao nhất, không nên chia nhỏ để rồi không ai chịu trách nhiệm."</li>
+                <li><strong>S2_5:</strong> "Quy tắc sinh ra là để tuân theo; việc cho phép ngoại lệ là mầm mống dẫn đến sự tan rã của hệ thống."</li>
+                <li><strong>S2_6:</strong> "Một đội ngũ vận hành như một cỗ máy chính xác luôn chiến thắng một nhóm người tài năng nhưng vô kỷ luật."</li>
+              </ul>
+            </div>
+            <div style="background:#F8FAFC; border-left:3px solid #64748B; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#475569;">CHIỀU B: PHÂN QUYỀN & TỰ QUẢN (-)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S2_7:</strong> "Một quyết định không nhận được sự đồng thuận tự nguyện sẽ chỉ sinh ra sự chống đối ngầm."</li>
+                <li><strong>S2_8:</strong> "Cấp quản lý tốt nhất là người tạo môi trường để nhân viên tự quyết định, không phải người chỉ tay năm ngón."</li>
+                <li><strong>S2_9:</strong> "Sự hòa thuận chỉ có giá trị khi nó không được xây dựng trên sự im lặng của những người bất đồng."</li>
+                <li><strong>S2_10:</strong> "Những sáng kiến đột phá thường nảy sinh từ những góc tự do nằm ngoài tầm kiểm soát của lãnh đạo."</li>
+                <li><strong>S2_11:</strong> "Quy tắc chỉ là phương tiện; khi quy tắc gây cản trở sự linh hoạt, việc phá vỡ nó là điều hiển nhiên."</li>
+                <li><strong>S2_12:</strong> "Một tổ chức phẳng nơi mọi ý kiến đều có sức nặng tương đương luôn lành mạnh hơn cấu trúc tháp nhiều tầng."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT: TRỤC 3 -->
+        <div class="qtab-content" id="qtab-t3" style="display:none;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#059669; margin-bottom:10px;">
+            ❤️ Trục 3: Con Người & Đạo Đức (Lý tính, Sòng phẳng vs Trắc ẩn, An toàn tâm lý)
+          </h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:#ECFDF5; border-left:3px solid #10B981; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#059669;">CHIỀU A: SÒNG PHẲNG & THẲNG THẮN (+)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S3_1:</strong> "Sự trung thực tàn nhẫn và thẳng thắn vào lỗi sai luôn nhân từ hơn lời khen ngợi vuốt ve giả tạo."</li>
+                <li><strong>S3_2:</strong> "Không có sự bất công nào lớn hơn việc khen thưởng cào bằng giữa người làm tốt và người làm dở."</li>
+                <li><strong>S3_3:</strong> "Trong công việc, kết quả đầu ra là thước đo duy nhất; nỗ lực không tạo giá trị thì không đáng ca ngợi."</li>
+                <li><strong>S3_4:</strong> "Việc sa thải nhanh chóng một nhân sự không đáp ứng là hành động tử tế nhất với phần còn lại của tập thể."</li>
+                <li><strong>S3_5:</strong> "Cảm xúc cá nhân không nên có chỗ đứng trong các cuộc thảo luận chuyên môn hoặc đánh giá hiệu quả."</li>
+                <li><strong>S3_6:</strong> "Sự công nhận phải được giành lấy bằng năng lực thực tế, không phải ban phát vì lòng thương hại."</li>
+              </ul>
+            </div>
+            <div style="background:#F8FAFC; border-left:3px solid #64748B; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#475569;">CHIỀU B: TRẮC ẨN & NHÂN ÁI (-)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S3_7:</strong> "Môi trường nơi con người sợ hãi sai lầm và luôn đề phòng nhau thì sớm muộn cũng bóp nghẹt mọi khát vọng."</li>
+                <li><strong>S3_8:</strong> "Trách nhiệm đầu tiên của người đồng hành là thấu hiểu khó khăn ẩn sau sự sa sút trước khi phán xét."</li>
+                <li><strong>S3_9:</strong> "Giữ gìn sự ấm áp trong quan hệ con người quý giá hơn việc chiến thắng một cuộc tranh luận đúng sai."</li>
+                <li><strong>S3_10:</strong> "Một người có thể thiếu kỹ năng nhưng có thái độ chân thành luôn xứng đáng được bảo bọc và trao cơ hội."</li>
+                <li><strong>S3_11:</strong> "Sự thúc ép đạt chỉ số đến mức kiệt quệ thể chất và tinh thần là một tội ác núp bóng thành công."</li>
+                <li><strong>S3_12:</strong> "Thành công của tập thể được đo bằng việc thành viên yếu thế nhất được nâng đỡ tiến bộ như thế nào."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT: TRỤC 4 -->
+        <div class="qtab-content" id="qtab-t4" style="display:none;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#D97706; margin-bottom:10px;">
+            🔥 Trục 4: Động Lực & Bản Sắc (Dấu ấn độc bản & Đơn độc vs Tận tụy đại cuộc & Mắt xích)
+          </h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:#FFFBEB; border-left:3px solid #F59E0B; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#D97706;">CHIỀU A: ĐỘC BẢN & TIÊN PHONG (+)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S4_1:</strong> "Tôi thà thất bại với một cách làm sáng tạo của mình, còn hơn thành công bằng lối mòn người khác vẽ sẵn."</li>
+                <li><strong>S4_2:</strong> "Những bước tiến vĩ đại luôn do những cá nhân dị biệt dám chống lại số đông tạo nên, không từ ủy ban hòa giải."</li>
+                <li><strong>S4_3:</strong> "Nếu công việc chỉ biến tôi thành một mắt xích vô danh có thể bị thay thế bất kỳ lúc nào, tôi sẽ rời đi."</li>
+                <li><strong>S4_4:</strong> "Sự thỏa hiệp để làm vừa lòng tất cả mọi người là con đường nhanh nhất dẫn đến tầm thường và biến chất."</li>
+                <li><strong>S4_5:</strong> "Tôi cần được trao trọn vẹn quyền tự do thể hiện phong cách cá nhân trong sản phẩm do chính tay mình tạo ra."</li>
+                <li><strong>S4_6:</strong> "Sự cô độc của một người đi trước thời đại luôn đáng tự hào hơn sự ấm áp nhưng an phận của đám đông."</li>
+              </ul>
+            </div>
+            <div style="background:#F8FAFC; border-left:3px solid #64748B; border-radius:8px; padding:10px 12px;">
+              <span style="font-size:0.7rem; font-weight:800; color:#475569;">CHIỀU B: VÌ ĐẠI CUỘC & TRUNG KIÊN (-)</span>
+              <ul style="font-size:0.8rem; margin:6px 0 0 16px; line-height:1.45;">
+                <li><strong>S4_7:</strong> "Giá trị lớn nhất của một cá nhân là biết hạ bớt cái tôi xuống để trở thành điểm tựa vững chắc cho đại cuộc."</li>
+                <li><strong>S4_8:</strong> "Không có vinh quang nào bền vững hơn việc cùng chung tay xây dựng công trình tập thể trường tồn qua thời gian."</li>
+                <li><strong>S4_9:</strong> "Người thầm lặng hoàn thành xuất sắc vị trí khiêm nhường đáng kính hơn ngôi sao luôn tìm cách chiếm ánh đèn."</li>
+                <li><strong>S4_10:</strong> "Sự trung thành và gắn bó với sứ mệnh chung trong lúc gian khó là phẩm chất cao quý nhất."</li>
+                <li><strong>S4_11:</strong> "Việc phô trương dấu ấn cá nhân khi chưa đóng góp gì cho sự ổn định của cả đội là sự ích kỷ thiếu trưởng thành."</li>
+                <li><strong>S4_12:</strong> "Khi tổ chức cần, tôi sẵn sàng nhận những phần việc hậu trường ít người biết đến mà không cần ai vinh danh."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT: SONG ĐỀ -->
+        <div class="qtab-content" id="qtab-td" style="display:none;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#7C3AED; margin-bottom:10px;">
+            ⚖️ 12 Song Đề Cân Não (Dilemmas: Vế A vs Vế B · Thước Đo 5 Mức Độ)
+          </h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:0.8rem;">
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D1. Quyết Sách Đột Phá:</strong><br>
+              <span style="color:#0284C7;">🔵 Vế A:</span> Người chỉ huy tài ba, độc đoán nhưng quyết định chớp nhoáng tới đích thắng lợi.<br>
+              <span style="color:#7C3AED;">🟣 Vế B:</span> Tập thể dân chủ, đồng thuận thảo luận kỹ càng nhưng tiến chậm, dễ lỡ thời cơ.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D2. Chuẩn Mực Sản Phẩm:</strong><br>
+              <span style="color:#0284C7;">🔵 Vế A:</span> Bảo vệ chất lượng hoàn hảo tuyệt đối, bất chấp đẩy áp lực gay gắt lên đồng đội.<br>
+              <span style="color:#7C3AED;">🟣 Vế B:</span> Bảo vệ sự bình an tâm lý cho đồng đội, dù phải ra mắt sản phẩm ở mức vừa phải.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D3. Bản Sắc Trong Bộ Máy:</strong><br>
+              <span style="color:#0284C7;">🔵 Vế A:</span> Ngọn lửa sáng tạo độc lập, tự do dù phải đứng ngoài kỷ luật tập thể.<br>
+              <span style="color:#7C3AED;">🟣 Vế B:</span> Mắt xích vững chãi trong cỗ máy lớn, tận tụy vận hành vì sự phồn vinh lâu dài.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D4. Đánh Giá Con Người:</strong><br>
+              <span style="color:#0284C7;">🔵 Vế A:</span> Sòng phẳng: Thưởng lớn người giỏi và thẳng thắn đào thải người yếu kém.<br>
+              <span style="color:#7C3AED;">🟣 Vế B:</span> Bao dung: Kiên nhẫn nâng đỡ người yếu thế dù làm chậm tiến độ toàn đội.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D5. Kế Hoạch vs Trực Giác:</strong> Tuân thủ lộ trình đã định vs Vứt bỏ kế hoạch cũ xoay trục theo thị trường.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D6. Bản Chất Quyền Lực:</strong> Nhóm tinh hoa dẫn dắt vs Phân tán quyền lực cho từng cá nhân tự do.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D7. Sự Thẳng Thắn:</strong> Nói thẳng sự thật trần trụi dù mất lòng vs Nói giảm nói tránh để giữ hòa khí.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D8. Vinh Quang vs Trách Nhiệm:</strong> Để lại kiệt tác mang tên mình vs Hài lòng làm bệ phóng thầm lặng.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D9. Đổi Mới vs Kế Thừa:</strong> Đập đi xây lại từ đầu vs Bảo tồn chắt lọc tinh hoa qua nhiều thế hệ.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D10. Trung Thực vs Sĩ Khí:</strong> Công khai dữ liệu khó khăn vs Giữ kín tin tiêu cực bảo toàn sĩ khí.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D11. Tự Do vs Quy Trình:</strong> Tự do chọn cách làm miễn ra kết quả vs Bắt buộc tuân thủ từng bước chuẩn.
+            </div>
+            <div style="background:#F8FAFC; border:1px solid var(--border); border-radius:8px; padding:10px;">
+              <strong>D12. Động Lực:</strong> Làm việc vì niềm vui gia đình gắn kết vs Làm việc vì thử thách đỉnh cao khẳng định mình.
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT: CĂN CƠ ĐỘNG CƠ -->
+        <div class="qtab-content" id="qtab-tr" style="display:none;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#D97706; margin-bottom:10px;">
+            🌾 5 Nền Tảng Căn Cơ Động Cơ ("Vì sao?") Bóc Tách Bản Sắc Lai
+          </h4>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px;">
+            Khi người dùng chọn mức dứt khoát (+2 hoặc -2), hệ thống kích hoạt câu hỏi: <em>"Đâu là nền tảng lý lẽ sâu xa nhất cho sự lựa chọn này của bạn?"</em>:
+          </p>
+          <div style="display:flex; flex-direction:column; gap:8px; font-size:0.82rem;">
+            <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:8px; padding:10px;">
+              <strong>⚡ 1. Chủ nghĩa Thực dụng / Hiệu năng:</strong> "Vì thế giới chỉ đánh giá qua kết quả thực tế tạo ra; mọi lý lẽ hoa mỹ không tạo ra giá trị đều là vô nghĩa."
+            </div>
+            <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:8px; padding:10px;">
+              <strong>⚖️ 2. Đạo đức Nghĩa vụ & Chuẩn mực:</strong> "Vì có những nguyên tắc đạo đức và quy chuẩn bất biến; đúng là đúng, sai là sai, không thể đánh đổi vì lợi ích trước mắt."
+            </div>
+            <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:8px; padding:10px;">
+              <strong>🌱 3. Lòng Trắc ẩn & Nhân bản:</strong> "Vì con người luôn là mục đích tự thân, không bao giờ là phương tiện hay công cụ phục vụ cho bất kỳ cỗ máy nào."
+            </div>
+            <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:8px; padding:10px;">
+              <strong>🏛️ 4. Trật tự & Kỷ luật Hệ thống:</strong> "Vì không có một trật tự kỷ luật vững chắc thì mọi tài năng cá nhân sẽ chỉ tạo ra sự hỗn loạn và tự triệt tiêu lẫn nhau."
+            </div>
+            <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:8px; padding:10px;">
+              <strong>🔥 5. Tự do & Căn tính Độc bản:</strong> "Vì nếu đánh mất cái tôi độc bản và quyền tự quyết, sự tồn tại của con người sẽ chỉ là cái bóng sao chép của kẻ khác."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<!-- SLIDE 3: ĐẶC TẢ CHI TIẾT: CẦN AI Ở CHỖ NÀO? -->
+    <section class="deck-slide" id="slide-4">
       <div class="slide-banner">
         <span class="slide-tag">Thẩm Định Kỹ Thuật Dành Cho Product & Tech Leads</span>
         <h2 class="slide-title">Đặc Tả Chi Tiết: Cần AI Ở Chỗ Nào & Đâu Là Thuật Toán Cố Định?</h2>
@@ -966,7 +1205,7 @@
     </section>
 
     <!-- SLIDE 4: KHI CHAT 1:1 VỚI AI & KHI ĐƯA VÀO GROUP CHAT -->
-    <section class="deck-slide" id="slide-4">
+    <section class="deck-slide" id="slide-5">
       <div class="slide-banner">
         <span class="slide-tag">Hành Trình Trải Nghiệm Sản Phẩm (User Journey)</span>
         <h2 class="slide-title">Chat 1:1 Khám Phá Bản Thân & Đưa Vào Group Chat Đồng Đội</h2>
@@ -1085,7 +1324,7 @@
     </section>
 
     <!-- SLIDE 5: MOMENT KÍCH HOẠT USER BẮT BUỘC PHẢI +1 BẠN VÀO CHAT CÙNG -->
-    <section class="deck-slide" id="slide-5">
+    <section class="deck-slide" id="slide-6">
       <div class="slide-banner">
         <span class="slide-tag">Đòn Bẩy Lan Tỏa Đột Phá (Viral Engine & Tipping Point)</span>
         <h2 class="slide-title">Moment Nào Khiến User Bắt Buộc Phải +1 Người Bạn Vào Chat Cùng?</h2>
@@ -1152,7 +1391,7 @@
     </section>
 
     <!-- SLIDE 6: THỬ NGHIỆM HỎI ĐÁP LOÀI HOA (LIVE SANDBOX) -->
-    <section class="deck-slide" id="slide-6">
+    <section class="deck-slide" id="slide-7">
       <div class="slide-banner">
         <span class="slide-tag">Trải Nghiệm Thử Nghiệm Tương Tác</span>
         <h2 class="slide-title">Thử Nghiệm Tính Năng: "Tại Sao Tôi Là Hoa Này Mà Không Phải Hoa Kia?"</h2>
@@ -1217,7 +1456,7 @@
   <!-- JAVASCRIPT SLIDE CONTROLLER & SANDBOX -->
   <script>
     let activeSlide = 1;
-    const maxSlides = 6;
+    const maxSlides = 7;
 
     function showSlide(num) {
       if (num < 1 || num > maxSlides) return;
@@ -1250,6 +1489,26 @@
 
     document.getElementById('btn-toggle-theme')?.addEventListener('click', () => {
       document.body.classList.toggle('light-mode');
+    });
+
+    
+    // QBank Tabs Switcher in Slide 3
+    document.querySelectorAll('#qbank-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#qbank-tabs button').forEach(b => {
+          b.classList.remove('active');
+          b.style.background = '';
+          b.style.color = '';
+        });
+        btn.classList.add('active');
+        btn.style.background = '#4F46E5';
+        btn.style.color = '#FFFFFF';
+
+        const tabKey = btn.getAttribute('data-qtab');
+        document.querySelectorAll('.qtab-content').forEach(c => c.style.display = 'none');
+        const target = document.getElementById(`qtab-${tabKey}`);
+        if (target) target.style.display = 'block';
+      });
     });
 
     // Sandbox Q&A Logic

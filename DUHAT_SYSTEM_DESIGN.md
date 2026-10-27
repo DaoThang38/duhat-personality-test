@@ -73,7 +73,7 @@ graph TD
 2. **Màn hình Chat Room (`ChatRoomView`):**
    * Top Header: Back button `<`, Avatar + Tên + Trạng thái (*Đang trực tuyến* / *X thành viên*), Call 📞, Video call 🎥.
    * Khung tin nhắn `MessageStream`: Wallpaper doodle mờ, bubble người gửi (vàng nhạt `#FEF5D1`), bubble người nhận (trắng), Quote box, Location Card Bubble, System Pill (`Hôm nay 11:18`).
-   * Input Bar `ChatInputBar`: Nút `+` mở action drawer, ô input text, Sticker/Emoji 🙂, Gửi ảnh 🖼️, Mic voice 🎙️.
+   * Input Bar `ChatInputBar`: Nút `+` mở action drawer, ô input text, Sticker/Emoji 🙂, Gửi ảnh 🖼️.
 3. **Màn hình Hub Cộng đồng (`CommunityHubView`):**
    * Header: Tên cộng đồng *"VSF Connect"* + Tag trạng thái: `Riêng tư · 2,6k thành viên`.
    * Sub-tabs: `Cộng đồng` (active gạch chân đen) | `Sự kiện`.
@@ -226,7 +226,7 @@ duhat-prototype/
 │   │   │   ├── MessageBubble.tsx      # Bubble vàng (self), trắng (others), location card
 │   │   │   ├── MessageStream.tsx      # Khung cuộn tin nhắn kèm wallpaper doodle
 │   │   │   ├── QuickActionDrawer.tsx  # Drawer nút `+` (vị trí, ảnh, file)
-│   │   │   └── ChatInputBar.tsx       # Thanh gõ tin nhắn, voice, emoji
+│   │   │   └── ChatInputBar.tsx       # Thanh gõ tin nhắn, emoji
 │   │   └── community/
 │   │       ├── CommunityHeader.tsx    # Header VSF Connect
 │   │       ├── SubGroupCard.tsx       # Thẻ nhóm CLB (Tham gia / Đã vào)

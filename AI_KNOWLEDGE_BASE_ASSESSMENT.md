@@ -105,7 +105,7 @@ quadrantChart
     quadrant-2 "Ưu Tiên Tuyệt Đối MVP (Quick Wins)"
     quadrant-3 "Xem Xét Cắt Bớt Hoặc Giữ Rule-based"
     quadrant-4 "Không Nên Đầu Tư Sớm"
-    "TP1: Nhận diện Text/Voice tự nhiên": [0.25, 0.88]
+    "TP1: Nhận diện Text tự do": [0.25, 0.88]
     "TP2: Adaptive Probing (Hỏi sâu khi hòa điểm)": [0.45, 0.82]
     "TP3: Dynamic Synergy Report theo dự án": [0.55, 0.90]
     "TP4: Duhat Mascot Empathy Guardrail": [0.30, 0.75]
@@ -125,7 +125,7 @@ quadrantChart
 
 | Điểm Chạm AI | Mô Tả & Nhiệm Vụ Cụ Thể | Vì Sao Bắt Buộc Cần AI? | Nếu KHÔNG Dùng AI (Fallback)? |
 | :--- | :--- | :--- | :--- |
-| **Touchpoint 1: Natural Language & Voice Intent Parser (NLU)** | Khi người dùng không bấm nút mà gõ: *"Tùy lúc, đi với sếp thì mình đi đúng giờ, bạn bè thân thì thoải mái hơn một chút"*. AI phân tích và trả về: (1) Level Likert tương đương (Level 3 hoặc 4), (2) Trích xuất Động cơ: *"Phân biệt theo đối tượng cam kết"*. | Không có bộ quy tắc Regex cố định nào bao quát hết cách diễn đạt đời thường và sắc thái tiếng Việt của người dùng. | Fallback về 5 nút bấm Likert hoặc nhắc người dùng chọn mức độ trực quan trên thanh Dock. |
+| **Touchpoint 1: Natural Language Text Intent Parser (NLU)** | Khi người dùng không bấm nút mà gõ text tự do: *"Tùy lúc, đi với sếp thì mình đi đúng giờ, bạn bè thân thì thoải mái hơn một chút"*. AI phân tích và trả về: (1) Level Likert tương đương (Level 3 hoặc 4), (2) Trích xuất Động cơ: *"Phân biệt theo đối tượng cam kết"*. | Không có bộ quy tắc Regex cố định nào bao quát hết cách diễn đạt đời thường và sắc thái tiếng Việt của người dùng. | Fallback về 5 nút bấm Likert hoặc nhắc người dùng chọn mức độ trực quan trên thanh Dock. |
 | **Touchpoint 2: Adaptive Probing Agent (Người Hỏi Đào Sâu Khi Giằng Co)** | Khi người dùng liên tục chọn **"⚪ Trung lập"** hoặc khi kết thúc bài test có 2 chiều điểm ngang nhau (VD: Điểm *Tốc* bằng điểm *Tín*). AI sinh ra duy nhất **1 câu hỏi vi mô (Micro-Probe)** dựa trên ngữ cảnh đã làm: *"Nếu dự án bắt buộc phải hy sinh 1 thứ giữa Deadline và Chất lượng dữ liệu, bạn sẽ nghiêng về bên nào?"*. | Bộ câu hỏi tĩnh không thể tự thích ứng theo điểm số động của từng người dùng. | Fallback: Lấy giá trị đầu tiên hoặc hiển thị hình mẫu hoa lai (hybrid badge). |
 | **Touchpoint 3: Dynamic Context-Aware Synergy Generator** | Trong Group Chat hoặc Góc Vườn, khi 2 thành viên muốn xem cách phối hợp. Thay vì chỉ đọc văn bản tĩnh cố định, AI cho phép nhập bối cảnh: *"Team mình chuẩn bị chạy chiến dịch Flash Sale 3 ngày"*. AI sinh ra cẩm nang phối hợp may đo riêng cho *🌻 Hướng Dương + 🪴 Sen Đá* trong chiến dịch đó. | Ma trận tĩnh chỉ có 1 nội dung chung chung. Bối cảnh dự án thực tế muôn hình vạn trạng. | Fallback về nội dung tĩnh đã được biên soạn sẵn trong ma trận `synergyMatrix` (như bản prototype hiện tại). |
 | **Touchpoint 4: Duhat Tone & Empathy Guardrail** | Kiểm soát giọng điệu của chú vịt Duhat (hóm hỉnh, dùng từ ngữ Việt Nam tươi vui, dùng biểu tượng cảm xúc vịt `🦆🌸`). Đồng thời chặn mọi từ ngữ mang tính đánh giá năng lực, phán xét nhân sự (*"bạn yếu kém ở điểm..."*). | Giữ chuẩn Brand Voice nhất quán trên toàn bộ các câu trả lời động của bot. | Sử dụng System Prompt và tập mẫu Few-Shot có sẵn. |
@@ -156,7 +156,7 @@ flowchart TD
     B -->|Click 5 Nút Likert Chuẩn| C[Deterministic Engine]
     C -->|Ghi điểm trực tiếp 0ms| D[Cập nhật Thanh Tiến Độ & Lưu Điểm]
     
-    B -->|Gõ Text Hoặc Voice Trả Lời Câu Hỏi| E[Gọi AI NLU Engine]
+    B -->|Gõ Text Trả Lời Câu Hỏi| E[Gọi AI NLU Engine]
     E --> F{AI Phản Hồi Trong Vòng 1.5 Giây?}
     F -->|Thành Công| G[Trích Xuất JSON: {level, score, motivation}]
     G --> D

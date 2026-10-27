@@ -30,7 +30,7 @@
 * **Cơ hội vàng cho Duhat:**
   1. **Tự nhiên hóa & Không phán xét (Zero Stigma):** Đưa việc khám phá tính cách về những tình huống gần gũi (dọn vườn, đi siêu thị, xử lý khi trễ hẹn cà phê, bưng nhầm món...).  
      *(⚠️ **Lưu ý quan trọng cho Product Team:** 10 tình huống đời thường trong bản prototype chỉ là mẫu đề xuất minh họa, hoàn toàn không cố định. Hệ thống thực tế sẽ hỗ trợ **Ngân hàng tình huống động (Dynamic Scenario Bank)** để mở rộng sang các tình huống dự án, xử lý sự cố hoặc tùy biến theo ngành nghề).*
-  2. **Tối giản thao tác (Frictionless Interaction):** Thang đo **5 mức độ Likert trực quan (🟢🟢 &rarr; 🔴🔴)** phản xạ trong 1 giây, hoặc gõ text/voice chia sẻ lý do tự nhiên.
+  2. **Tối giản thao tác (Frictionless Interaction):** Thang đo **5 mức độ Likert trực quan (🟢🟢 &rarr; 🔴🔴)** phản xạ trong 1 giây, hoặc gõ text tự do chia sẻ lý do tự nhiên.
   3. **Hệ thống Ma Trận 3 &times; 4 &times; 6 = 72 Loài Hoa Độc Bản:** 6 Giá trị cốt lõi &times; 3 Phong cách dẫn dắt &times; 4 Kiểu tư duy. Tôn vinh nét độc bản, không có loài hoa nào xấu.
   4. **Kích hoạt mạng lưới tức thì (Network Effects & Team Synergy):** Kết quả test sinh ra Thẻ Hồ Sơ Loài Hoa có thể chia sẻ 1 chạm vào Group Chat, lập tức mở khóa **Ma trận Ăn ý (Synergy Matrix)** và **Góc Vườn Đồng Đội (Team Garden)**.
 
@@ -54,7 +54,7 @@ mindmap
     Trụ Cột 1: Trải Nghiệm Không Rào Cản
       10 Tình Huống Đời Thường Quen Thuộc
       Thang Đo 5 Mức Độ Likert 1-Chạm
-      Hỗ Trợ Chat Tự Nhiên & Voice Note
+      Hỗ Trợ Gõ Text Tự Do Không Bó Buộc
       Thời Gian Hoàn Tất Dưới 2.5 Phút
     Trụ Cột 2: Hệ Thống 72 Loài Hoa Nhân Văn
       6 Giá Trị Cốt Lõi Tín - Tâm - Trí - Tốc - Tinh - Nhân
@@ -76,7 +76,7 @@ mindmap
 ### 3.1 Trụ cột 1: Zero Cognitive Friction (Trải Nghiệm Không Rào Cản)
 * Không dùng câu hỏi giả định công sở nhức đầu. Thay bằng những tình huống đời thường sinh động (dọn vườn, phân vai nấu tiệc, đi siêu thị, xử lý khi trễ hẹn bạn bè...).
 * Thang đo 5 nút Likert màu sắc trực quan (🟢🟢 Rất đồng tình $\rightarrow$ ⚪ Trung lập $\rightarrow$ 🔴🔴 Rất không đồng tình).
-* Gõ chữ tự do hoặc gửi voice: Hệ thống AI nhận diện tức thì mức độ tương ứng mà không bắt ép người dùng chỉ được bấm nút.
+* Gõ chữ text tự do: Hệ thống AI nhận diện tức thì mức độ tương ứng mà không bắt ép người dùng chỉ được bấm nút.
 
 ### 3.2 Trụ cột 2: 72 Hình Mẫu Loài Hoa Nhân Văn (Zero Stigma & Positive Framing)
 * Tích hợp bộ khung 3 chiều:
@@ -118,7 +118,7 @@ sequenceDiagram
         alt Người dùng bấm chọn 1 nút Likert
             User->>LikertEngine: Chọn mức độ (VD: Rất đồng tình +2)
             LikertEngine-->>DuhatApp: Lưu điểm & chuyển tiếp mượt mà (< 300ms)
-        else Người dùng gõ text hoặc gửi voice
+        else Người dùng gõ text tự do
             User->>AIEngine: Gõ "Tùy lúc, nhưng mình hay xem xét kỹ..."
             AIEngine-->>LikertEngine: Trích xuất Level 4 (Đồng tình) + Động cơ "Cẩn trọng dữ liệu"
             LikertEngine-->>DuhatApp: Lưu điểm & chuyển tiếp

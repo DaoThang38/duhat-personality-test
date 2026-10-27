@@ -86,21 +86,7 @@
       transition: background 0.3s ease;
     }
 
-    body.dark-env {
-      background: radial-gradient(circle at 10% 20%, #1E293B 0%, #0F172A 100%);
-    }
-
-    body.dark-env .prototype-control-bar {
-      background: rgba(30, 41, 59, 0.85);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: #F8FAFC;
-    }
-
-    body.dark-env .ctrl-btn {
-      background: #334155;
-      color: #F8FAFC;
-      border-color: #475569;
-    }
+    
 
     /* Outer Control Bar */
     .prototype-control-bar {
@@ -108,14 +94,15 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      max-width: 620px;
-      padding: 10px 18px;
-      margin-bottom: 14px;
-      background: rgba(255, 255, 255, 0.88);
+      max-width: 580px;
+      height: 42px;
+      padding: 4px 14px;
+      margin-bottom: 8px;
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
       border-radius: var(--radius-full);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
       z-index: 100;
     }
 
@@ -2433,15 +2420,13 @@
     <!-- Thanh điều khiển Toolbar giả lập bên ngoài -->
     <header class="prototype-control-bar">
       <div class="brand-tag">
-        <span class="duck-icon">🦆</span>
-        <span class="brand-title">Duhat AI - Format 5 Mức Độ (Likert)</span>
-        <span class="badge-version">Mệnh Đề Nhanh</span>
+        <span class="duck-icon" style="font-size:1.2rem;">🦆</span>
+        <span class="brand-title" style="font-size:0.85rem; font-weight:800;">Duhat AI · Likert 5 Mức</span>
       </div>
       <div class="control-actions">
-        <a href="AI_KNOWLEDGE_BASE_PRESENTATION.html" target="_blank" class="ctrl-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; background:#FEF3C7; color:#92400E; border-color:#FDE68A;">📊 Product Deck</a>
-        <a href="LOGIC_MATRIX_EXPLAINER.html" target="_blank" class="ctrl-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; background:#EEF2FF; color:#4338CA; border-color:#C7D2FE;">🧭 Ma Trận Logic</a>
-        <button id="btn-toggle-theme" class="ctrl-btn" title="Chuyển chế độ Nền">🌓 Đổi nền</button>
-        <button id="btn-restart-assessment" class="ctrl-btn" title="Làm lại bài test từ đầu">🔄 Khởi động lại</button>
+        <a href="AI_KNOWLEDGE_BASE_PRESENTATION.html" target="_blank" class="ctrl-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; background:#FEF3C7; color:#92400E; border-color:#FDE68A;">📊 Deck</a>
+        <a href="LOGIC_MATRIX_EXPLAINER.html" target="_blank" class="ctrl-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; background:#EEF2FF; color:#4338CA; border-color:#C7D2FE;">🧭 Ma Trận</a>
+        <button id="btn-restart" class="ctrl-btn" title="Làm lại từ đầu">🔄 Làm lại</button>
       </div>
     </header>
 
@@ -3331,7 +3316,7 @@
     btnBackInbox: document.getElementById('btn-back-inbox'),
     btnBackFromFlower: document.getElementById('btn-back-from-flower'),
     btnViewProfileDirect: document.getElementById('btn-view-profile-direct'),
-    btnToggleTheme: document.getElementById('btn-toggle-theme'),
+    // btnToggleTheme removed
     btnRestartAssessment: document.getElementById('btn-restart-assessment'),
 
     // Group Chat & Garden
@@ -4564,7 +4549,7 @@
       if (inputQA && inputQA.value.trim()) handleFlowerQA(inputQA.value.trim());
     });
 
-    els.btnToggleTheme.addEventListener('click', () => document.body.classList.toggle('dark-env'));
+    // Dark mode toggle removed
     els.btnRestartAssessment.addEventListener('click', resetAdaptiveTest);
   }
 

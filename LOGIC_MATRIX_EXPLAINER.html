@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duhat AI - Bảng Điều Khiển Ma Trận Logic (Non-Tech Explainer)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #FDC830;
+      --primary-dark: #D97706;
+      --primary-light: #FEF3C7;
+      --primary-subtle: #FFFBEB;
+      --indigo: #4F46E5;
+      --indigo-light: #EEF2FF;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --radius-xl: 18px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 10%, #F1F5F9 0%, #E2E8F0 100%);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: var(--radius-xl);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .top-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--border);
+      background: #FFFFFF;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--indigo-light);
+      border-color: var(--indigo);
+      color: var(--indigo);
+    }
+
+    .header-title {
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: #0F172A;
+      letter-spacing: -0.5px;
+    }
+
+    .header-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Grid layout */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card Box */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: var(--indigo-light);
+      color: var(--indigo);
+    }
+
+    /* Interactive Sliders */
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .slider-item {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slider-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .slider-axis-name {
+      color: #334155;
+    }
+
+    .slider-val-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .slider-labels-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      outline: none;
+      background: #CBD5E1;
+      cursor: pointer;
+      accent-color: var(--indigo);
+    }
+
+    /* AI Live Prediction Box */
+    .ai-hero-box {
+      background: linear-gradient(135deg, #FFFDF5 0%, #FEF9C3 100%);
+      border: 2px solid #FDE047;
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .ai-flower-avatar {
+      font-size: 3.5rem;
+      line-height: 1;
+      animation: flowerBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes flowerBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .ai-flower-name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #854D0E;
+    }
+
+    .ai-flower-tagline {
+      font-size: 0.86rem;
+      color: #A16207;
+      font-weight: 700;
+    }
+
+    .match-rate-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FEF08A;
+      border: 1px solid #EAB308;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #713F12;
+      margin: 0 auto;
+    }
+
+    .ai-decision-status {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      border: 1px solid #E2E8F0;
+      text-align: left;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    /* Infographic Flow */
+    .flow-step-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 680px) {
+      .flow-step-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .flow-step-card {
+      background: #F8FAFC;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .flow-step-card.active-flow {
+      border-color: #6366F1;
+      background: #EEF2FF;
+    }
+
+    .step-number {
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--indigo);
+    }
+
+    .step-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .step-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Matrix Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      background: #FFFFFF;
+      min-width: 780px;
+    }
+
+    th {
+      background: #F1F5F9;
+      color: #334155;
+      font-weight: 800;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: #1E293B;
+      vertical-align: top;
+    }
+
+    tr:hover td {
+      background: #F8FAFC;
+    }
+
+    .table-flower-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .coord-badge {
+      font-family: monospace;
+      font-size: 0.74rem;
+      background: #E2E8F0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #334155;
+      display: inline-block;
+    }
+
+    /* Ranking bars */
+    .ranking-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      margin-bottom: 6px;
+    }
+
+    .ranking-name {
+      width: 110px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .ranking-track {
+      flex: 1;
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ranking-fill {
+      height: 100%;
+      background: var(--indigo);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .ranking-pct {
+      width: 42px;
+      text-align: right;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    
+    <!-- HEADER -->
+    <header class="header-card">
+      <div class="header-top">
+        <span class="brand-badge">🦆 DUHAT AI ARCHITECTURE · NON-TECH EXPLAINER</span>
+        <div class="top-links">
+          <a href="index.html" class="nav-btn" target="_blank">🚀 Mở Live Prototype</a>
+          <a href="AI_KNOWLEDGE_BASE_PRESENTATION.html" class="nav-btn" target="_blank">📊 Slide Thuyết Trình PMM</a>
+        </div>
+      </div>
+      <h1 class="header-title">Bảng Giải Mã Ma Trận Logic & Thuật Toán Thích Ứng</h1>
+      <p class="header-desc">
+        Tài liệu tương tác trực quan giúp <strong>Founder, PMM, HR và Stakeholders không chuyên kỹ thuật</strong> hiểu trọn vẹn: 
+        <em>Tại sao AI chọn câu hỏi này? Khi nào rẽ nhánh từ 12 lên 24 câu? Và từng cá nhân được ánh xạ vào loài hoa nào dựa trên 4 trục giá trị?</em>
+      </p>
+    </header>
+
+    <!-- SECTION 1: INTERACTIVE SANDBOX (THỬ LÀM BỘ NÃO AI) -->
+    <div class="grid-2col">
+      <!-- Left: 4 Sliders -->
+      <section class="section-card">
+        <div class="card-title-row">
+          <h2 class="card-title">🎛️ Sandbox Trực Quan: Giả Lập 4 Trục Tư Tưởng</h2>
+          <span class="pill-tag">Kéo thanh trượt để thử</span>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted);">
+          Kéo 4 thanh trượt bên dưới để mô phỏng phản hồi của một nhân sự. Quan sát bên phải xem AI tính toán khoảng cách vector và quyết định hình mẫu hoa trong chớp mắt!
+        </p>
+
+        <div class="slider-group">
+          <!-- Slider 1 -->
+          <div class="slider-item">
+            <div class="slider-head">
+              <span class="slider-axis-name">Trục 1: Chiến Lược (Tốc độ vs Hoàn hảo)</span>
+              <span class="slider-val-badge" id="val-badge-1">+0.5</span>
+            </div>
+            <input type="range" id="slider-axis-1" min="-2" max="2" step="0.1" value="0.5">
+            <div class="slider-labels-row">
+              <span>Thận trọng, Chuẩn mực (-2)</span>
+              <span>Tốc độ, Thực chiến (+2)</span>
+            </div>
+          </div>
+
+          <!-- Slider 2 -->
+          <div class="slider-item">
+            <div class="slider-head">
+              <span class="slider-axis-name">Trục 2: Quyền Lực (Tập trung vs Phân quyền)</span>
+              <span class="slider-val-badge" id="val-badge-2">+1.5</span>
+            </div>
+            <input type="range" id="slider-axis-2" min="-2" max="2" step="0.1" value="1.5">
+            <div class="slider-labels-row">
+              <span>Phân quyền, Đồng thuận (-2)</span>
+              <span>Tập trung, Chỉ huy (+2)</span>
+            </div>
+          </div>
+
+          <!-- Slider 3 -->
+          <div class="slider-item">
+            <div class="slider-head">
+              <span class="slider-axis-name">Trục 3: Con Người (Sòng phẳng vs Trắc ẩn)</span>
+              <span class="slider-val-badge" id="val-badge-3">+0.5</span>
+            </div>
+            <input type="range" id="slider-axis-3" min="-2" max="2" step="0.1" value="0.5">
+            <div class="slider-labels-row">
+              <span>Trắc ẩn, Nâng đỡ (-2)</span>
+              <span>Sòng phẳng, Kết quả (+2)</span>
+            </div>
+          </div>
+
+          <!-- Slider 4 -->
+          <div class="slider-item">
+            <div class="slider-head">
+              <span class="slider-axis-name">Trục 4: Bản Sắc (Độc bản vs Đại cuộc)</span>
+              <span class="slider-val-badge" id="val-badge-4">-0.5</span>
+            </div>
+            <input type="range" id="slider-axis-4" min="-2" max="2" step="0.1" value="-0.5">
+            <div class="slider-labels-row">
+              <span>Vì đại cuộc, Trung kiên (-2)</span>
+              <span>Dấu ấn cá nhân, Độc bản (+2)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: AI Live Prediction & Decision -->
+      <section class="section-card">
+        <div class="card-title-row">
+          <h2 class="card-title">🤖 Kết Quả Phán Quyết Của AI</h2>
+          <span class="pill-tag" id="live-calc-status">Thời gian thực</span>
+        </div>
+
+        <div class="ai-hero-box">
+          <div class="ai-flower-avatar" id="hero-flower-emoji">🌻</div>
+          <div class="ai-flower-name" id="hero-flower-name">Hoa Hướng Dương</div>
+          <div class="ai-flower-tagline" id="hero-flower-tagline">Người Tiên Phong Hệ Thống & Kỷ Luật Sắt</div>
+          <div class="match-rate-pill" id="hero-match-pill">Độ Khớp: 94% · Khoảng cách vector gần nhất</div>
+        </div>
+
+        <div class="ai-decision-status" id="ai-decision-box">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Mini Rankings -->
+        <div>
+          <div style="font-size: 0.76rem; font-weight: 800; color: #475569; margin-bottom: 6px;">
+            📊 XẾP HẠNG ĐỘ TƯƠNG ĐỒNG VỚI 8 LOÀI HOA:
+          </div>
+          <div id="rankings-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECTION 2: ẨN DỤ "BÁC SĨ KHÁM BỆNH" & SƠ ĐỒ RẼ NHÁNH -->
+    <section class="section-card" style="margin-bottom: 24px;">
+      <div class="card-title-row">
+        <h2 class="card-title">🩺 Ẩn Dụ "Bác Sĩ Khám Bệnh": Tại Sao Không Cần Hỏi Cố Định 50 Câu?</h2>
+        <span class="pill-tag">Triết Lý La Bàn Tư Tưởng</span>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+        Một bác sĩ giỏi không bắt mọi bệnh nhân phải làm toàn bộ 50 xét nghiệm giống nhau. Bác sĩ khám <strong>12 dấu hiệu tổng quát</strong> trước. Nếu kết quả rõ ràng, bác sĩ kết luận ngay. Nếu triệu chứng nằm ở lằn ranh mờ nhạt giữa 2 nguyên nhân, bác sĩ mới chỉ định làm thêm đúng <strong>12 xét nghiệm chuyên biệt</strong> để bóc tách. Đó chính là <strong>Computerized Adaptive Testing</strong> của Duhat AI!
+      </p>
+
+      <div class="flow-step-grid">
+        <div class="flow-step-card">
+          <span class="step-number">TẦNG 1 (CỐT LÕI)</span>
+          <h3 class="step-title">12 Câu Khám Sơ Bộ</h3>
+          <p class="step-desc">
+            • 8 Mệnh đề nguyên lý 2 chiều.<br>
+            • 4 Song đề cân não (Vế A vs Vế B).<br>
+            • Quét qua 4 trục giá trị để tạo tọa độ sơ bộ ban đầu.
+          </p>
+        </div>
+
+        <div class="flow-step-card active-flow">
+          <span class="step-number">ĐIỂM RẼ NHÁNH (TẠI CÂU 12)</span>
+          <h3 class="step-title">Đo Lường Độ Chênh Lệch</h3>
+          <p class="step-desc">
+            • <strong>Độ lệch $\ge 22\%$:</strong> Bản sắc quá rõ! Hỏi thêm 1 câu chốt hạ $\to$ <strong>Dừng ở câu 13</strong>.<br>
+            • <strong>Độ lệch $< 22\%$:</strong> Phân hóa hoặc có tố chất lai $\to$ <strong>Kích hoạt Tầng 2</strong>!
+          </p>
+        </div>
+
+        <div class="flow-step-card">
+          <span class="step-number">TẦNG 2 (THÍCH ỨNG)</span>
+          <h3 class="step-title">12 Câu Phân Tách Sâu</h3>
+          <p class="step-desc">
+            • CHỈ rút các câu thuộc 2 trục đang sát nút nhất giữa Top 1 & Top 2.<br>
+            • Bỏ qua các câu không còn giá trị phân loại.<br>
+            • Bóc tách bản sắc lai (Hybrid) ở <strong>câu 24</strong>!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE MASTER MATRIX LOOKUP TABLE -->
+    <section class="section-card">
+      <div class="card-title-row">
+        <h2 class="card-title">📖 Bảng Tra Cứu Toàn Diện 8 Hình Mẫu Hoa (The Master Matrix)</h2>
+        <span class="pill-tag">Hệ Tọa Độ 4 Trục</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted);">
+        Dưới đây là bản thiết kế "DNA Công Sở" của 8 loài hoa. Mỗi loài hoa là một tổ hợp giá trị độc nhất vô nhị:
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Loài Hoa</th>
+              <th>Tọa Độ Chuẩn [Tốc độ, Quyền lực, Sòng phẳng, Độc bản]</th>
+              <th>Phong Cách Cốt Lõi</th>
+              <th>Điểm Mạnh Nhất</th>
+              <th>Điểm Mù (Shadow Self)</th>
+              <th>Cặp Đôi Bù Trừ Hoàn Hảo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🌻</span> Hoa Hướng Dương</div>
+              </td>
+              <td><span class="coord-badge">[+0.5, +1.5, +0.5, -0.5]</span></td>
+              <td>Tiên phong hệ thống & Kỷ luật</td>
+              <td>Giữ đúng hạn cam kết, quy tụ lực lượng thi hành mục tiêu.</td>
+              <td>Khó linh hoạt khi kế hoạch ban đầu bị thay đổi đột ngột.</td>
+              <td>🪴 Sen Đá & 🌸 Cẩm Tú Cầu</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🌺</span> Hoa Đỗ Quyên</div>
+              </td>
+              <td><span class="coord-badge">[+1.8, +0.8, +0.8, +0.8]</span></td>
+              <td>Tia chớp hành động & Thực dụng</td>
+              <td>Phá vỡ bế tắc, đưa sản phẩm ra thị trường tốc độ kỷ lục.</td>
+              <td>Dễ nóng vội, tạo áp lực quá tải lên các đồng đội cẩn trọng.</td>
+              <td>🌻 Hướng Dương (Giữ trật tự)</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🌸</span> Hoa Cẩm Tú Cầu</div>
+              </td>
+              <td><span class="coord-badge">[-0.8, -1.8, -1.0, -0.8]</span></td>
+              <td>Kết nối hệ sinh thái & Đồng thuận</td>
+              <td>Huy động nguồn lực đa bên, kết nối phòng ban bền chặt.</td>
+              <td>Mất nhiều thời gian tham vấn số đông nên tiến chậm.</td>
+              <td>🌻 Hướng Dương (Dứt khoát chốt)</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🪴</span> Hoa Sen Đá</div>
+              </td>
+              <td><span class="coord-badge">[-1.8, +0.5, +0.5, -1.8]</span></td>
+              <td>Kiến trúc sư nền tảng & Quy trình</td>
+              <td>Xây dựng công cụ, checklist giúp tổ chức tự vận hành.</td>
+              <td>Ngại các quyết định ngẫu hứng, phức tạp hóa quy trình.</td>
+              <td>🌻 Hướng Dương & 🌺 Đỗ Quyên</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🪷</span> Hoa Sen Trắng</div>
+              </td>
+              <td><span class="coord-badge">[-0.8, -0.8, -1.8, -0.8]</span></td>
+              <td>Lòng trắc ẩn & An toàn tâm lý</td>
+              <td>Bao bọc, tạo môi trường không sợ hãi sai lầm, nuôi dưỡng niềm tin.</td>
+              <td>Ngần ngại đối đầu, khó đưa ra quyết định sa thải cứng rắn.</td>
+              <td>🌵 Xương Rồng (Bù đắp tính sòng phẳng)</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🌵</span> Hoa Xương Rồng</div>
+              </td>
+              <td><span class="coord-badge">[+0.8, -0.8, +1.8, +1.8]</span></td>
+              <td>Chiến binh độc bản & Phản biện</td>
+              <td>Trung thực tàn nhẫn, vạch trần điểm mù, không xu nịnh.</td>
+              <td>Lời nói sắc bén dễ làm tổn thương người nhạy cảm.</td>
+              <td>🪷 Sen Trắng (Cân bằng tình cảm)</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🪻</span> Hoa Oải Hương</div>
+              </td>
+              <td><span class="coord-badge">[-1.8, +0.8, 0.0, +0.8]</span></td>
+              <td>Chiến lược trầm mặc & Tinh hoa</td>
+              <td>Tầm nhìn xa 5-10 năm, định nghĩa đúng bài toán sâu sắc.</td>
+              <td>Trầm mặc, ít khi thực chiến làm người khác tưởng xa cách.</td>
+              <td>🌺 Đỗ Quyên (Kéo ra thực tế)</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="table-flower-cell"><span>🌼</span> Hoa Cúc Vàng</div>
+              </td>
+              <td><span class="coord-badge">[-0.8, +0.8, -0.8, -1.8]</span></td>
+              <td>Trụ cột tận tụy & Mắt xích trung kiên</td>
+              <td>Chịu thương chịu khó, trung thành phụng sự sứ mệnh chung.</td>
+              <td>Quá khiêm nhường nên công lao dễ bị xem là điều hiển nhiên.</td>
+              <td>🌻 Hướng Dương & 🌸 Cẩm Tú Cầu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- INTERACTIVE LOGIC JAVASCRIPT -->
+  <script>
+    (function () {
+      const FLOWER_PROFILES = {
+        'huong_duong': { name: 'Hoa Hướng Dương', emoji: '🌻', tagline: 'Người Tiên Phong Hệ Thống & Kỷ Luật Sắt', profile: { a1: 0.5, a2: 1.5, a3: 0.5, a4: -0.5 } },
+        'do_quyen': { name: 'Hoa Đỗ Quyên', emoji: '🌺', tagline: 'Tia Chớp Bứt Phá & Thực Dụng', profile: { a1: 1.8, a2: 0.8, a3: 0.8, a4: 0.8 } },
+        'cam_tu_cau': { name: 'Hoa Cẩm Tú Cầu', emoji: '🌸', tagline: 'Bậc Thầy Kết Nối Hệ Sinh Thái & Đồng Thuận', profile: { a1: -0.8, a2: -1.8, a3: -1.0, a4: -0.8 } },
+        'sen_da': { name: 'Hoa Sen Đá', emoji: '🪴', tagline: 'Kiến Trúc Sư Nền Tảng & Quy Trình Bền Vững', profile: { a1: -1.8, a2: 0.5, a3: 0.5, a4: -1.8 } },
+        'sen_trang': { name: 'Hoa Sen Trắng', emoji: '🪷', tagline: 'Người Gìn Giữ Lòng Trắc Ẩn & An Toàn Tâm Lý', profile: { a1: -0.8, a2: -0.8, a3: -1.8, a4: -0.8 } },
+        'xuong_rong': { name: 'Hoa Xương Rồng', emoji: '🌵', tagline: 'Chiến Binh Độc Bản & Phản Biện Gai Góc', profile: { a1: 0.8, a2: -0.8, a3: 1.8, a4: 1.8 } },
+        'oai_huong': { name: 'Hoa Oải Hương', emoji: '🪻', tagline: 'Nhà Chiến Lược Trầm Mặc & Tinh Hoa', profile: { a1: -1.8, a2: 0.8, a3: 0.0, a4: 0.8 } },
+        'cuc_vang': { name: 'Hoa Cúc Vàng', emoji: '🌼', tagline: 'Trụ Cột Tận Tụy & Mắt Xích Trung Kiên', profile: { a1: -0.8, a2: 0.8, a3: -0.8, a4: -1.8 } }
+      };
+
+      const s1 = document.getElementById('slider-axis-1');
+      const s2 = document.getElementById('slider-axis-2');
+      const s3 = document.getElementById('slider-axis-3');
+      const s4 = document.getElementById('slider-axis-4');
+
+      const b1 = document.getElementById('val-badge-1');
+      const b2 = document.getElementById('val-badge-2');
+      const b3 = document.getElementById('val-badge-3');
+      const b4 = document.getElementById('val-badge-4');
+
+      const heroEmoji = document.getElementById('hero-flower-emoji');
+      const heroName = document.getElementById('hero-flower-name');
+      const heroTagline = document.getElementById('hero-flower-tagline');
+      const heroMatch = document.getElementById('hero-match-pill');
+      const decisionBox = document.getElementById('ai-decision-box');
+      const rankingsContainer = document.getElementById('rankings-container');
+
+      function updateSimulation() {
+        const a1 = parseFloat(s1.value);
+        const a2 = parseFloat(s2.value);
+        const a3 = parseFloat(s3.value);
+        const a4 = parseFloat(s4.value);
+
+        b1.textContent = (a1 > 0 ? '+' : '') + a1.toFixed(1);
+        b2.textContent = (a2 > 0 ? '+' : '') + a2.toFixed(1);
+        b3.textContent = (a3 > 0 ? '+' : '') + a3.toFixed(1);
+        b4.textContent = (a4 > 0 ? '+' : '') + a4.toFixed(1);
+
+        // Tính khoảng cách Euclid tới 8 hình mẫu hoa
+        const list = Object.keys(FLOWER_PROFILES).map(k => {
+          const item = FLOWER_PROFILES[k];
+          const dist = Math.sqrt(
+            Math.pow(a1 - item.profile.a1, 2) +
+            Math.pow(a2 - item.profile.a2, 2) +
+            Math.pow(a3 - item.profile.a3, 2) +
+            Math.pow(a4 - item.profile.a4, 2)
+          );
+          const match = Math.max(0, Math.min(99, Math.round(100 - (dist * 18))));
+          return { key: k, item, dist, match };
+        });
+
+        list.sort((x, y) => y.match - x.match);
+
+        const top1 = list[0];
+        const top2 = list[1];
+        const margin = top1.match - top2.match;
+
+        heroEmoji.textContent = top1.item.emoji;
+        heroName.textContent = top1.item.name;
+        heroTagline.textContent = top1.item.tagline;
+        heroMatch.textContent = `Độ Khớp: ${top1.match}% (Khoảng cách vector: ${top1.dist.toFixed(2)})`;
+
+        let decisionHtml = '';
+        if (margin >= 20 && top1.match >= 75) {
+          decisionHtml = `
+            <div style="color: #15803D; font-weight: 800; margin-bottom: 4px;">
+              ✅ TÍN HIỆU ĐỊNH HÌNH RÕ RÀNG (Khoảng cách an toàn: ${margin}%)
+            </div>
+            <div>
+              Vector phản hồi bám sát <strong>${top1.item.name}</strong> và bỏ xa các loài hoa còn lại. 
+              <strong>Hệ thống chỉ cần 13 câu (12 câu cốt lõi + 1 câu chốt)</strong> là đủ độ tin cậy $\ge 94\%$ để xuất kết quả mà không cần làm phiền người dùng thêm!
+            </div>
+          `;
+        } else {
+          decisionHtml = `
+            <div style="color: #4F46E5; font-weight: 800; margin-bottom: 4px;">
+              🌱 KÍCH HOẠT NHÁNH THÍCH ỨNG TẦNG 2 (Sát nút: chênh nhau chỉ ${margin}%)
+            </div>
+            <div>
+              Người dùng có nội tâm phong phú! Giữa <strong>${top1.item.name}</strong> (${top1.match}%) và <strong>${top2.item.name}</strong> (${top2.match}%) đang cạnh tranh gay gắt.
+              Thay vì đoán mò, <strong>AI tự động hỏi thêm 12 câu thích ứng chuyên biệt</strong> để bóc tách phẩm chất lai (Hybrid) ở <strong>câu 24</strong>!
+            </div>
+          `;
+        }
+        decisionBox.innerHTML = decisionHtml;
+
+        // Render rankings
+        rankingsContainer.innerHTML = list.slice(0, 5).map(r => `
+          <div class="ranking-row">
+            <span class="ranking-name">${r.item.emoji} ${r.item.name}</span>
+            <div class="ranking-track">
+              <div class="ranking-fill" style="width: ${r.match}%;"></div>
+            </div>
+            <span class="ranking-pct">${r.match}%</span>
+          </div>
+        `).join('');
+      }
+
+      [s1, s2, s3, s4].forEach(s => s.addEventListener('input', updateSimulation));
+      updateSimulation();
+    })();
+  </script>
+</body>
+
+</html>
